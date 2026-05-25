@@ -99,31 +99,37 @@ CSS = """
 """
 
 
-def render_digimon(name: str, attrs: dict | None) -> str:
-    """Render a digimon's name plus a chip row for its attributes (if known)."""
-    if not attrs:
-        return f'<span class="digimon-name">{name}</span>'
+def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str:
+    """Render a digimon's chip row (attribute/element/families).
+
+    If `show_name` is True the name is prepended — used for multi-digimon
+    posts where the list still needs to disambiguate which chip set belongs
+    to which digimon. Single-digimon posts pass `show_name=False` because
+    the name already appears in the section <h2>.
+    """
     chips: list[str] = []
-    if attrs.get("attribute"):
-        abbr_map = {"Vaccine": "VA", "Virus": "VI", "Data": "DA",
-                    "Free": "FR", "Unknown": "UN"}
-        abbr = attrs.get("attribute_abbr") or abbr_map.get(attrs["attribute"], "UN")
-        chips.append(
-            f'<span class="chip chip-attr-{abbr}" title="Basic Attribute">'
-            f'<span class="chip-label">Attr</span>{attrs["attribute"]}</span>'
-        )
-    if attrs.get("natural_attribute"):
-        chips.append(
-            f'<span class="chip chip-elem" title="Natural Attribute">'
-            f'<span class="chip-label">Element</span>{attrs["natural_attribute"]}</span>'
-        )
-    for fam in attrs.get("families", []):
-        chips.append(
-            f'<span class="chip chip-field" title="Field">'
-            f'<span class="chip-label">Field</span>{fam}</span>'
-        )
+    if attrs:
+        if attrs.get("attribute"):
+            abbr_map = {"Vaccine": "VA", "Virus": "VI", "Data": "DA",
+                        "Free": "FR", "Unknown": "UN"}
+            abbr = attrs.get("attribute_abbr") or abbr_map.get(attrs["attribute"], "UN")
+            chips.append(
+                f'<span class="chip chip-attr-{abbr}" title="Basic Attribute">'
+                f'<span class="chip-label">Attr</span>{attrs["attribute"]}</span>'
+            )
+        if attrs.get("natural_attribute"):
+            chips.append(
+                f'<span class="chip chip-elem" title="Natural Attribute">'
+                f'<span class="chip-label">Element</span>{attrs["natural_attribute"]}</span>'
+            )
+        for fam in attrs.get("families", []):
+            chips.append(
+                f'<span class="chip chip-field" title="Field">'
+                f'<span class="chip-label">Field</span>{fam}</span>'
+            )
     chip_row = f'<div class="chips">{"".join(chips)}</div>' if chips else ""
-    return f'<span class="digimon-name">{name}</span>{chip_row}'
+    name_html = f'<span class="digimon-name">{name}</span>' if show_name else ""
+    return f"{name_html}{chip_row}" or "&nbsp;"
 
 
 def render() -> str:
@@ -151,11 +157,16 @@ def render() -> str:
     def render_post(idx: str, p: dict, kind: str) -> str:
         prefix = "e" if kind == "event" else "p"
         patch_cls = " patch" if kind == "patch" else ""
-        n = len(p["digimon"])
+        names = p["digimon"]
+        n = len(names)
         attrs_map = p.get("attributes", {})
+        # h2 carries the digimon name(s); only show the name in each <li>
+        # when there's more than one digimon (so chip rows stay associated
+        # with the right digimon).
+        h2_text = ", ".join(names)
         items = "\n      ".join(
-            f"<li>{render_digimon(name, attrs_map.get(name))}</li>"
-            for name in p["digimon"]
+            f"<li>{render_digimon(name, attrs_map.get(name), show_name=(n > 1))}</li>"
+            for name in names
         )
         def img_wrap(path: str, label: str, label_cls: str = "") -> str:
             return (
@@ -191,7 +202,7 @@ def render() -> str:
         return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
-      <h2>{n} Digimon</h2>
+      <h2>{h2_text}</h2>
       <span class="date">{fmt_date(p["date"])}</span>
     </div>
     <p class="src">{src_html}</p>
