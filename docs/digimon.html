@@ -54,10 +54,14 @@
   .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
-  /* Attribute chips — icon-only, two rows per digimon
+  /* Attribute chips — icon-only with category label, two rows per digimon
      (row 1: basic attribute + natural attribute, row 2: families) */
-  .chips-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; align-items: center; }
+  .chips-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; align-items: center;
+               font-size: 12px; color: #7f8c8d; }
   .chips-row + .chips-row { margin-top: 4px; }
+  .chips-row .chips-label { font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+                            font-size: 10.5px; color: #95a5a6; margin-right: 4px; }
+  .chips-row .chips-label + .chips-label { margin-left: 10px; }
   .chip-icon-only { width: 28px; height: 28px; object-fit: contain; cursor: help;
                     transition: transform 0.12s ease; }
   .chip-icon-only:hover { transform: scale(1.18); }
@@ -153,7 +157,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">05.03.2024</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=663" target="_blank">EventView.aspx?idx=663 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">13.12.2023</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=780048&Btype=Update" target="_blank">newsBoard_sub.aspx?o=780048&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e663.jpeg" target="_blank"><img class="post-image" src="img/digimon/e663.jpeg" alt="idx 663" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Families: Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Families: Wind Guardians"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Wind Guardians"></div></li>
     </ul>
   </section>
 
@@ -165,7 +169,7 @@
     <p class="src"><span class="src-kr"><span class="src-label">KR</span><span class="src-date">20.03.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?Btype=Update&o=784466&p=1" target="_blank">newsBoard_sub.aspx?Btype=Update&o=784466&p=1 ↗</a></span></p>
     <a href="img/digimon/e664.jpeg" target="_blank"><img class="post-image" src="img/digimon/e664.jpeg" alt="idx 664" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Basic Attribute: Data"><img class="chip-icon-only" src="img/icons/elem-Steel.png" alt="Steel" title="Natural Attribute: Steel"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Data"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Steel.png" alt="Steel" title="Steel"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"></div></li>
     </ul>
   </section>
 
@@ -177,7 +181,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">11.06.2024</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=673" target="_blank">EventView.aspx?idx=673 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">14.05.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787200&Btype=Update" target="_blank">newsBoard_sub.aspx?o=787200&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e673.png" target="_blank"><img class="post-image" src="img/digimon/e673.png" alt="idx 673" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Basic Attribute: Data"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Families: Nightmare Soldiers"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Data"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Nightmare Soldiers"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
@@ -189,7 +193,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">20.08.2024</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=683" target="_blank">EventView.aspx?idx=683 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">21.08.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789668&Btype=Update" target="_blank">newsBoard_sub.aspx?o=789668&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e683.png" target="_blank"><img class="post-image" src="img/digimon/e683.png" alt="idx 683" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Basic Attribute: Virus"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Families: Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Families: Wind Guardians"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Virus"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Wind Guardians"></div></li>
     </ul>
   </section>
 
@@ -201,7 +205,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">12.11.2024</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=692" target="_blank">EventView.aspx?idx=692 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">13.11.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update" target="_blank">newsBoard_sub.aspx?o=794497&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e692.png" target="_blank"><img class="post-image" src="img/digimon/e692.png" alt="idx 692" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Basic Attribute: Unknown"><img class="chip-icon-only" src="img/icons/elem-Thunder.png" alt="Thunder" title="Natural Attribute: Thunder"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Unknown"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Thunder.png" alt="Thunder" title="Thunder"></div></li>
     </ul>
   </section>
 
@@ -213,7 +217,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">25.02.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=705" target="_blank">EventView.aspx?idx=705 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">19.02.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797630&Btype=Update" target="_blank">newsBoard_sub.aspx?o=797630&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e705.png" target="_blank"><img class="post-image" src="img/digimon/e705.png" alt="idx 705" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Wood.png" alt="Wood" title="Natural Attribute: Wood"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Wood.png" alt="Wood" title="Wood"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
@@ -225,7 +229,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">18.03.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=708" target="_blank">EventView.aspx?idx=708 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">12.03.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798287&Btype=Update" target="_blank">newsBoard_sub.aspx?o=798287&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e708.png" target="_blank"><img class="post-image" src="img/digimon/e708.png" alt="idx 708" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Basic Attribute: Virus"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Families: Dark Area"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Virus"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Dark Area"></div></li>
     </ul>
   </section>
 
@@ -237,7 +241,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">13.05.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=731" target="_blank">EventView.aspx?idx=731 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">23.04.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=801540&Btype=Update" target="_blank">newsBoard_sub.aspx?o=801540&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e731.png" target="_blank"><img class="post-image" src="img/digimon/e731.png" alt="idx 731" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Families: Deep Savers"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Families: Wind Guardians"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Deep Savers"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Wind Guardians"></div></li>
     </ul>
   </section>
 
@@ -249,7 +253,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">17.06.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=743" target="_blank">EventView.aspx?idx=743 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">11.06.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=804377&Btype=Update" target="_blank">newsBoard_sub.aspx?o=804377&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e743.jpeg" target="_blank"><img class="post-image" src="img/digimon/e743.jpeg" alt="idx 743" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"></div></li>
     </ul>
   </section>
 
@@ -261,7 +265,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">22.07.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=759" target="_blank">EventView.aspx?idx=759 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">16.07.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808086&Btype=Update" target="_blank">newsBoard_sub.aspx?o=808086&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e759.png" target="_blank"><img class="post-image" src="img/digimon/e759.png" alt="idx 759" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Basic Attribute: Virus"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Families: Dark Area"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Families: Nightmare Soldiers"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Virus"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Dark Area"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Nightmare Soldiers"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"></div></li>
     </ul>
   </section>
 
@@ -273,7 +277,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">19.08.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=770" target="_blank">EventView.aspx?idx=770 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">13.08.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809411&Btype=Update" target="_blank">newsBoard_sub.aspx?o=809411&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e770.png" target="_blank"><img class="post-image" src="img/digimon/e770.png" alt="idx 770" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Basic Attribute: Unknown"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Unknown"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
@@ -285,8 +289,8 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">23.09.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=782" target="_blank">EventView.aspx?idx=782 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">24.09.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update" target="_blank">newsBoard_sub.aspx?o=810885&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e782.png" target="_blank"><img class="post-image" src="img/digimon/e782.png" alt="idx 782" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><span class="digimon-name">Goddramon</span><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Fire.png" alt="Fire" title="Natural Attribute: Fire"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Dragons_Roar.png" alt="Dragon's Roar" title="Families: Dragon's Roar"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Families: Wind Guardians"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"></div></li>
-      <li><span class="digimon-name">Holydramon (Awaken)</span><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Wind.png" alt="Wind" title="Natural Attribute: Wind"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Dragons_Roar.png" alt="Dragon's Roar" title="Families: Dragon's Roar"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Families: Wind Guardians"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Families: Nature Spirits"></div></li>
+      <li><span class="digimon-name">Goddramon</span><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Fire.png" alt="Fire" title="Fire"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Dragons_Roar.png" alt="Dragon's Roar" title="Dragon's Roar"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Wind Guardians"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"></div></li>
+      <li><span class="digimon-name">Holydramon (Awaken)</span><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Wind.png" alt="Wind" title="Wind"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Dragons_Roar.png" alt="Dragon's Roar" title="Dragon's Roar"><img class="chip-icon-only" src="img/icons/field-Wind_Guardians.png" alt="Wind Guardians" title="Wind Guardians"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Nature Spirits"></div></li>
     </ul>
   </section>
 
@@ -298,7 +302,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">01.10.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=784" target="_blank">EventView.aspx?idx=784 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">01.10.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810988&Btype=Update" target="_blank">newsBoard_sub.aspx?o=810988&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e784.png" target="_blank"><img class="post-image" src="img/digimon/e784.png" alt="idx 784" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Thunder.png" alt="Thunder" title="Natural Attribute: Thunder"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Families: Deep Savers"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Families: Nature Spirits"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Thunder.png" alt="Thunder" title="Thunder"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Deep Savers"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Nature Spirits"></div></li>
     </ul>
   </section>
 
@@ -310,7 +314,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">11.11.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=791" target="_blank">EventView.aspx?idx=791 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">05.11.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811713&Btype=Update" target="_blank">newsBoard_sub.aspx?o=811713&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e791.png" target="_blank"><img class="post-image" src="img/digimon/e791.png" alt="idx 791" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Basic Attribute: Virus"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Families: Dark Area"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Families: Nightmare Soldiers"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Virus"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Dark_Area.png" alt="Dark Area" title="Dark Area"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Nightmare Soldiers"></div></li>
     </ul>
   </section>
 
@@ -322,7 +326,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">10.12.2025</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=798" target="_blank">EventView.aspx?idx=798 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">09.12.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812305&Btype=Update" target="_blank">newsBoard_sub.aspx?o=812305&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e798.png" target="_blank"><img class="post-image" src="img/digimon/e798.png" alt="idx 798" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Basic Attribute: Virus"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Families: Nightmare Soldiers"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Virus.png" alt="Virus" title="Virus"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Nightmare_Soldiers.png" alt="Nightmare Soldiers" title="Nightmare Soldiers"></div></li>
     </ul>
   </section>
 
@@ -334,7 +338,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">14.01.2026</span><a href="https://dmo.gameking.com/news/EventView.aspx?idx=810" target="_blank">EventView.aspx?idx=810 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">13.01.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update" target="_blank">newsBoard_sub.aspx?o=812989&Btype=Update ↗</a></span></p>
     <a href="img/digimon/e810.jpeg" target="_blank"><img class="post-image" src="img/digimon/e810.jpeg" alt="idx 810" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Basic Attribute: Unknown"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Unknown"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
@@ -347,7 +351,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">25.02.2026</span><a href="https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4110" target="_blank">PatchNoteView.aspx?idx=4110 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">24.02.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814493&Btype=Update ↗</a></span></p>
     <a href="img/digimon/p4110.png" target="_blank"><img class="post-image" src="img/digimon/p4110.png" alt="idx 4110" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Basic Attribute: Unknown"><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Natural Attribute: Pitch Black"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Unknown.png" alt="Unknown" title="Unknown"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Pitch_Black.png" alt="Pitch Black" title="Pitch Black"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
@@ -359,7 +363,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">17.03.2026</span><a href="https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4121" target="_blank">PatchNoteView.aspx?idx=4121 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">17.03.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814935&Btype=Update ↗</a></span></p>
     <a href="img/digimon/p4121.jpeg" target="_blank"><img class="post-image" src="img/digimon/p4121.jpeg" alt="idx 4121" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Basic Attribute: Vaccine"><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Natural Attribute: Light"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Families: Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Families: Virus Busters"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Families: Nature Spirits"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Vaccine.png" alt="Vaccine" title="Vaccine"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Light.png" alt="Light" title="Light"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Metal_Empire.png" alt="Metal Empire" title="Metal Empire"><img class="chip-icon-only" src="img/icons/field-Virus_Busters.png" alt="Virus Busters" title="Virus Busters"><img class="chip-icon-only" src="img/icons/field-Nature_Spirits.png" alt="Nature Spirits" title="Nature Spirits"></div></li>
     </ul>
   </section>
 
@@ -371,7 +375,7 @@
     <p class="src"><span class="src-en"><span class="src-label">NA</span><span class="src-date">20.05.2026</span><a href="https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4148" target="_blank">PatchNoteView.aspx?idx=4148 ↗</a></span><span class="src-kr"><span class="src-label">KR</span><span class="src-date">19.05.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816756&Btype=Update" target="_blank">newsBoard_sub.aspx?o=816756&Btype=Update ↗</a></span></p>
     <a href="img/digimon/p4148.png" target="_blank"><img class="post-image" src="img/digimon/p4148.png" alt="idx 4148" loading="lazy"></a>
     <ul class="digimon-list">
-      <li><div class="chips-row"><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Basic Attribute: Data"><img class="chip-icon-only" src="img/icons/elem-Water.png" alt="Water" title="Natural Attribute: Water"></div><div class="chips-row"><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Families: Deep Savers"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Families: Unknown"></div></li>
+      <li><div class="chips-row"><span class="chips-label">Attribute</span><img class="chip-icon-only" src="img/icons/attr-Data.png" alt="Data" title="Data"><span class="chips-label">Element</span><img class="chip-icon-only" src="img/icons/elem-Water.png" alt="Water" title="Water"></div><div class="chips-row"><span class="chips-label">Families</span><img class="chip-icon-only" src="img/icons/field-Deep_Savers.png" alt="Deep Savers" title="Deep Savers"><img class="chip-icon-only" src="img/icons/field-Unknown.png" alt="Unknown" title="Unknown"></div></li>
     </ul>
   </section>
 
