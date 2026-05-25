@@ -355,14 +355,16 @@ def render() -> str:
     <div class="filter-group">{attr_pills}</div>
     <h4>Natural Attribute</h4>
     <div class="filter-group">{elem_pills}</div>
-    <h4>Families</h4>
+    <h4>Families <span style="font-weight:400;text-transform:none;color:#aaa;font-size:10px;">(เลือกได้หลายอัน — match ทุกอัน)</span></h4>
     <div class="filter-group">{fam_pills}<button class="filter-reset" id="filter-reset">reset</button><span class="filter-count" id="filter-count"></span></div>
   </div>"""
 
     filter_js = """
 <script>
 (() => {
-  const state = {attr: null, elem: null, family: null};
+  // attr/elem are single-select (radio); family is multi-select.
+  // A post matches family when its families contain EVERY selected one (AND).
+  const state = {attr: null, elem: null, family: new Set()};
   const pills = document.querySelectorAll('.filter-pill');
   const posts = document.querySelectorAll('section.post');
   const countEl = document.getElementById('filter-count');
@@ -374,9 +376,13 @@ def render() -> str:
       const e = (s.dataset.elem   || '').split(',');
       const f = (s.dataset.family || '').split(',');
       let show = true;
-      if (state.attr   && !a.includes(state.attr))   show = false;
-      if (state.elem   && !e.includes(state.elem))   show = false;
-      if (state.family && !f.includes(state.family)) show = false;
+      if (state.attr && !a.includes(state.attr)) show = false;
+      if (state.elem && !e.includes(state.elem)) show = false;
+      if (state.family.size) {
+        for (const wanted of state.family) {
+          if (!f.includes(wanted)) { show = false; break; }
+        }
+      }
       s.style.display = show ? '' : 'none';
       if (show) visible++;
     });
@@ -392,7 +398,9 @@ def render() -> str:
       }
       h.style.display = anyVisible ? '' : 'none';
     });
-    const active = [state.attr, state.elem, state.family].filter(Boolean);
+    const active = [
+      state.attr, state.elem, ...state.family
+    ].filter(Boolean);
     countEl.textContent = active.length
       ? `${visible} โพสต์ ตรงตาม ${active.join(' + ')}`
       : '';
@@ -402,22 +410,35 @@ def render() -> str:
     btn.addEventListener('click', () => {
       const key = btn.dataset.filter;
       const val = btn.dataset.value;
-      if (state[key] === val) {
-        state[key] = null;
-        btn.classList.remove('active');
+      if (key === 'family') {
+        // multi-select: toggle membership
+        if (state.family.has(val)) {
+          state.family.delete(val);
+          btn.classList.remove('active');
+        } else {
+          state.family.add(val);
+          btn.classList.add('active');
+        }
       } else {
-        // Toggle off others in the same group
-        document.querySelectorAll(`.filter-pill[data-filter="${key}"]`)
-          .forEach(b => b.classList.remove('active'));
-        state[key] = val;
-        btn.classList.add('active');
+        // single-select: same value clears; new value replaces
+        if (state[key] === val) {
+          state[key] = null;
+          btn.classList.remove('active');
+        } else {
+          document.querySelectorAll(`.filter-pill[data-filter="${key}"]`)
+            .forEach(b => b.classList.remove('active'));
+          state[key] = val;
+          btn.classList.add('active');
+        }
       }
       apply();
     });
   });
 
   document.getElementById('filter-reset').addEventListener('click', () => {
-    state.attr = state.elem = state.family = null;
+    state.attr = null;
+    state.elem = null;
+    state.family.clear();
     pills.forEach(b => b.classList.remove('active'));
     apply();
   });
