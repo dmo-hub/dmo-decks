@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>DMO New Deck Report</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; margin: 0; color: #2c3e50; background: #f5f7fa; line-height: 1.5; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 240px 1fr; gap: 28px; }
+  @media (max-width: 900px) { .container { grid-template-columns: 1fr; } .toc { position: static !important; max-height: none !important; } }
+
+  /* Sidebar — compact */
+  .toc { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto;
+         background: white; border-radius: 10px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); font-size: 12.5px; }
+  .toc h3 { margin: 0 0 8px 0; color: #1a4d8f; font-size: 13px; border-bottom: 2px solid #e7eef6; padding-bottom: 5px; }
+  .toc h4 { margin: 10px 0 4px 0; font-size: 10.5px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+  .toc a { color: #2c3e50; text-decoration: none; display: block; padding: 3px 6px; border-radius: 4px; line-height: 1.35; }
+  .toc a:hover { background: #eef4fb; color: #1a4d8f; }
+  .toc a.featured { color: #c0392b; font-weight: 600; }
+  .toc .nav-home { display: inline-block; font-size: 11px; color: #2c6fb8; padding: 0; margin-bottom: 8px; }
+  .toc .nav-home:hover { text-decoration: underline; }
+
+  /* Hero header — title + stats inline (gradient bar) */
+  .hero { background: linear-gradient(135deg, #1a4d8f, #2c6fb8); border-radius: 10px; padding: 18px 24px; margin-bottom: 14px;
+          display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px;
+          box-shadow: 0 4px 14px rgba(26,77,143,0.20); }
+  .hero h1 { color: white; margin: 0; font-size: 22px; line-height: 1.2; letter-spacing: 0.2px; }
+  .hero-stats { display: flex; gap: 22px; }
+  .hero-stat { text-align: center; color: white; padding: 0 6px; }
+  .hero-stat .num { font-size: 30px; font-weight: 700; line-height: 1; }
+  .hero-stat .lbl { font-size: 10.5px; opacity: 0.88; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .warn { background: #fff8e1; border-left: 4px solid #f39c12; padding: 10px 14px; border-radius: 4px; font-size: 13px; margin-bottom: 24px; }
+
+  /* Section headers */
+  .section-title { font-size: 22px; color: #fff; background: linear-gradient(135deg, #1a4d8f, #2c6fb8); padding: 12px 18px; border-radius: 8px; margin: 32px 0 16px 0; box-shadow: 0 2px 6px rgba(26,77,143,0.2); }
+  .section-title.patch { background: linear-gradient(135deg, #9b3f1a, #c0573a); box-shadow: 0 2px 6px rgba(155,63,26,0.2); }
+
+  /* Post (idx) card */
+  .post { background: white; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .post-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .post-header .idx-badge { background: #1a4d8f; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .post-header.patch .idx-badge { background: #9b3f1a; }
+  .post-header h2 { color: #2c3e50; font-size: 19px; margin: 0; }
+  .post-header .date { color: #95a5a6; font-size: 13px; }
+  .src { font-size: 12px; margin: 0 0 16px 0; }
+  .src a { color: #2c6fb8; text-decoration: none; }
+  .src a:hover { text-decoration: underline; }
+  .featured-badge { background: #f39c12; color: white; padding: 2px 8px; border-radius: 8px; font-size: 11px; margin-left: 4px; }
+
+  /* Deck block */
+  .deck { margin: 18px 0; padding: 16px 20px; background: #fafbfc; border-radius: 8px; box-shadow: 0 0 0 2px #f39c12; }
+  .deck-name { font-size: 16px; font-weight: 700; color: #1a4d8f; margin-bottom: 14px; }
+  .deck.patch .deck-name { color: #9b3f1a; }
+  .deck-body { display: block; }
+
+  /* Labels — gameking bullet style */
+  .gk-label { font-size: 14px; font-weight: 600; color: #2c3e50; margin: 14px 0 8px 0; padding-left: 14px; position: relative; }
+  .gk-label::before { content: "•"; position: absolute; left: 0; color: #1a4d8f; font-size: 18px; line-height: 1; }
+  .deck.patch .gk-label::before { color: #9b3f1a; }
+
+  /* Tables — match gameking original layout (centered, blue header, black borders) but use main font */
+  .gk-table { border-collapse: collapse; margin: 4px auto 14px auto; background: white; font-size: 13px; }
+  .gk-table th, .gk-table td { border: 1px solid #000; padding: 6px 14px; }
+  .gk-table th { background: #1f4e79; color: white; text-align: center; font-weight: 600; font-size: 13px; }
+  .gk-table td { text-align: center; background: white; color: #2c3e50; }
+  .digimon-table { min-width: 320px; }
+  .effect-table { min-width: 580px; }
+  @media (max-width: 700px) { .effect-table { min-width: 0; width: 100%; } .gk-table th, .gk-table td { padding: 5px 8px; font-size: 13px; } }
+
+  .note { font-size: 12px; color: #7f8c8d; font-style: italic; margin-top: 8px; padding: 6px 10px; background: #fffbf0; border-left: 3px solid #f39c12; border-radius: 3px; }
+
+  .methodology { font-size: 12px; color: #7f8c8d; background: white; padding: 14px 18px; border-radius: 8px; margin-top: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+
+  /* Filter bar — compact */
+  .filter-bar { background: white; border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                display: flex; align-items: end; gap: 14px; flex-wrap: wrap; }
+  .filter-bar h3 { margin: 0; color: #1a4d8f; font-size: 13px; padding-bottom: 8px; flex-shrink: 0; white-space: nowrap; }
+  .filter-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; flex: 1; min-width: 260px; }
+  @media (max-width: 700px) { .filter-row { grid-template-columns: 1fr; } .filter-bar { flex-direction: column; align-items: stretch; } .filter-bar h3 { padding-bottom: 0; } }
+  .filter-group { display: flex; flex-direction: column; gap: 3px; }
+  .filter-group label { font-size: 10.5px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
+  .filter-group input, .filter-group select { padding: 7px 10px; border: 1.5px solid #d5dde6; border-radius: 6px; font-size: 13px; outline: none; transition: border-color 0.15s; background: white; height: 34px; }
+  .filter-group input:focus, .filter-group select:focus { border-color: #2c6fb8; }
+  .filter-btn { padding: 7px 14px; background: #95a5a6; color: white; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; height: 34px; }
+  .filter-btn:hover { background: #7f8c8d; }
+  .filter-status { font-size: 12px; color: #7f8c8d; flex-basis: 100%; padding-top: 4px; line-height: 1.5; }
+  .filter-status b { color: #1a4d8f; }
+  .deck.hidden, .post.hidden { display: none; }
+  .deck.match { box-shadow: 0 0 0 3px #e67e22; }
+  .post mark { background: #fff3a8; padding: 0 2px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===================== TOC ===================== -->
+<aside class="toc">
+  <a href="./" class="nav-home">← Home</a>
+  <h3>สารบัญ</h3>
+
+  <h4>EventView (16 โพสต์)</h4>
+  <a href="#e622">idx 622 — D5 and Ultimate DigiXros</a>
+  <a href="#e663">idx 663 — White Wings (Gurei Tou + Garuru Hou)</a>
+  <a href="#e673">idx 673 — God's Will + Four Holy Beasts</a>
+  <a href="#e683">idx 683 — Divine Spear / Guardians</a>
+  <a href="#e692">idx 692 — Goddess of False Neverland</a>
+  <a href="#e708">idx 708 — Ultimate Holy War!</a>
+  <a href="#e731">idx 731 — White Wings</a>
+  <a href="#e734">idx 734 — Justice / Savior / Corrupted</a>
+  <a href="#e743">idx 743 — Reunion</a>
+  <a href="#e759">idx 759 — Invasion of Real World!</a>
+  <a href="#e770">idx 770 — Last Evolution: Kizuna</a>
+  <a href="#e782">idx 782 — Our hope, our light</a>
+  <a href="#e784">idx 784 — Transcending Time</a>
+  <a href="#e791">idx 791 — Wings of Temptation</a>
+  <a href="#e798">idx 798 — Final Phase / Virus</a>
+  <a href="#e810">idx 810 — Fear of the Abyss</a>
+
+  <h4>PatchNote (4 โพสต์)</h4>
+  <a href="#p4110">idx 4110 — Abyssal Fear</a>
+  <a href="#p4114">idx 4114 — True Form Destroyer</a>
+  <a href="#p4121">idx 4121 — Wings of Justice</a>
+  <a href="#p4148">idx 4148 — Quantumon (3)</a>
+</aside>
+
+<!-- ===================== MAIN ===================== -->
+<main>
+  <!-- ===== Hero header ===== -->
+  <div class="hero">
+    <h1>DMO – New Deck Add Report</h1>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">20</div><div class="lbl">โพสต์</div></div>
+      <div class="hero-stat"><div class="num">34</div><div class="lbl">deck ใหม่</div></div>
+    </div>
+  </div>
+
+  <!-- ===== Filter bar ===== -->
+  <div class="filter-bar">
+    <h3>🔍 Filter</h3>
+    <div class="filter-row">
+      <div class="filter-group">
+        <label for="f-digimon">Digimon</label>
+        <select id="f-digimon"><option value="">— ทั้งหมด —</option></select>
+      </div>
+      <div class="filter-group">
+        <label for="f-effect">Effect Name</label>
+        <select id="f-effect"><option value="">— ทั้งหมด —</option></select>
+      </div>
+      <button class="filter-btn" id="f-reset" title="ล้างฟิลเตอร์">Reset</button>
+    </div>
+    <div class="filter-status" id="f-status">แสดงทั้งหมด <b id="f-count">34</b> deck จาก <b>20</b> โพสต์</div>
+  </div>
+
+  <!-- ============ 622 ============ -->
+  <section class="post" id="e622">
+    <div class="post-header">
+      <span class="idx-badge">idx 622</span>
+      <h2>D5 and Ultimate DigiXros</h2>
+      <span class="date">02.05.2023</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=622" target="_blank">EventView.aspx?idx=622 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">D5 and Ultimate DigiXros</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>D5 and Ultimate DigiXros</th></tr>
+          <tr><td>Shoutmon X7 Superior Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Activation</th><th>Effect</th></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>15% additional damage</td></tr>
+          <tr><td>Critical Damage</td><td>3% chance</td><td>100% Increase for 10s</td></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>15% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 663 ============ -->
+  <section class="post" id="e663">
+    <div class="post-header">
+      <span class="idx-badge">idx 663</span>
+      <h2>White Wings: Gurei Tou of Courage + Garuru Hou of Friendship</h2>
+      <span class="date">05.03.2024</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=663" target="_blank">EventView.aspx?idx=663 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. White Wings: Gurei Tou of Courage</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>White Wings: Gurei Tou of Courage</th></tr>
+          <tr><td>Agumon</td></tr><tr><td>Greymon</td></tr><tr><td>MetalGreymon</td></tr>
+          <tr><td>WarGreymon</td></tr><tr><td>Jogress (Omegamon)</td></tr><tr><td>Omegamon Merciful Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Name</th><th>Activation Probability</th><th>Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>22% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>10% chance on normal attack</td><td>125% Increase for 10s</td></tr>
+          <tr><td>Attack</td><td>20% chance on normal attack</td><td>30% additional damage for 7s</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. White Wings: Garuru Hou of Friendship</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>White Wings: Garuru Hou of Friendship</th></tr>
+          <tr><td>Gabumon</td></tr><tr><td>Garurumon</td></tr><tr><td>WereGarurumon</td></tr>
+          <tr><td>MetalGarurumon</td></tr><tr><td>Jogress (Omegamon)</td></tr><tr><td>Omegamon Merciful Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Name</th><th>Activation Probability</th><th>Effect</th></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>25% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>10% chance on normal attack</td><td>125% Increase for 10s</td></tr>
+          <tr><td>Skill Damage</td><td>20% chance on normal attack</td><td>25% Increase for 10s</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 673 ============ -->
+  <section class="post" id="e673">
+    <div class="post-header">
+      <span class="idx-badge">idx 673</span>
+      <h2>God's Will + Leader of the Awakened Four Holy Beasts</h2>
+      <span class="date">11.06.2024</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=673" target="_blank">EventView.aspx?idx=673 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. God's Will</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>God's Will</th></tr>
+          <tr><td>Taomon</td></tr><tr><td>Sakuyamon</td></tr><tr><td>Sakuyamon (Awaken)</td></tr>
+          <tr><td>Kuzuhamon</td></tr><tr><td>Kuzuhamon MikoMode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect Name</th><th>Activation Probability</th><th>Activation Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>Attack Speed 17% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>10% chance on Normal Attack</td><td>Critical Damage 80% Increase for 10s</td></tr>
+          <tr><td>Skill Damage</td><td>10% chance on Normal Attack</td><td>Skill Damage 30% Increase for 10s</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. Leader of the Awakened Four Holy Beasts</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Leader of the Awakened Four Holy Beasts</th></tr>
+          <tr><td>Qinglongmon</td></tr><tr><td>Xuanwumon</td></tr><tr><td>Zhuqiaomon</td></tr>
+          <tr><td>Baihumon</td></tr><tr><td>Fanglongmon (Awaken)</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect Name</th><th>Activation Probability</th><th>Activation Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>Attack Speed 8% Increase</td></tr>
+          <tr><td>HP Increase</td><td>Always Active</td><td>HP 10% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 683 ============ -->
+  <section class="post" id="e683">
+    <div class="post-header">
+      <span class="idx-badge">idx 683</span>
+      <h2>Divine Spear / Guardians of the Digital World</h2>
+      <span class="date">20.08.2024</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=683" target="_blank">EventView.aspx?idx=683 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. Divine Spear and Sacred Sword of Light</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Divine Spear and Sacred Sword of Light</th></tr>
+          <tr><td>Guilmon</td></tr><tr><td>Growlmon</td></tr><tr><td>WarGrowlmon</td></tr>
+          <tr><td>Gallantmon</td></tr><tr><td>Gallantmon Crimson Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect Name</th><th>Activation Probability</th><th>Activation Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>Increases Attack Speed by 20%</td></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>Increases Skill Damage by 80%</td></tr>
+          <tr><td>Skill Damage</td><td>When using normal attacks, 20% chance</td><td>Increase Skill Damage by 50% for 10 seconds</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. Guardians of the Digital World</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Guardians of the Digital World</th></tr>
+          <tr><td>Omegamon Merciful Mode</td></tr><tr><td>Shoutmon X7 Superior Mode</td></tr>
+          <tr><td>Kuzuhamon Miko Mode</td></tr><tr><td>Gallantmon Crimson Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect Name</th><th>Activation Probability</th><th>Activation Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>Increases Attack Speed by 22%</td></tr>
+          <tr><td>Health Increase</td><td>Always Active</td><td>Increases Health by 30%</td></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>Increases Skill Damage by 70%</td></tr>
+          <tr><td>Critical Damage</td><td>Always Active</td><td>Increases Critical Damage by 125%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="note">หมายเหตุ: deck "Guardians of the Digital World" นี้คือ version แรก (Aug 2024) — version upgrade ที่ idx 784 มี [Extreme] Susanoomon เพิ่มและค่า effect สูงกว่า</p>
+  </section>
+
+  <!-- ============ 692 ============ -->
+  <section class="post" id="e692">
+    <div class="post-header">
+      <span class="idx-badge">idx 692</span>
+      <h2>The Goddess of the False Neverland</h2>
+      <span class="date">12.11.2024</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=692" target="_blank">EventView.aspx?idx=692 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">The Goddess of the False Neverland</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>The Goddess of the False Neverland</th></tr>
+          <tr><td>Eosmon_LV4</td></tr><tr><td>Eosmon_LV5</td></tr><tr><td>Eosmon_LV6</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>19% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>35% Increase (when using skill)</td></tr>
+          <tr><td>Reset Cooltime</td><td>10% chance</td><td>Reset attack skill cooltime</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 708 ============ -->
+  <section class="post" id="e708">
+    <div class="post-header">
+      <span class="idx-badge">idx 708</span>
+      <h2>The End, The Ultimate Holy War!</h2>
+      <span class="date">18.03.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=708" target="_blank">EventView.aspx?idx=708 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">The End, The Ultimate Holy War!</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>The End, The Ultimate Holy War!</th></tr>
+          <tr><td>ZeedMillenniummon</td></tr><tr><td>WarGreymon</td></tr><tr><td>MetalGarurumon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>17% Increase</td></tr>
+          <tr><td>HP</td><td>Always Active</td><td>30% Increase</td></tr>
+          <tr><td>Base Attack</td><td>Always Active</td><td>45% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 731 ============ -->
+  <section class="post" id="e731">
+    <div class="post-header">
+      <span class="idx-badge">idx 731</span>
+      <h2>White Wings: Sorrow and Determination</h2>
+      <span class="date">13.05.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=731" target="_blank">EventView.aspx?idx=731 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">White Wings: Sorrow and Determination</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>White Wings: Sorrow and Determination</th></tr>
+          <tr><td>Omegamon: Merciful Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>20% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>Always Active</td><td>125% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>20% chance on basic atk</td><td>30% Increase for 10s</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 734 ============ -->
+  <section class="post" id="e734">
+    <div class="post-header">
+      <span class="idx-badge">idx 734</span>
+      <h2>3 New Decks (Justice / Savior / Corrupted)</h2>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=734" target="_blank">EventView.aspx?idx=734 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. Justice Veiled in Darkness</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Justice Veiled in Darkness</th></tr>
+          <tr><td>Kuzuhamon Miko Mode</td></tr><tr><td>Eosmon</td></tr><tr><td>BloomLordmon</td></tr><tr><td>ZeedMillenniummon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>22% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Always Active</td><td>5% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>Always Active</td><td>100% Increase</td></tr>
+          <tr><td>Attack Amplification</td><td>Always Active</td><td>15% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. Savior Who Protects Peace</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Savior Who Protects Peace</th></tr>
+          <tr><td>Omegamon Merciful Mode</td></tr><tr><td>Shoutmon X7 Superior Mode</td></tr>
+          <tr><td>Gallantmon Crimson Mode</td></tr><tr><td>Imperialdramon Paladin Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>22% Increase</td></tr>
+          <tr><td>HP</td><td>Always Active</td><td>50% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Always Active</td><td>80% Increase</td></tr>
+          <tr><td>Attack Increase</td><td>Always Active</td><td>45% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">3. Corrupted Purification Ritual</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Corrupted Purification Ritual</th></tr>
+          <tr><td>Kuzuhamon Miko Mode</td></tr><tr><td>Kuzuhamon</td></tr><tr><td>Siriusmon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>18% Increase</td></tr>
+          <tr><td>HP</td><td>Always Active</td><td>40% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Always Active</td><td>5% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">[Existing Deck Effect Changed] Digital World The Guardian: HP 30%→40%, Critical Damage 125%→150%</p>
+  </section>
+
+  <!-- ============ 743 - REUNION ============ -->
+  <section class="post" id="e743">
+    <div class="post-header">
+      <span class="idx-badge">idx 743</span>
+      <h2>Reunion <span class="featured-badge">★ ตัวอย่างต้นฉบับ</span></h2>
+      <span class="date">17.06.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=743" target="_blank">EventView.aspx?idx=743 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Reunion</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Reunion</th></tr>
+          <tr><td>Alphamon Ouryuken [Extreme]</td></tr><tr><td>Omegamon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Always Active</td><td>20% Increase</td></tr>
+          <tr><td>Attack Speed</td><td>20% chance on Normal Atk</td><td>10% Increase</td></tr>
+          <tr><td>Hit Rate</td><td>Always Active</td><td>7% Amplify</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 759 ============ -->
+  <section class="post" id="e759">
+    <div class="post-header">
+      <span class="idx-badge">idx 759</span>
+      <h2>Invasion of the Real World!</h2>
+      <span class="date">22.07.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=759" target="_blank">EventView.aspx?idx=759 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Invasion of the Real World!</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List (11)</p>
+          <table class="gk-table digimon-table"><tr><th>Invasion of the Real World!</th></tr>
+          <tr><td>[Extreme] Lucemon : Satan Mode</td></tr>
+          <tr><td>Agnimon</td></tr><tr><td>Fairimon</td></tr><tr><td>Chakkumon</td></tr>
+          <tr><td>Arbormon</td></tr><tr><td>Grotmon</td></tr><tr><td>Wolfmon</td></tr>
+          <tr><td>Blitzmon</td></tr><tr><td>Lanamon</td></tr><tr><td>Lowemon</td></tr><tr><td>Mercuremon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>7% Increase</td></tr>
+          <tr><td>Hit Rate</td><td>Passive</td><td>10% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 770 ============ -->
+  <section class="post" id="e770">
+    <div class="post-header">
+      <span class="idx-badge">idx 770</span>
+      <h2>Last Evolution: Kizuna</h2>
+      <span class="date">19.08.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=770" target="_blank">EventView.aspx?idx=770 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Last Evolution: Kizuna</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Last Evolution: Kizuna</th></tr>
+          <tr><td>Last Evolution: Kizuna</td></tr>
+          <tr><td>Omegamon</td></tr>
+          <tr><td>Eosmon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect Name</th><th>Activation Chance</th><th>Effect</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>130% Increase</td></tr>
+          <tr><td>Attack</td><td>Passive</td><td>45% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 782 ============ -->
+  <section class="post" id="e782">
+    <div class="post-header">
+      <span class="idx-badge">idx 782</span>
+      <h2>Our hope, our light</h2>
+      <span class="date">23.09.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=782" target="_blank">EventView.aspx?idx=782 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Our hope, our light</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Our hope, our light</th></tr>
+          <tr><td>Goddramon</td></tr><tr><td>Holydramon</td></tr><tr><td>Millenniumon</td></tr>
+          <tr><td>[Awaken] WarGreymon</td></tr><tr><td>[Awaken] MetalGarurumon</td></tr><tr><td>[Awaken] ZeedMillenniumon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>19% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>45% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>200% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 784 ============ -->
+  <section class="post" id="e784">
+    <div class="post-header">
+      <span class="idx-badge">idx 784</span>
+      <h2>Transcending Time + 2 Upgrade Decks</h2>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=784" target="_blank">EventView.aspx?idx=784 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. Transcending Time, The Beginning of a Legend!</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List (11)</p>
+          <table class="gk-table digimon-table"><tr><th>Transcending Time, The Beginning of a Legend!</th></tr>
+          <tr><td>[Extreme] Susanoomon</td></tr><tr><td>Vritramon</td></tr><tr><td>shutsmon</td></tr>
+          <tr><td>Blizzarmon</td></tr><tr><td>Petaldramon</td></tr><tr><td>Gigasmon</td></tr>
+          <tr><td>Garmmon</td></tr><tr><td>Bolgmon</td></tr><tr><td>Calamaramon</td></tr>
+          <tr><td>Kaiserleomon</td></tr><tr><td>Sefirotmon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>17% Increase</td></tr>
+          <tr><td>Critical Rate Damage</td><td>Passive</td><td>70% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>70% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. Guardians of the Digital World (Upgrade)</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Guardians of the Digital World</th></tr>
+          <tr><td>Omegamon Merciful Mode</td></tr><tr><td>Shoutmon X7 : superiormode</td></tr>
+          <tr><td>Kuzuhamon Miko Mode</td></tr><tr><td>[Awaken] Gallantmon (Crimson Mode)</td></tr>
+          <tr><td>[Extreme] Susanoomon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>23%</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>50%</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>90%</td></tr>
+          <tr><td>Critical Rate Damage</td><td>Passive</td><td>170%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">3. Saviors Who Protect Peace (Upgrade)</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Saviors Who Protect Peace</th></tr>
+          <tr><td>Omegamon Merciful Mode</td></tr><tr><td>Shoutmon X7 : superiormode</td></tr>
+          <tr><td>[Awaken] Gallantmon (Crimson Mode)</td></tr><tr><td>[Awaken] Imperialdramon: Paladin Mode</td></tr>
+          <tr><td>[Extreme] Susanoomon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>23%</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>60%</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>100%</td></tr>
+          <tr><td>Attack Increase</td><td>Passive</td><td>60%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 791 ============ -->
+  <section class="post" id="e791">
+    <div class="post-header">
+      <span class="idx-badge">idx 791</span>
+      <h2>Wings of Temptation and Wings of Justice</h2>
+      <span class="date">11.11.2025</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=791" target="_blank">EventView.aspx?idx=791 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Wings of Temptation and Wings of Justice</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Wings of Temptation and Wings of Justice</th></tr>
+          <tr><td>Awakened Lilithmon (Resistance)</td></tr><tr><td>[Extreme] Alphamon Ouryuken</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>20% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>30% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>7% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 798 ============ -->
+  <section class="post" id="e798">
+    <div class="post-header">
+      <span class="idx-badge">idx 798</span>
+      <h2>3 New Decks (Final Phase / Virus / Fight Virus)</h2>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=798" target="_blank">EventView.aspx?idx=798 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">1. Demon of the Final Phase</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Demon of the Final Phase</th></tr>
+          <tr><td>DoneDevimon</td></tr><tr><td>MetalGreymon</td></tr><tr><td>WereGarurumon</td></tr><tr><td>MugenDramon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Critical Hit Damage</td><td>Passive</td><td>100% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>100% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">2. Abnormal Status Occurred: Virus</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Abnormal Status Occurred: Virus</th></tr>
+          <tr><td>DoneDevimon</td></tr><tr><td>[Awaken] Gallantmon (Crimson Mode)</td></tr>
+          <tr><td>Lilithmon X [Awaken]</td></tr><tr><td>[Awaken] ZeedMillenniummon</td></tr>
+          <tr><td>[Extreme] Lucemon: Wild 2nd Mode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>25% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>35% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>8% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>170% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck">
+      <div class="deck-name">3. Fight against the Virus!</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Fight against the Virus!</th></tr>
+          <tr><td>[Awaken] Imperialdramon: Paladin Mode</td></tr><tr><td>[Extreme] Alphamon Ouryuken</td></tr>
+          <tr><td>Omegamon Merciful Mode</td></tr><tr><td>Bloomlordmon</td></tr><tr><td>Goddramon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>25% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>35% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>8% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>170% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 810 ============ -->
+  <section class="post" id="e810">
+    <div class="post-header">
+      <span class="idx-badge">idx 810</span>
+      <h2>Fear of the Abyss</h2>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=810" target="_blank">EventView.aspx?idx=810 ↗</a></p>
+
+    <div class="deck">
+      <div class="deck-name">Fear of the Abyss</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List (9)</p>
+          <table class="gk-table digimon-table"><tr><th>Fear of the Abyss</th></tr>
+          <tr><td>Abbadomon</td></tr><tr><td>[Awaken] WarGreymon</td></tr><tr><td>[Awaken] MetalGarurumon</td></tr>
+          <tr><td>Seraphimon</td></tr><tr><td>Ophanimon</td></tr><tr><td>Rosemon</td></tr>
+          <tr><td>HerculesKabuterimon</td></tr><tr><td>Vikemon</td></tr><tr><td>Phoenixmon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>85% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>20% chance on attack</td><td>75% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4110 ============ -->
+  <section class="post" id="p4110">
+    <div class="post-header patch">
+      <span class="idx-badge">idx 4110</span>
+      <h2>Abyssal Fear + Perfect data</h2>
+      <span class="date">25.02.2026</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4110" target="_blank">PatchNoteView.aspx?idx=4110 ↗</a></p>
+
+    <div class="deck patch">
+      <div class="deck-name">1. Abyssal Fear</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Abyssal Fear</th></tr>
+          <tr><td>Abbadomon</td></tr><tr><td>Abbadomon Core</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>180% Increase</td></tr>
+          <tr><td>Critical Damage</td><td>Passive</td><td>180% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck patch">
+      <div class="deck-name">2. Perfect data, and data of unknown origin</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Demon of the Final Phase</th></tr>
+          <tr><td>Abbadomon</td></tr><tr><td>Abbadomon Core</td></tr>
+          <tr><td>Eosmon</td></tr><tr><td>Last Evolution Kizuna</td></tr>
+          <tr><td>Kuzuhamon Miko Mode</td></tr><tr><td>Shoutmon X7 : superiormode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>25% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>12% Increase</td></tr>
+          <tr><td>Final Damage</td><td>Passive</td><td>25% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>45% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4114 ============ -->
+  <section class="post" id="p4114">
+    <div class="post-header patch">
+      <span class="idx-badge">idx 4114</span>
+      <h2>The True Form of the Destroyer</h2>
+      <span class="date">04.03.2026</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4114" target="_blank">PatchNoteView.aspx?idx=4114 ↗</a></p>
+
+    <div class="deck patch">
+      <div class="deck-name">The True Form of the Destroyer</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List (10)</p>
+          <table class="gk-table digimon-table"><tr><th>The True Form of the Destroyer</th></tr>
+          <tr><td>Abbadomon</td></tr><tr><td>WarGreymon [Awaken]</td></tr><tr><td>MetalGarurumon [Awaken]</td></tr>
+          <tr><td>Seraphimon</td></tr><tr><td>Ophanimon</td></tr><tr><td>Rosemon</td></tr>
+          <tr><td>HerculesKabuterimon</td></tr><tr><td>Vikemon</td></tr><tr><td>Phoenixmon</td></tr>
+          <tr><td>Omegamon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>85% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>20% chance on attack</td><td>75% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <p class="note">[Modify Existing Deck] Perfect data, and data of unknown origin — เพิ่ม Skill Damage 100% Increase</p>
+  </section>
+
+  <!-- ============ 4121 ============ -->
+  <section class="post" id="p4121">
+    <div class="post-header patch">
+      <span class="idx-badge">idx 4121</span>
+      <h2>Wings of Justice (3 Decks)</h2>
+      <span class="date">17.03.2026</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4121" target="_blank">PatchNoteView.aspx?idx=4121 ↗</a></p>
+
+    <div class="deck patch">
+      <div class="deck-name">1. Wings of Justice</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Wings of Justice</th></tr>
+          <tr><td>(Extreme) Omegamon (Resistance)</td></tr><tr><td>(Awaken) Alphamon Ouryuken</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>4% Increase</td></tr>
+          <tr><td>Attack</td><td>Passive</td><td>15% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck patch">
+      <div class="deck-name">2. Tempting Wings of Justice</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Tempting Wings of Justice</th></tr>
+          <tr><td>(Extreme) Omegamon (Resistance)</td></tr><tr><td>(Awaken) Lilithmon (Resistance)</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>20% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>150% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>3% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck patch">
+      <div class="deck-name">3. The Nullifiers</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>The Nullifiers</th></tr>
+          <tr><td>(Extreme) Omegamon (Resistance)</td></tr><tr><td>(Extreme) Lucemon Satan Mode</td></tr>
+          <tr><td>(Extreme) Alphamon Ouryuken</td></tr><tr><td>(Extreme) ZeedMillenniumon</td></tr>
+          <tr><td>Holydramon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>25% Increase</td></tr>
+          <tr><td>Hit Rate</td><td>Passive</td><td>20% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>10% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>140% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4148 ============ -->
+  <section class="post" id="p4148">
+    <div class="post-header patch">
+      <span class="idx-badge">idx 4148</span>
+      <h2>Quantumon (3 Decks)</h2>
+      <span class="date">20.05.2026</span>
+    </div>
+    <p class="src"><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4148" target="_blank">PatchNoteView.aspx?idx=4148 ↗</a></p>
+
+    <div class="deck patch">
+      <div class="deck-name">1. One who resides in Lark</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>One who resides in Lark</th></tr>
+          <tr><td>Quantumon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>18% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>180% Increase</td></tr>
+          <tr><td>Critical Rate Damage</td><td>Passive</td><td>200% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck patch">
+      <div class="deck-name">2. A being that sends Digimon to the human world</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>A being that sends Digimon to the human world</th></tr>
+          <tr><td>Quantumon</td></tr><tr><td>BloomLordmon</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>19% Increase</td></tr>
+          <tr><td>HP</td><td>Passive</td><td>45% Increase</td></tr>
+          <tr><td>Skill Damage</td><td>Passive</td><td>200% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck patch">
+      <div class="deck-name">3. Neutral type Digimon</div>
+      <div class="deck-body">
+        <div>
+          <p class="gk-label">Digimon List</p>
+          <table class="gk-table digimon-table"><tr><th>Neutral type Digimon</th></tr>
+          <tr><td>Quantumon</td></tr><tr><td>Kuzuhamon Miko Mode</td></tr>
+          <tr><td>Shoutmon X7 : superiormode</td></tr></table>
+        </div>
+        <div>
+          <p class="gk-label">Effect</p>
+          <table class="gk-table effect-table">
+          <tr><th>Effect</th><th>Chance</th><th>Detail</th></tr>
+          <tr><td>Attack Speed</td><td>Passive</td><td>22% Increase</td></tr>
+          <tr><td>Attribute Damage</td><td>Passive</td><td>5% Increase</td></tr>
+          <tr><td>Critical Rate Damage</td><td>Passive</td><td>100% Increase</td></tr>
+          <tr><td>AT Boost</td><td>Passive</td><td>15% Increase</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      const inDigimon = document.getElementById('f-digimon');
+      const inEffect = document.getElementById('f-effect');
+      const btnReset = document.getElementById('f-reset');
+      const countEl = document.getElementById('f-count');
+      const statusEl = document.getElementById('f-status');
+      const decks = Array.from(document.querySelectorAll('.deck'));
+      const posts = Array.from(document.querySelectorAll('.post'));
+
+      // Rank U Digimon list from dmowiki (Category:Digimon_Rank_U, 20 total)
+      // Each entry: [wiki display name, regex to match against deck digimon text]
+      const rankU = [
+        ["Abbadomon",                              /\babbadomon\b(?!\s*core)/i],
+        ["Abbadomon Core",                         /abbadomon\s+core/i],
+        ["Alphamon Ouryuken (Extreme)",            /alphamon\s+ouryuken/i],
+        ["Bloomlordmon",                           /bloomlordmon/i],
+        ["DoneDevimon",                            /donedevimon/i],
+        ["Eosmon LV6",                             /eosmon/i],
+        ["Gallantmon (Crimson Mode) (Awaken)",     /gallantmon[^|]*crimson/i],
+        ["Goddramon",                              /goddramon/i],
+        ["Holydramon (Awaken)",                    /holydramon/i],
+        ["Imperialdramon Paladin Mode (Awaken)",   /imperialdramon[^|]*paladin/i],
+        ["Kuzuhamon - Miko Mode",                  /kuzuhamon\s+miko\s+mode/i],
+        ["Last Evolution: Kizuna",                 /last\s+evolution[^|]*kizuna/i],
+        ["Lilithmon X (Awaken)",                   /awakened\s+lilithmon|lilithmon\s*x\b/i],
+        ["Lucemon: Satan Mode (Extreme)",          /lucemon[^|]*satan/i],
+        ["Omegamon - Merciful Mode",               /omegamon[^|]*merciful/i],
+        ["Omegamon X Extreme",                     /\(?\s*extreme\s*\)?\s*omegamon|omegamon\s*x\s+extreme/i],
+        ["Shoutmon X7 Superior Mode",              /shoutmon\s*x7/i],
+        ["Susanoomon (Extreme)",                   /susanoomon/i],
+        ["ZeedMillenniummon (Awaken)",             /zeedmillennium/i],
+      ];
+
+      // Pre-index each deck: build digimon text (for U-rank matching) + effect set
+      const effectSet = new Set();
+      decks.forEach(d => {
+        const tables = d.querySelectorAll('table');
+        const digimonList = [];
+        if (tables[0]) {
+          tables[0].querySelectorAll('tr').forEach((tr, i) => {
+            if (i === 0) return;
+            const td = tr.querySelector('td');
+            if (td) digimonList.push(td.textContent.trim());
+          });
+        }
+        const effectList = [];
+        if (tables[1]) {
+          tables[1].querySelectorAll('tr').forEach((tr, i) => {
+            if (i === 0) return;
+            const td = tr.querySelector('td');
+            if (td) {
+              const name = td.textContent.trim();
+              effectList.push(name);
+              effectSet.add(name);
+            }
+          });
+        }
+        d.dataset.digimon = '|' + digimonList.join('|') + '|';
+        d.dataset.effect = '|' + effectList.join('|') + '|';
+      });
+
+      // Populate Digimon dropdown with U-rank list (alphabetical)
+      rankU.forEach(([name]) => {
+        const opt = document.createElement('option');
+        opt.value = name; opt.textContent = name;
+        inDigimon.appendChild(opt);
+      });
+
+      // Populate Effect dropdown auto from data
+      [...effectSet].sort((a,b) => a.localeCompare(b)).forEach(name => {
+        const opt = document.createElement('option');
+        opt.value = name; opt.textContent = name;
+        inEffect.appendChild(opt);
+      });
+
+      function applyFilter() {
+        const dq = inDigimon.value;
+        const eq = inEffect.value;
+        const digimonRegex = dq ? (rankU.find(r => r[0] === dq) || [,null])[1] : null;
+        let visibleDecks = 0;
+        let visiblePosts = 0;
+
+        decks.forEach(d => {
+          const matchD = !digimonRegex || digimonRegex.test(d.dataset.digimon);
+          const matchE = !eq || d.dataset.effect.includes('|' + eq + '|');
+          const show = matchD && matchE;
+          d.classList.toggle('hidden', !show);
+          d.classList.toggle('match', show && (dq || eq));
+          if (show) visibleDecks++;
+        });
+
+        posts.forEach(p => {
+          const anyVisible = Array.from(p.querySelectorAll('.deck')).some(d => !d.classList.contains('hidden'));
+          p.classList.toggle('hidden', !anyVisible);
+          if (anyVisible) visiblePosts++;
+        });
+
+        countEl.textContent = visibleDecks;
+        if (dq || eq) {
+          statusEl.innerHTML = `แสดง <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์ (กรอง: ${dq ? `Digimon "${dq}"` : ''}${dq && eq ? ' + ' : ''}${eq ? `Effect "${eq}"` : ''})`;
+        } else {
+          statusEl.innerHTML = `แสดงทั้งหมด <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์`;
+        }
+      }
+
+      inDigimon.addEventListener('change', applyFilter);
+      inEffect.addEventListener('change', applyFilter);
+      btnReset.addEventListener('click', () => {
+        inDigimon.value = '';
+        inEffect.value = '';
+        applyFilter();
+      });
+
+      applyFilter();
+    })();
+  </script>
+
+  <footer style="margin-top:40px;padding:20px 0 8px;text-align:center;color:#7f8c8d;font-size:12px;border-top:1px solid #e7eef6;">
+    Generated with <a href="https://claude.ai/" target="_blank" style="color:#1a4d8f;text-decoration:none;font-weight:600;">Claude AI</a>
+  </footer>
+
+</main>
+</div>
+</body>
+</html>
