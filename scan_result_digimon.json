@@ -67,6 +67,18 @@
             "Nightmare Soldiers",
             "Unknown",
             "TBD"
+          ],
+          "rebalance_sources": [
+            {
+              "kind": "event",
+              "idx": "782",
+              "url": "https://dmo.gameking.com/news/EventView.aspx?idx=782",
+              "families": [
+                "Nightmare Soldiers",
+                "Unknown",
+                "TBD"
+              ]
+            }
           ]
         }
       },
@@ -118,6 +130,17 @@
           "families": [
             "TBD",
             "Unknown"
+          ],
+          "rebalance_sources": [
+            {
+              "kind": "event",
+              "idx": "782",
+              "url": "https://dmo.gameking.com/news/EventView.aspx?idx=782",
+              "families": [
+                "TBD",
+                "Unknown"
+              ]
+            }
           ]
         }
       },
@@ -143,6 +166,17 @@
           "families": [
             "Unknown",
             "TBD"
+          ],
+          "rebalance_sources": [
+            {
+              "kind": "event",
+              "idx": "782",
+              "url": "https://dmo.gameking.com/news/EventView.aspx?idx=782",
+              "families": [
+                "Unknown",
+                "TBD"
+              ]
+            }
           ]
         }
       },
