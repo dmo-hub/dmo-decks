@@ -71,12 +71,17 @@ def extract_image(raw: str) -> tuple[bytes, str] | None:
 
 
 def main() -> None:
+    force = "--force" in sys.argv
     IMG_DIR.mkdir(parents=True, exist_ok=True)
     data = json.loads(SCAN.read_text(encoding="utf-8"))
 
     for kind in ("event", "patch"):
         prefix = "e" if kind == "event" else "p"
         for idx, post in data.get(kind, {}).items():
+            if post.get("image") and not force:
+                # Already has an image (possibly hand-curated or from another source).
+                # Don't overwrite — use --force to re-extract from cache.
+                continue
             cache_file = CACHE / f"{kind}_{idx}.html"
             if not cache_file.exists():
                 print(f"skip {kind}_{idx}: no cache")
@@ -85,7 +90,6 @@ def main() -> None:
             result = extract_image(raw)
             if result is None:
                 print(f"{kind}_{idx}: no image found")
-                post.pop("image", None)
                 continue
             blob, ext = result
             out = IMG_DIR / f"{prefix}{idx}.{ext}"
