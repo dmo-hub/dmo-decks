@@ -59,9 +59,11 @@ CSS = """
   .post-header.patch .idx-badge { background: #9b3f1a; }
   .post-header h2 { color: #2c3e50; font-size: 19px; margin: 0; }
   .post-header .date { color: #95a5a6; font-size: 13px; }
-  .src { font-size: 12px; margin: 0 0 16px 0; }
+  .src { font-size: 12px; margin: 0 0 16px 0; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
   .src a { color: #2c6fb8; text-decoration: none; }
   .src a:hover { text-decoration: underline; }
+  .src .src-label { color: #95a5a6; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .src .src-kr a { color: #c0392b; }
 
   /* Digimon list — orange-border cards matching deck style */
   .digimon-list { list-style: none; padding: 0; margin: 8px 0 0 0; display: grid; gap: 10px; }
@@ -107,13 +109,26 @@ def render() -> str:
             if p.get("image")
             else ""
         )
+        def src_span(url: str) -> str:
+            is_kr = "digimonmasters.com" in url
+            cls = "src-kr" if is_kr else "src-en"
+            label = "KR" if is_kr else "EN"
+            return (
+                f'<span class="{cls}"><span class="src-label">{label}</span> '
+                f'<a href="{url}" target="_blank">{url.split("/")[-1]} ↗</a></span>'
+            )
+
+        urls = [p["source"]]
+        if p.get("source_kr") and p["source_kr"] != p["source"]:
+            urls.append(p["source_kr"])
+        src_html = "".join(src_span(u) for u in urls)
         return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
       <h2>{n} New Digimon</h2>
       <span class="date">{fmt_date(p["date"])}</span>
     </div>
-    <p class="src"><a href="{p["source"]}" target="_blank">{p["source"].split("/")[-1]} ↗</a></p>
+    <p class="src">{src_html}</p>
     {img_block}<ul class="digimon-list">
       {items}
     </ul>

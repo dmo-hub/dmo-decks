@@ -6,7 +6,8 @@
       "digimon": [
         "Omegamon – Merciful Mode"
       ],
-      "image": "img/digimon/e663.png"
+      "image": "img/digimon/e663.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=783359&Btype=Update"
     },
     "664": {
       "date": "03-20-2024",
@@ -14,7 +15,8 @@
       "digimon": [
         "Shoutmon X7 Superior Mode"
       ],
-      "image": "img/digimon/e664.jpeg"
+      "image": "img/digimon/e664.jpeg",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?Btype=Update&o=784466&p=1"
     },
     "673": {
       "date": "06-11-2024",
@@ -22,7 +24,8 @@
       "digimon": [
         "Kuzuhamon MikoMode"
       ],
-      "image": "img/digimon/e673.png"
+      "image": "img/digimon/e673.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787977&Btype=Update"
     },
     "683": {
       "date": "08-20-2024",
@@ -30,7 +33,8 @@
       "digimon": [
         "Gallantmon Crimson Mode"
       ],
-      "image": "img/digimon/e683.png"
+      "image": "img/digimon/e683.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789668&Btype=Update"
     },
     "692": {
       "date": "11-12-2024",
@@ -38,7 +42,8 @@
       "digimon": [
         "Eosmon"
       ],
-      "image": "img/digimon/e692.png"
+      "image": "img/digimon/e692.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update"
     },
     "705": {
       "date": "02-25-2025",
@@ -46,7 +51,8 @@
       "digimon": [
         "Bloomlordmon"
       ],
-      "image": "img/digimon/e705.png"
+      "image": "img/digimon/e705.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797955&Btype=Update"
     },
     "708": {
       "date": "03-18-2025",
@@ -54,7 +60,8 @@
       "digimon": [
         "ZeedMillenniummon"
       ],
-      "image": "img/digimon/e708.png"
+      "image": "img/digimon/e708.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798510&Btype=Update"
     },
     "731": {
       "date": "05-13-2025",
@@ -62,7 +69,8 @@
       "digimon": [
         "Imperialdramon PaladinMode"
       ],
-      "image": "img/digimon/e731.png"
+      "image": "img/digimon/e731.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=802550&Btype=Update"
     },
     "743": {
       "date": "06-17-2025",
@@ -70,14 +78,17 @@
       "digimon": [
         "Alphamon Ouryuken [Extreme]"
       ],
-      "image": "img/digimon/e743.png"
+      "image": "img/digimon/e743.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=807402&Btype=Update"
     },
     "759": {
       "date": "07-22-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=759",
       "digimon": [
         "[Extreme] Lucemon : Satan Mode"
-      ]
+      ],
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808363&Btype=Update",
+      "image": "img/digimon/e759.png"
     },
     "770": {
       "date": "08-19-2025",
@@ -85,7 +96,8 @@
       "digimon": [
         "Last Evolution: Kizuna"
       ],
-      "image": "img/digimon/e770.png"
+      "image": "img/digimon/e770.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809751&Btype=Update"
     },
     "782": {
       "date": "09-23-2025",
@@ -94,7 +106,8 @@
         "Goddramon",
         "Holydramon"
       ],
-      "image": "img/digimon/e782.png"
+      "image": "img/digimon/e782.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update"
     },
     "784": {
       "date": "10-01-2025",
@@ -102,14 +115,16 @@
       "digimon": [
         "[Extreme] Susanoomon"
       ],
-      "image": "img/digimon/e784.png"
+      "image": "img/digimon/e784.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810988&Btype=Update"
     },
     "791": {
       "date": "11-11-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=791",
       "digimon": [
         "Awakened Lilithmon (Resistance)"
-      ]
+      ],
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811812&Btype=Update"
     },
     "798": {
       "date": "12-10-2025",
@@ -117,14 +132,16 @@
       "digimon": [
         "DoneDevimon"
       ],
-      "image": "img/digimon/e798.png"
+      "image": "img/digimon/e798.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812305&Btype=Update"
     },
     "810": {
       "date": "01-14-2026",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=810",
       "digimon": [
         "Abbadomon"
-      ]
+      ],
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update"
     }
   },
   "patch": {
@@ -134,7 +151,8 @@
       "digimon": [
         "Abbadomon Core"
       ],
-      "image": "img/digimon/p4110.png"
+      "image": "img/digimon/p4110.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update"
     },
     "4121": {
       "date": "03-17-2026",
@@ -142,7 +160,8 @@
       "digimon": [
         "(Extreme) Omegamon(Resistance)"
       ],
-      "image": "img/digimon/p4121.png"
+      "image": "img/digimon/p4121.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update"
     },
     "4148": {
       "date": "05-20-2026",
@@ -150,7 +169,8 @@
       "digimon": [
         "QUANTUMON"
       ],
-      "image": "img/digimon/p4148.png"
+      "image": "img/digimon/p4148.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816756&Btype=Update"
     }
   }
 }
