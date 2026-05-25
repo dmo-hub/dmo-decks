@@ -34,14 +34,18 @@ HEADERS = {
 def name_candidates(raw_name: str) -> list[str]:
     """Generate candidate DMW Wiki filename slugs from a digimon name.
 
-    Strategy: try the full name, then a version with any leading
-    [Bracket] / (Paren) qualifier stripped (e.g. "[Extreme] Lucemon..." → "Lucemon..."),
-    each with/without parens. Last resort: bare first word.
+    Tries the full name, then a version with any leading [Bracket] / (Paren)
+    qualifier stripped (e.g. "[Extreme] Lucemon..." → "Lucemon..."), each
+    with/without parens. Treats both kinds of dash and the colon as separators.
+
+    Does NOT fall back to bare first word — that would substitute a specific
+    form (e.g. "Omegamon Merciful Mode") with the generic base form
+    ("Omegamon.png"), which is the wrong portrait.
 
     Examples:
       "Omegamon – Merciful Mode" → ["Omegamon_Merciful_Mode"]
       "[Extreme] Lucemon : Satan Mode" → ["Extreme_Lucemon_Satan_Mode", "Lucemon_Satan_Mode"]
-      "Negamon (Evolved Form)" → ["Negamon_(Evolved_Form)", "Negamon_Evolved_Form", "Negamon"]
+      "Alphamon Ouryuken (Extreme)" → ["Alphamon_Ouryuken_(Extreme)", "Alphamon_Ouryuken_Extreme"]
     """
     sources = [raw_name]
     # Add a stripped version if there's a leading [...] or (...) qualifier
@@ -51,18 +55,13 @@ def name_candidates(raw_name: str) -> list[str]:
 
     candidates: list[str] = []
     for s in sources:
-        # Variant: keep parens
-        a = re.sub(r"[–—:\[\]]", " ", s)
+        # Variant: keep parens (matches wiki filenames like "Alphamon_Ouryuken_(Extreme).png")
+        a = re.sub(r"[\-–—:\[\]]", " ", s)
         a = re.sub(r"\s+", " ", a).strip().replace(" ", "_")
         # Variant: drop parens too
-        b = re.sub(r"[–—:\[\]()]", " ", s)
+        b = re.sub(r"[\-–—:\[\]()]", " ", s)
         b = re.sub(r"\s+", " ", b).strip().replace(" ", "_")
         candidates.extend([a, b])
-
-    # Final fallback: just the first word
-    first = re.split(r"[\s(\[]", raw_name, maxsplit=1)[0].strip()
-    if first:
-        candidates.append(re.sub(r"[–—:]", "", first))
 
     seen, out = set(), []
     for v in candidates:
