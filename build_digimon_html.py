@@ -72,10 +72,11 @@ CSS = """
   .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
-  /* Attribute chips (Basic / Natural / Field) */
+  /* Attribute chips (Basic / Natural / Families) — icon + name layout */
   .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; font-weight: 500; font-size: 12px; }
-  .chip { padding: 3px 9px; border-radius: 999px; line-height: 1.4; letter-spacing: 0.3px; }
-  .chip-label { font-size: 10px; opacity: 0.8; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .chip { padding: 3px 9px 3px 4px; border-radius: 999px; line-height: 1.4; letter-spacing: 0.3px;
+          display: inline-flex; align-items: center; gap: 4px; }
+  .chip-icon { width: 18px; height: 18px; vertical-align: middle; object-fit: contain; flex-shrink: 0; }
   /* Basic attribute colors */
   .chip-attr-VA { background: #d6f0d6; color: #1f6b1f; }
   .chip-attr-VI { background: #efd9ef; color: #6b1f6b; }
@@ -84,18 +85,13 @@ CSS = """
   .chip-attr-UN { background: #ebebeb; color: #555; }
   /* Natural attribute (element) — neutral grey base */
   .chip-elem { background: #eef2f5; color: #2c3e50; border: 1px solid #d4dce3; }
-  /* Field / family — neutral pale orange */
-  .chip-field { background: #fff1d6; color: #9b6e1a; border: 1px solid #f1d49a; }
+  /* Families (was "Field") — neutral pale orange */
+  .chip-families { background: #fff1d6; color: #9b6e1a; border: 1px solid #f1d49a; }
 
-  /* Banner image — when both EN + KR are present, lay them side by side */
-  .post-images { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 14px 0; }
-  .post-image-wrap { flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-  .post-image-wrap .img-label { font-size: 11px; color: #95a5a6; text-transform: uppercase;
-                                letter-spacing: 0.5px; font-weight: 600; }
-  .post-image-wrap.kr .img-label { color: #c0392b; }
-  .post-image { display: block; max-width: 100%; max-height: 360px; width: auto;
+  /* Banner image (one per post) */
+  .post-image { display: block; max-width: 100%; max-height: 360px; margin: 4px 0 14px 0;
                 border-radius: 6px; border: 1px solid #e7eef6; cursor: zoom-in;
-                object-fit: contain; align-self: flex-start; }
+                object-fit: contain; }
 """
 
 
@@ -168,23 +164,12 @@ def render() -> str:
             f"<li>{render_digimon(name, attrs_map.get(name), show_name=(n > 1))}</li>"
             for name in names
         )
-        def img_wrap(path: str, label: str, label_cls: str = "") -> str:
-            return (
-                f'<div class="post-image-wrap{(" " + label_cls) if label_cls else ""}">'
-                f'<span class="img-label">{label}</span>'
-                f'<a href="{path}" target="_blank">'
-                f'<img class="post-image" src="{path}" alt="idx {idx} ({label})" loading="lazy">'
-                f'</a></div>'
-            )
-
-        img_parts = []
-        if p.get("image"):
-            img_parts.append(img_wrap(p["image"], "EN"))
-        if p.get("image_kr"):
-            img_parts.append(img_wrap(p["image_kr"], "KR", "kr"))
+        img_path = p.get("image") or p.get("image_kr")
         img_block = (
-            f'<div class="post-images">{"".join(img_parts)}</div>\n    '
-            if img_parts else ""
+            f'<a href="{img_path}" target="_blank">'
+            f'<img class="post-image" src="{img_path}" alt="idx {idx}" loading="lazy">'
+            f'</a>\n    '
+            if img_path else ""
         )
         def src_span(url: str) -> str:
             is_kr = "digimonmasters.com" in url
