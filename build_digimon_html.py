@@ -68,6 +68,10 @@ CSS = """
   .digimon-list li { padding: 12px 18px; background: #fafbfc; border-radius: 8px; box-shadow: 0 0 0 2px #f39c12;
                      font-size: 16px; font-weight: 700; color: #1a4d8f; }
   .post.patch .digimon-list li { color: #9b3f1a; }
+
+  /* Banner image (one per post) */
+  .post-image { display: block; max-width: 100%; max-height: 360px; margin: 4px 0 14px 0;
+                border-radius: 6px; border: 1px solid #e7eef6; cursor: zoom-in; }
 """
 
 
@@ -98,6 +102,11 @@ def render() -> str:
         patch_cls = " patch" if kind == "patch" else ""
         n = len(p["digimon"])
         items = "\n      ".join(f"<li>{name}</li>" for name in p["digimon"])
+        img_block = (
+            f'<a href="{p["image"]}" target="_blank"><img class="post-image" src="{p["image"]}" alt="idx {idx}" loading="lazy"></a>\n    '
+            if p.get("image")
+            else ""
+        )
         return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
@@ -105,7 +114,7 @@ def render() -> str:
       <span class="date">{fmt_date(p["date"])}</span>
     </div>
     <p class="src"><a href="{p["source"]}" target="_blank">{p["source"].split("/")[-1]} ↗</a></p>
-    <ul class="digimon-list">
+    {img_block}<ul class="digimon-list">
       {items}
     </ul>
   </section>

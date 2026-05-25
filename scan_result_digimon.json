@@ -5,49 +5,56 @@
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=663",
       "digimon": [
         "Omegamon – Merciful Mode"
-      ]
+      ],
+      "image": "img/digimon/e663.jpg"
     },
     "673": {
       "date": "06-11-2024",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=673",
       "digimon": [
         "Kuzuhamon MikoMode"
-      ]
+      ],
+      "image": "img/digimon/e673.png"
     },
     "683": {
       "date": "08-20-2024",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=683",
       "digimon": [
         "Gallantmon Crimson Mode"
-      ]
+      ],
+      "image": "img/digimon/e683.png"
     },
     "692": {
       "date": "11-12-2024",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=692",
       "digimon": [
         "Eosmon"
-      ]
+      ],
+      "image": "img/digimon/e692.png"
     },
     "708": {
       "date": "03-18-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=708",
       "digimon": [
         "ZeedMillenniummon"
-      ]
+      ],
+      "image": "img/digimon/e708.png"
     },
     "731": {
       "date": "05-13-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=731",
       "digimon": [
         "Imperialdramon PaladinMode"
-      ]
+      ],
+      "image": "img/digimon/e731.png"
     },
     "743": {
       "date": "06-17-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=743",
       "digimon": [
         "Alphamon Ouryuken [Extreme]"
-      ]
+      ],
+      "image": "img/digimon/e743.png"
     },
     "759": {
       "date": "07-22-2025",
@@ -61,7 +68,8 @@
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=770",
       "digimon": [
         "Last Evolution: Kizuna"
-      ]
+      ],
+      "image": "img/digimon/e770.png"
     },
     "782": {
       "date": "09-23-2025",
@@ -69,14 +77,16 @@
       "digimon": [
         "Goddramon",
         "Holydramon"
-      ]
+      ],
+      "image": "img/digimon/e782.png"
     },
     "784": {
       "date": "10-01-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=784",
       "digimon": [
         "[Extreme] Susanoomon"
-      ]
+      ],
+      "image": "img/digimon/e784.png"
     },
     "791": {
       "date": "11-11-2025",
@@ -90,7 +100,8 @@
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=798",
       "digimon": [
         "DoneDevimon"
-      ]
+      ],
+      "image": "img/digimon/e798.png"
     },
     "810": {
       "date": "01-14-2026",
@@ -108,21 +119,24 @@
       "source": "https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4110",
       "digimon": [
         "Abbadomon Core"
-      ]
+      ],
+      "image": "img/digimon/p4110.png"
     },
     "4121": {
       "date": "03-17-2026",
       "source": "https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4121",
       "digimon": [
         "(Extreme) Omegamon(Resistance)"
-      ]
+      ],
+      "image": "img/digimon/p4121.png"
     },
     "4148": {
       "date": "05-20-2026",
       "source": "https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4148",
       "digimon": [
         "QUANTUMON"
-      ]
+      ],
+      "image": "img/digimon/p4148.png"
     }
   }
 }
