@@ -95,14 +95,12 @@ CSS = """
   .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
-  /* Attribute chips — icon-only with category label, two rows per digimon
-     (row 1: basic attribute + natural attribute, row 2: families) */
-  .chips-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; align-items: center;
+  /* Attribute chips — one row per category (Attribute / Element / Families)
+     with a left-aligned label so icons line up across rows. */
+  .chips-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; align-items: center;
                font-size: 12px; color: #7f8c8d; }
-  .chips-row + .chips-row { margin-top: 4px; }
   .chips-row .chips-label { font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
-                            font-size: 10.5px; color: #95a5a6; margin-right: 4px; }
-  .chips-row .chips-label + .chips-label { margin-left: 10px; }
+                            font-size: 10.5px; color: #95a5a6; min-width: 76px; }
   .chip-icon-only { width: 28px; height: 28px; object-fit: contain; cursor: help;
                     transition: transform 0.12s ease; }
   .chip-icon-only:hover { transform: scale(1.18); }
@@ -181,36 +179,33 @@ def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str
     in the filter bar at the top of the report.
     """
     rows: list[str] = []
-    primary: list[str] = []
     if attrs:
         if attrs.get("attribute"):
             v = attrs["attribute"]
-            primary.append(
+            rows.append(
+                f'<div class="chips-row">'
                 f'<span class="chips-label">Attribute</span>'
                 f'<img class="chip-icon-only" src="img/icons/attr-{v}.png" '
-                f'alt="{v}" title="{v}">'
+                f'alt="{v}" title="{v}"></div>'
             )
         if attrs.get("natural_attribute"):
             v = attrs["natural_attribute"]
-            primary.append(
+            rows.append(
+                f'<div class="chips-row">'
                 f'<span class="chips-label">Element</span>'
                 f'<img class="chip-icon-only" src="img/icons/elem-{elem_slug(v)}.png" '
-                f'alt="{v}" title="{v}">'
+                f'alt="{v}" title="{v}"></div>'
             )
-    if primary:
-        rows.append(f'<div class="chips-row">{"".join(primary)}</div>')
-
-    families = (attrs or {}).get("families", [])
-    if families:
-        fam_icons = "".join(
-            f'<img class="chip-icon-only" src="img/icons/field-{family_slug(f)}.png" '
-            f'alt="{f}" title="{f}">'
-            for f in families
-        )
-        rows.append(
-            f'<div class="chips-row">'
-            f'<span class="chips-label">Families</span>{fam_icons}</div>'
-        )
+        if attrs.get("families"):
+            fam_icons = "".join(
+                f'<img class="chip-icon-only" src="img/icons/field-{family_slug(f)}.png" '
+                f'alt="{f}" title="{f}">'
+                for f in attrs["families"]
+            )
+            rows.append(
+                f'<div class="chips-row">'
+                f'<span class="chips-label">Families</span>{fam_icons}</div>'
+            )
 
     chip_block = "".join(rows)
     name_html = f'<span class="digimon-name">{name}</span>' if show_name else ""
