@@ -73,6 +73,9 @@
   .filter-group { display: flex; flex-direction: column; gap: 3px; }
   .filter-group label { font-size: 10.5px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
   .filter-group input, .filter-group select { padding: 7px 10px; border: 1.5px solid #d5dde6; border-radius: 6px; font-size: 13px; outline: none; transition: border-color 0.15s; background: white; height: 34px; }
+  .filter-group select[multiple] { height: auto; min-height: 96px; padding: 4px; }
+  .filter-group select[multiple] option { padding: 4px 8px; border-radius: 3px; }
+  .filter-group select[multiple] option:checked { background: #2c6fb8 linear-gradient(0deg, #2c6fb8, #2c6fb8); color: white; }
   .filter-group input:focus, .filter-group select:focus { border-color: #2c6fb8; }
   .filter-btn { padding: 7px 14px; background: #95a5a6; color: white; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; height: 34px; }
   .filter-btn:hover { background: #7f8c8d; }
@@ -128,12 +131,12 @@
     <h3>🔍 Filter</h3>
     <div class="filter-row">
       <div class="filter-group">
-        <label for="f-digimon">Digimon</label>
-        <select id="f-digimon"><option value="">— ทั้งหมด —</option></select>
+        <label for="f-digimon">Digimon <span style="font-weight:400;text-transform:none;color:#aaa;font-size:10px;">(เลือกได้หลายอัน — Ctrl/⌘+click)</span></label>
+        <select id="f-digimon" multiple size="5"></select>
       </div>
       <div class="filter-group">
-        <label for="f-effect">Effect Name</label>
-        <select id="f-effect"><option value="">— ทั้งหมด —</option></select>
+        <label for="f-effect">Effect Name <span style="font-weight:400;text-transform:none;color:#aaa;font-size:10px;">(เลือกได้หลายอัน — Ctrl/⌘+click)</span></label>
+        <select id="f-effect" multiple size="5"></select>
       </div>
       <button class="filter-btn" id="f-reset" title="ล้างฟิลเตอร์">Reset</button>
     </div>
@@ -1097,6 +1100,20 @@
         ["ZeedMillenniummon (Awaken)",             /zeedmillennium/i],
       ];
 
+      // Normalize variant effect names into a single canonical label so
+      // the dropdown isn't cluttered with near-duplicates (gameking posts
+      // spell the same in-game stat several ways).
+      const EFFECT_ALIASES = {
+        "Attack": "Attack",
+        "Attack Amplification": "Attack",
+        "Attack Increase": "Attack",
+        "Attack Speed": "Attack",
+        "HP": "HP",
+        "HP Increase": "HP",
+        "Health Increase": "HP",
+      };
+      const canonicalEffect = name => EFFECT_ALIASES[name] || name;
+
       // Pre-index each deck: build digimon text (for U-rank matching) + effect set
       const effectSet = new Set();
       decks.forEach(d => {
@@ -1115,9 +1132,9 @@
             if (i === 0) return;
             const td = tr.querySelector('td');
             if (td) {
-              const name = td.textContent.trim();
-              effectList.push(name);
-              effectSet.add(name);
+              const canonical = canonicalEffect(td.textContent.trim());
+              effectList.push(canonical);
+              effectSet.add(canonical);
             }
           });
         }
@@ -1139,19 +1156,28 @@
         inEffect.appendChild(opt);
       });
 
+      function selectedValues(sel) {
+        return Array.from(sel.selectedOptions).map(o => o.value);
+      }
+
       function applyFilter() {
-        const dq = inDigimon.value;
-        const eq = inEffect.value;
-        const digimonRegex = dq ? (rankU.find(r => r[0] === dq) || [,null])[1] : null;
+        const ds = selectedValues(inDigimon);  // selected digimon names
+        const es = selectedValues(inEffect);   // selected effect names
+        // Match if deck has ANY of the selected digimon (OR within filter)
+        const digimonRegexes = ds.map(name =>
+          (rankU.find(r => r[0] === name) || [,null])[1]
+        ).filter(Boolean);
         let visibleDecks = 0;
         let visiblePosts = 0;
 
         decks.forEach(d => {
-          const matchD = !digimonRegex || digimonRegex.test(d.dataset.digimon);
-          const matchE = !eq || d.dataset.effect.includes('|' + eq + '|');
+          const matchD = digimonRegexes.length === 0
+            || digimonRegexes.some(rx => rx.test(d.dataset.digimon));
+          const matchE = es.length === 0
+            || es.some(name => d.dataset.effect.includes('|' + name + '|'));
           const show = matchD && matchE;
           d.classList.toggle('hidden', !show);
-          d.classList.toggle('match', show && (dq || eq));
+          d.classList.toggle('match', show && (ds.length || es.length));
           if (show) visibleDecks++;
         });
 
@@ -1162,8 +1188,11 @@
         });
 
         countEl.textContent = visibleDecks;
-        if (dq || eq) {
-          statusEl.innerHTML = `แสดง <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์ (กรอง: ${dq ? `Digimon "${dq}"` : ''}${dq && eq ? ' + ' : ''}${eq ? `Effect "${eq}"` : ''})`;
+        const parts = [];
+        if (ds.length) parts.push(`Digimon: ${ds.map(v => `"${v}"`).join(' | ')}`);
+        if (es.length) parts.push(`Effect: ${es.map(v => `"${v}"`).join(' | ')}`);
+        if (parts.length) {
+          statusEl.innerHTML = `แสดง <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์ (กรอง: ${parts.join(' + ')})`;
         } else {
           statusEl.innerHTML = `แสดงทั้งหมด <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์`;
         }
@@ -1172,8 +1201,8 @@
       inDigimon.addEventListener('change', applyFilter);
       inEffect.addEventListener('change', applyFilter);
       btnReset.addEventListener('click', () => {
-        inDigimon.value = '';
-        inEffect.value = '';
+        Array.from(inDigimon.options).forEach(o => o.selected = false);
+        Array.from(inEffect.options).forEach(o => o.selected = false);
         applyFilter();
       });
 
