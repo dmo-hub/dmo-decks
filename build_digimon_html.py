@@ -174,7 +174,7 @@ def render() -> str:
         def src_span(url: str) -> str:
             is_kr = "digimonmasters.com" in url
             cls = "src-kr" if is_kr else "src-en"
-            label = "KR" if is_kr else "EN"
+            label = "KR" if is_kr else "NA"
             return (
                 f'<span class="{cls}"><span class="src-label">{label}</span> '
                 f'<a href="{url}" target="_blank">{url.split("/")[-1]} ↗</a></span>'
