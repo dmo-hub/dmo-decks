@@ -61,7 +61,7 @@ FIELD_MAP = {
     "NSo": "Nightmare Soldiers",
     "UK":  "Unknown",
     "DA":  "Dark Area",
-    # "TBD" placeholder gets dropped (it's not a real family).
+    "TBD": "TBD",
 }
 
 

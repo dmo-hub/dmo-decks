@@ -93,7 +93,10 @@
         "Eosmon": {
           "attribute": "Unknown",
           "natural_attribute": "Thunder",
-          "attribute_abbr": "UN"
+          "attribute_abbr": "UN",
+          "families": [
+            "TBD"
+          ]
         }
       }
     },
@@ -211,7 +214,8 @@
           "attribute_abbr": "UN",
           "families": [
             "Virus Busters",
-            "Unknown"
+            "Unknown",
+            "TBD"
           ]
         }
       }
@@ -321,7 +325,8 @@
           "natural_attribute": "Pitch Black",
           "attribute_abbr": "UN",
           "families": [
-            "Unknown"
+            "Unknown",
+            "TBD"
           ]
         }
       },
@@ -343,7 +348,8 @@
           "natural_attribute": "Pitch Black",
           "attribute_abbr": "UN",
           "families": [
-            "Unknown"
+            "Unknown",
+            "TBD"
           ]
         }
       }
@@ -384,7 +390,8 @@
           "natural_attribute": "Water",
           "families": [
             "Deep Savers",
-            "Unknown"
+            "Unknown",
+            "TBD"
           ]
         }
       }
