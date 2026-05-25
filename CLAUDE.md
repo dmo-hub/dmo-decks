@@ -26,7 +26,10 @@ python diff_report.py
 # 5. Scan cache for "[New Digimon ...]" markers → scan_result_digimon.json
 python scan_digimon.py
 
-# 6. Generate docs/digimon.html from scan_result_digimon.json
+# 6. Extract banner image per post → docs/img/digimon/<idx>.<ext>; updates JSON's `image` field
+python extract_digimon_images.py
+
+# 7. Generate docs/digimon.html from scan_result_digimon.json (uses `image` if present)
 python build_digimon_html.py
 ```
 
@@ -46,8 +49,14 @@ scan_decks.py ──┐
                          └──► (manual hand-curation) ──► docs/decks.html  (deck report, published)
 
 cache/*.html ──► scan_digimon.py ──► scan_result_digimon.json
-                                              │
-                                              └──► build_digimon_html.py ──► docs/digimon.html  (digimon report, auto-generated)
+                          │                    │
+                          │                    └──► extract_digimon_images.py
+                          │                                    │
+                          │                                    ├──► docs/img/digimon/<idx>.<ext>
+                          │                                    └──► (adds `image` field to JSON)
+                          │                    │
+                          │                    └──► build_digimon_html.py ──► docs/digimon.html
+                          │                                                       (digimon report, auto-generated)
 
 docs/index.html  (hand-written landing page linking to decks.html + digimon.html)
 
