@@ -123,6 +123,10 @@ CSS = """
   .chip-icon-only { width: 28px; height: 28px; object-fit: contain; cursor: help;
                     transition: transform 0.12s ease; }
   .chip-icon-only:hover { transform: scale(1.18); }
+  .rebalance-src { margin-left: 8px; font-size: 10.5px; color: #2c6fb8;
+                   text-decoration: none; padding: 2px 6px; border-radius: 4px;
+                   background: #eef4fb; font-weight: 500; }
+  .rebalance-src:hover { background: #d8e6f5; text-decoration: underline; }
 
   /* Filter bar at top of report — repurposes the old text+pill chip look */
   .filter-bar { background: white; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;
@@ -221,9 +225,17 @@ def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str
                 f'alt="{f}" title="{f}">'
                 for f in attrs["families"]
             )
+            # Append small "updated by [eXXX]" links for any post-release
+            # rebalance that contributed to this digimon's family list.
+            src_links = "".join(
+                f'<a class="rebalance-src" href="{s["url"]}" target="_blank" '
+                f'title="Families updated in {s["kind"]}_{s["idx"]}">'
+                f'updated&nbsp;{s["kind"][0]}{s["idx"]}</a>'
+                for s in attrs.get("rebalance_sources", [])
+            )
             rows.append(
                 f'<div class="chips-row">'
-                f'<span class="chips-label">Families</span>{fam_icons}</div>'
+                f'<span class="chips-label">Families</span>{fam_icons}{src_links}</div>'
             )
 
     chip_block = "".join(rows)
