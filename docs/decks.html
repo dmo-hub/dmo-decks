@@ -73,10 +73,42 @@
   .filter-group { display: flex; flex-direction: column; gap: 3px; }
   .filter-group label { font-size: 10.5px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
   .filter-group input, .filter-group select { padding: 7px 10px; border: 1.5px solid #d5dde6; border-radius: 6px; font-size: 13px; outline: none; transition: border-color 0.15s; background: white; height: 34px; }
-  .filter-group select[multiple] { height: auto; min-height: 96px; padding: 4px; }
-  .filter-group select[multiple] option { padding: 4px 8px; border-radius: 3px; }
-  .filter-group select[multiple] option:checked { background: #2c6fb8 linear-gradient(0deg, #2c6fb8, #2c6fb8); color: white; }
   .filter-group input:focus, .filter-group select:focus { border-color: #2c6fb8; }
+
+  /* Custom multi-select with checkboxes */
+  .ms { position: relative; }
+  .ms-button {
+    width: 100%; padding: 7px 28px 7px 12px;
+    border: 1.5px solid #d5dde6; border-radius: 6px; background: white;
+    font-size: 13px; cursor: pointer; text-align: left; height: 34px;
+    transition: border-color 0.15s; color: #2c3e50;
+  }
+  .ms-button::after {
+    content: "▾"; position: absolute; right: 10px; top: 50%;
+    transform: translateY(-50%); color: #95a5a6; font-size: 11px;
+    pointer-events: none;
+  }
+  .ms-button:hover, .ms-button.is-open { border-color: #2c6fb8; }
+  .ms-button.has-filter { background: #eef4fb; color: #1a4d8f; font-weight: 500; }
+  .ms-panel {
+    position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: white; border: 1px solid #d5dde6; border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(15,30,50,0.14);
+    z-index: 50; max-height: 320px; overflow-y: auto;
+    padding: 4px;
+  }
+  .ms-option {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 8px; border-radius: 4px; font-size: 13px;
+    cursor: pointer; user-select: none; line-height: 1.3;
+  }
+  .ms-option:hover { background: #eef4fb; }
+  .ms-option input { margin: 0; accent-color: #2c6fb8; flex-shrink: 0; cursor: pointer; }
+  .ms-option.is-all {
+    font-weight: 600; border-bottom: 1px solid #e7eef6;
+    margin: 0 0 4px; padding: 7px 8px; border-radius: 4px 4px 0 0;
+    background: #fafbfc;
+  }
   .filter-btn { padding: 7px 14px; background: #95a5a6; color: white; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; height: 34px; }
   .filter-btn:hover { background: #7f8c8d; }
   .filter-status { font-size: 12px; color: #7f8c8d; flex-basis: 100%; padding-top: 4px; line-height: 1.5; }
@@ -92,8 +124,7 @@
 <!-- ===================== TOC ===================== -->
 <aside class="toc">
   <a href="./" class="nav-home">← Home</a>
-  <h3>สารบัญ (20 โพสต์)</h3>
-  <a href="#e622">idx 622 — D5 and Ultimate DigiXros</a>
+  <h3>สารบัญ (19 โพสต์)</h3>
   <a href="#e663">idx 663 — White Wings (Gurei Tou + Garuru Hou)</a>
   <a href="#e673">idx 673 — God's Will + Four Holy Beasts</a>
   <a href="#e683">idx 683 — Divine Spear / Guardians</a>
@@ -121,8 +152,8 @@
   <div class="hero">
     <h1>DMO – New Deck Add Report</h1>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="num">20</div><div class="lbl">โพสต์</div></div>
-      <div class="hero-stat"><div class="num">34</div><div class="lbl">deck ใหม่</div></div>
+      <div class="hero-stat"><div class="num">19</div><div class="lbl">โพสต์</div></div>
+      <div class="hero-stat"><div class="num">33</div><div class="lbl">deck ใหม่</div></div>
     </div>
   </div>
 
@@ -131,47 +162,17 @@
     <h3>🔍 Filter</h3>
     <div class="filter-row">
       <div class="filter-group">
-        <label for="f-digimon">Digimon <span style="font-weight:400;text-transform:none;color:#aaa;font-size:10px;">(เลือกได้หลายอัน — Ctrl/⌘+click)</span></label>
-        <select id="f-digimon" multiple size="5"></select>
+        <label for="f-digimon">Digimon</label>
+        <select id="f-digimon" multiple hidden></select>
       </div>
       <div class="filter-group">
-        <label for="f-effect">Effect Name <span style="font-weight:400;text-transform:none;color:#aaa;font-size:10px;">(เลือกได้หลายอัน — Ctrl/⌘+click)</span></label>
-        <select id="f-effect" multiple size="5"></select>
+        <label for="f-effect">Effect Name</label>
+        <select id="f-effect" multiple hidden></select>
       </div>
       <button class="filter-btn" id="f-reset" title="ล้างฟิลเตอร์">Reset</button>
     </div>
-    <div class="filter-status" id="f-status">แสดงทั้งหมด <b id="f-count">34</b> deck จาก <b>20</b> โพสต์</div>
+    <div class="filter-status" id="f-status">แสดงทั้งหมด <b id="f-count">33</b> deck จาก <b>19</b> โพสต์</div>
   </div>
-
-  <!-- ============ 622 ============ -->
-  <section class="post" id="e622">
-    <div class="post-header">
-      <span class="idx-badge">idx 622</span>
-      <h2>D5 and Ultimate DigiXros</h2>
-      <span class="date">02.05.2023</span>
-    </div>
-    <p class="src"><a href="https://dmo.gameking.com/news/EventView.aspx?idx=622" target="_blank">EventView.aspx?idx=622 ↗</a></p>
-
-    <div class="deck">
-      <div class="deck-name">D5 and Ultimate DigiXros</div>
-      <div class="deck-body">
-        <div>
-          <p class="gk-label">Digimon List</p>
-          <table class="gk-table digimon-table"><tr><th>D5 and Ultimate DigiXros</th></tr>
-          <tr><td>Shoutmon X7 Superior Mode</td></tr></table>
-        </div>
-        <div>
-          <p class="gk-label">Effect</p>
-          <table class="gk-table effect-table">
-          <tr><th>Effect</th><th>Activation</th><th>Effect</th></tr>
-          <tr><td>Skill Damage</td><td>Always Active</td><td>15% additional damage</td></tr>
-          <tr><td>Critical Damage</td><td>3% chance</td><td>100% Increase for 10s</td></tr>
-          <tr><td>Attack Speed</td><td>Always Active</td><td>15% Increase</td></tr>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ============ 663 ============ -->
   <section class="post" id="e663">
@@ -1104,6 +1105,7 @@
       // the dropdown isn't cluttered with near-duplicates (gameking posts
       // spell the same in-game stat several ways).
       const EFFECT_ALIASES = {
+        "AT Boost": "Attack",
         "Attack": "Attack",
         "Attack Amplification": "Attack",
         "Attack Increase": "Attack",
@@ -1156,8 +1158,101 @@
         inEffect.appendChild(opt);
       });
 
+      /* ---- Custom checkbox-list multi-select widget ---------------- */
+      function enhanceMultiSelect(selectEl, allLabel) {
+        const options = Array.from(selectEl.options);
+        // Default state: nothing selected = no filter active (shows all)
+        options.forEach(o => o.selected = false);
+
+        const wrap = document.createElement('div');
+        wrap.className = 'ms';
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ms-button';
+
+        const panel = document.createElement('div');
+        panel.className = 'ms-panel';
+        panel.hidden = true;
+
+        const allLbl = document.createElement('label');
+        allLbl.className = 'ms-option is-all';
+        const allCb = document.createElement('input');
+        allCb.type = 'checkbox'; allCb.checked = false;
+        allLbl.appendChild(allCb);
+        allLbl.appendChild(document.createTextNode(' All'));
+
+        panel.appendChild(allLbl);
+
+        const checkboxes = options.map(o => {
+          const lbl = document.createElement('label');
+          lbl.className = 'ms-option';
+          const cb = document.createElement('input');
+          cb.type = 'checkbox'; cb.checked = false; cb.value = o.value;
+          lbl.appendChild(cb);
+          lbl.appendChild(document.createTextNode(' ' + o.value));
+          panel.appendChild(lbl);
+          return cb;
+        });
+
+        wrap.appendChild(btn);
+        wrap.appendChild(panel);
+        selectEl.parentNode.insertBefore(wrap, selectEl.nextSibling);
+
+        function sync() {
+          let n = 0;
+          checkboxes.forEach((cb, i) => {
+            options[i].selected = cb.checked;
+            if (cb.checked) n++;
+          });
+          const total = checkboxes.length;
+          if (n === total) { allCb.checked = true; allCb.indeterminate = false; }
+          else if (n === 0) { allCb.checked = false; allCb.indeterminate = false; }
+          else { allCb.checked = false; allCb.indeterminate = true; }
+
+          if (n === 0 || n === total) {
+            btn.textContent = `${allLabel} (${total})`;
+            btn.classList.remove('has-filter');
+          } else {
+            btn.textContent = `${n} / ${total} เลือก`;
+            btn.classList.add('has-filter');
+          }
+          selectEl.dispatchEvent(new Event('change'));
+        }
+        sync();
+
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          panel.hidden = !panel.hidden;
+          btn.classList.toggle('is-open', !panel.hidden);
+        });
+        document.addEventListener('click', (e) => {
+          if (!wrap.contains(e.target)) {
+            panel.hidden = true;
+            btn.classList.remove('is-open');
+          }
+        });
+        allCb.addEventListener('change', () => {
+          const target = allCb.checked;
+          checkboxes.forEach(cb => cb.checked = target);
+          sync();
+        });
+        checkboxes.forEach(cb => cb.addEventListener('change', sync));
+
+        return {
+          reset: () => { checkboxes.forEach(cb => cb.checked = true); sync(); },
+        };
+      }
+
+      const digimonMS = enhanceMultiSelect(inDigimon, 'ทุก Digimon');
+      const effectMS = enhanceMultiSelect(inEffect, 'ทุก Effect');
+
       function selectedValues(sel) {
-        return Array.from(sel.selectedOptions).map(o => o.value);
+        const opts = sel.options;
+        const sel_ = Array.from(opts).filter(o => o.selected);
+        // All selected = no filter active (cleaner intent than listing 17 items)
+        if (sel_.length === opts.length) return [];
+        return sel_.map(o => o.value);
       }
 
       function applyFilter() {
@@ -1172,9 +1267,9 @@
 
         decks.forEach(d => {
           const matchD = digimonRegexes.length === 0
-            || digimonRegexes.some(rx => rx.test(d.dataset.digimon));
+            || digimonRegexes.every(rx => rx.test(d.dataset.digimon));
           const matchE = es.length === 0
-            || es.some(name => d.dataset.effect.includes('|' + name + '|'));
+            || es.every(name => d.dataset.effect.includes('|' + name + '|'));
           const show = matchD && matchE;
           d.classList.toggle('hidden', !show);
           d.classList.toggle('match', show && (ds.length || es.length));
@@ -1189,8 +1284,8 @@
 
         countEl.textContent = visibleDecks;
         const parts = [];
-        if (ds.length) parts.push(`Digimon: ${ds.map(v => `"${v}"`).join(' | ')}`);
-        if (es.length) parts.push(`Effect: ${es.map(v => `"${v}"`).join(' | ')}`);
+        if (ds.length) parts.push(`Digimon: ${ds.map(v => `"${v}"`).join(' & ')}`);
+        if (es.length) parts.push(`Effect: ${es.map(v => `"${v}"`).join(' & ')}`);
         if (parts.length) {
           statusEl.innerHTML = `แสดง <b>${visibleDecks}</b> deck จาก <b>${visiblePosts}</b> โพสต์ (กรอง: ${parts.join(' + ')})`;
         } else {
@@ -1201,9 +1296,8 @@
       inDigimon.addEventListener('change', applyFilter);
       inEffect.addEventListener('change', applyFilter);
       btnReset.addEventListener('click', () => {
-        Array.from(inDigimon.options).forEach(o => o.selected = false);
-        Array.from(inEffect.options).forEach(o => o.selected = false);
-        applyFilter();
+        digimonMS.reset();
+        effectMS.reset();
       });
 
       applyFilter();
