@@ -51,7 +51,7 @@ Key design points:
 
 ## Publishing the report
 
-`docs/index.html` is published as **https://dmo-hub.github.io/dmoDeck/** via GitHub Pages, configured to serve from this repo's `main` branch / `/docs` folder. No separate mirror repo — edit `docs/index.html`, commit, push to `origin/main` (SSH key at `~/.ssh/id_ed25519_github`), and Pages rebuilds in ~30s.
+`docs/index.html` is published as **https://dmo-hub.github.io/dmo/** via GitHub Pages, configured to serve from this repo's `main` branch / `/docs` folder. Repo is `dmo-hub/dmo` (previously `dmoDeck` / `dmo-decks` — both old URLs auto-redirect). No separate mirror repo — edit `docs/index.html`, commit, push to `origin/main` (SSH key at `~/.ssh/id_ed25519_github`), and Pages rebuilds in ~30s.
 
 ```bash
 # After editing docs/index.html
