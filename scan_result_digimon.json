@@ -7,7 +7,19 @@
         "Omegamon – Merciful Mode"
       ],
       "image": "img/digimon/e663.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=783359&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=780048&Btype=Update",
+      "attributes": {
+        "Omegamon – Merciful Mode": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Light",
+          "families": [
+            "Virus Busters",
+            "Wind Guardians",
+            "Metal Empire"
+          ]
+        }
+      }
     },
     "664": {
       "date": "03-20-2024",
@@ -16,7 +28,7 @@
         "Shoutmon X7 Superior Mode"
       ],
       "image": "img/digimon/e664.jpeg",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?Btype=Update&o=784466&p=1"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=784466&Btype=Update"
     },
     "673": {
       "date": "06-11-2024",
@@ -25,7 +37,7 @@
         "Kuzuhamon MikoMode"
       ],
       "image": "img/digimon/e673.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787977&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787200&Btype=Update"
     },
     "683": {
       "date": "08-20-2024",
@@ -34,7 +46,19 @@
         "Gallantmon Crimson Mode"
       ],
       "image": "img/digimon/e683.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789668&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789668&Btype=Update",
+      "attributes": {
+        "Gallantmon Crimson Mode": {
+          "attribute": "Virus",
+          "attribute_abbr": "VI",
+          "natural_attribute": "Light",
+          "families": [
+            "Virus Busters",
+            "Metal Empire",
+            "Wind Guardians"
+          ]
+        }
+      }
     },
     "692": {
       "date": "11-12-2024",
@@ -52,25 +76,46 @@
         "Bloomlordmon"
       ],
       "image": "img/digimon/e705.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797955&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797630&Btype=Update",
+      "attributes": {
+        "Bloomlordmon": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Wood",
+          "families": [
+            "Jungle Troopers",
+            "Nature Spirits",
+            "Unknown"
+          ]
+        }
+      }
     },
     "708": {
       "date": "03-18-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=708",
       "digimon": [
-        "ZeedMillenniummon"
+        "ZeedMillenniummon (Awaken)"
       ],
-      "image": "img/digimon/e708.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798510&Btype=Update"
+      "image": "img/digimon/e708.png"
     },
     "731": {
       "date": "05-13-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=731",
       "digimon": [
-        "Imperialdramon PaladinMode"
+        "Imperialdramon Paladin Mode (Awaken)"
       ],
       "image": "img/digimon/e731.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=802550&Btype=Update"
+      "attributes": {
+        "Imperialdramon Paladin Mode (Awaken)": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Light",
+          "families": [
+            "Metal Empire",
+            "Virus Busters"
+          ]
+        }
+      }
     },
     "743": {
       "date": "06-17-2025",
@@ -79,16 +124,29 @@
         "Alphamon Ouryuken [Extreme]"
       ],
       "image": "img/digimon/e743.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=807402&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=804377&Btype=Update",
+      "attributes": {
+        "Alphamon Ouryuken [Extreme]": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Light"
+        }
+      }
     },
     "759": {
       "date": "07-22-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=759",
       "digimon": [
-        "[Extreme] Lucemon : Satan Mode"
+        "Lucemon: Satan Mode (Extreme)"
       ],
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808363&Btype=Update",
-      "image": "img/digimon/e759.png"
+      "image": "img/digimon/e759.png",
+      "attributes": {
+        "Lucemon: Satan Mode (Extreme)": {
+          "attribute": "Virus",
+          "attribute_abbr": "VI",
+          "natural_attribute": "Pitch Black"
+        }
+      }
     },
     "770": {
       "date": "08-19-2025",
@@ -97,14 +155,14 @@
         "Last Evolution: Kizuna"
       ],
       "image": "img/digimon/e770.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809751&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809411&Btype=Update"
     },
     "782": {
       "date": "09-23-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=782",
       "digimon": [
         "Goddramon",
-        "Holydramon"
+        "Holydramon (Awaken)"
       ],
       "image": "img/digimon/e782.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update"
@@ -116,15 +174,36 @@
         "[Extreme] Susanoomon"
       ],
       "image": "img/digimon/e784.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810988&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810988&Btype=Update",
+      "attributes": {
+        "[Extreme] Susanoomon": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Thunder",
+          "families": [
+            "Nightmare Soldiers",
+            "Virus Busters"
+          ]
+        }
+      }
     },
     "791": {
       "date": "11-11-2025",
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=791",
       "digimon": [
-        "Awakened Lilithmon (Resistance)"
+        "Lilithmon X (Awaken)"
       ],
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811812&Btype=Update"
+      "attributes": {
+        "Lilithmon X (Awaken)": {
+          "attribute": "Virus",
+          "attribute_abbr": "VI",
+          "natural_attribute": "Pitch Black",
+          "families": [
+            "Nightmare Soldiers",
+            "Dark Area"
+          ]
+        }
+      }
     },
     "798": {
       "date": "12-10-2025",
@@ -141,7 +220,7 @@
       "digimon": [
         "Abbadomon"
       ],
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update"
     }
   },
   "patch": {
@@ -158,10 +237,21 @@
       "date": "03-17-2026",
       "source": "https://dmo.gameking.com/news/PatchNoteView.aspx?idx=4121",
       "digimon": [
-        "(Extreme) Omegamon(Resistance)"
+        "Omegamon X Extreme"
       ],
       "image": "img/digimon/p4121.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update"
+      "attributes": {
+        "Omegamon X Extreme": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Light",
+          "families": [
+            "Wind Guardians",
+            "Virus Busters",
+            "Metal Empire"
+          ]
+        }
+      }
     },
     "4148": {
       "date": "05-20-2026",

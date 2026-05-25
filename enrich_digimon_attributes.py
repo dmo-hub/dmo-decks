@@ -1,0 +1,227 @@
+"""Fetch Basic Attribute / Natural Attribute / Field for each digimon
+from Digital Masters World Wiki, and add them to scan_result_digimon.json.
+
+Source:  https://digitalmastersworld.wiki.gg/wiki/<slug>
+Fields extracted (from the infobox):
+  - attribute            (id="scraper-digimon-attribute")          e.g. "Vaccine"
+  - natural_attribute    (id="scraper-digimon-naturalattribute")   e.g. "Light"
+  - families             (<td> after the Families: label)          e.g. ["Virus Busters", ...]
+
+Caches the raw HTML at cache/dmw_<slug>.html so reruns are cheap.
+
+The result is attached per-digimon as a parallel `attributes` dict on each
+post so existing readers that expect `digimon: list[str]` still work:
+
+    "663": {
+      ...,
+      "digimon": ["Omegamon – Merciful Mode"],
+      "attributes": {
+        "Omegamon – Merciful Mode": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Light",
+          "families": ["Virus Busters", "Wind Guardians", "Metal Empire"]
+        }
+      }
+    }
+
+Usage:
+  python enrich_digimon_attributes.py            # missing only
+  python enrich_digimon_attributes.py --force    # re-fetch every digimon
+"""
+
+import json
+import re
+import sys
+from pathlib import Path
+
+import requests
+
+sys.stdout.reconfigure(encoding="utf-8")
+
+PROJ = Path(__file__).resolve().parent
+SCAN = PROJ / "scan_result_digimon.json"
+CACHE = PROJ / "cache"
+CACHE.mkdir(exist_ok=True)
+
+WIKI = "https://digitalmastersworld.wiki.gg/wiki"
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                  "AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml",
+}
+
+ABBR = {"Vaccine": "VA", "Virus": "VI", "Data": "DA", "Free": "FR"}
+
+# Manual name → DMW slug overrides for pages whose URL can't be derived from
+# the gameking name (different parenthesization, alt spelling, etc.). Append
+# new entries as new digimon are released.
+OVERRIDES: dict[str, str] = {
+    "Imperialdramon Paladin Mode (Awaken)": "Imperialdramon_(Paladin_Mode)",
+    "Bloomlordmon": "BloomLordmon",
+    "Omegamon X Extreme": "Omegamon_X",
+    "Gallantmon Crimson Mode": "Gallantmon_(Crimson_Mode)",
+    "Kuzuhamon MikoMode": "Kuzuhamon_Miko_Mode",
+}
+
+
+def name_candidates(raw_name: str) -> list[str]:
+    """Generate DMW Wiki slug candidates from a digimon name.
+
+    Tries:
+      * the name itself
+      * with leading `[X]` / `(X)` qualifier stripped (e.g. "[Extreme] X")
+      * with trailing `(X)` / `[X]` qualifier stripped (e.g. "X (Awaken)")
+      * with both stripped
+    Each source name is then converted to slug form, with two paren-handling
+    variants (keep / drop parens) — mirrors fetch_dmw_images convention.
+    """
+    sources = {raw_name}
+    no_lead = re.sub(r"^\s*[\[(][^\])]+[\])]\s*", "", raw_name).strip()
+    no_trail = re.sub(r"\s*[\[(][^\])]+[\])]\s*$", "", raw_name).strip()
+    no_both = re.sub(r"\s*[\[(][^\])]+[\])]\s*$", "", no_lead).strip()
+    for s in (no_lead, no_trail, no_both):
+        if s:
+            sources.add(s)
+
+    candidates: list[str] = []
+    for s in sources:
+        # keep parens (matches "Foo_(Bar)")
+        a = re.sub(r"[\-–—:\[\]]", " ", s)
+        a = re.sub(r"\s+", " ", a).strip().replace(" ", "_")
+        # drop parens too
+        b = re.sub(r"[\-–—:\[\]()]", " ", s)
+        b = re.sub(r"\s+", " ", b).strip().replace(" ", "_")
+        candidates.extend([a, b])
+
+    seen, out = set(), []
+    for v in candidates:
+        if v and v not in seen:
+            seen.add(v)
+            out.append(v)
+    return out
+
+
+def fetch_page(slug: str) -> str | None:
+    """Fetch a wiki page, using a per-slug cache. Returns None if not found."""
+    cache_file = CACHE / f"dmw_{slug}.html"
+    if cache_file.exists():
+        return cache_file.read_text(encoding="utf-8")
+    url = f"{WIKI}/{slug}"
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=20)
+    except Exception as e:
+        print(f"    ! fetch error: {e}")
+        return None
+    if r.status_code != 200:
+        return None
+    # MediaWiki returns 200 with "noarticletext" for missing pages — detect it.
+    if "noarticletext" in r.text or "There is currently no text in this page" in r.text:
+        return None
+    cache_file.write_text(r.text, encoding="utf-8")
+    return r.text
+
+
+def strip_tags(html: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", html)).strip()
+
+
+def parse_attributes(html: str) -> dict | None:
+    """Pull Basic Attribute, Natural Attribute, and Families from the infobox.
+
+    Returns None if no recognizable infobox is present (i.e. the page exists
+    but isn't a digimon page).
+    """
+    def cell_by_id(id_: str) -> str | None:
+        m = re.search(rf'id="{id_}"[^>]*>(.*?)</td>', html, re.S)
+        if not m:
+            return None
+        return strip_tags(m.group(1))
+
+    attr = cell_by_id("scraper-digimon-attribute")
+    natural = cell_by_id("scraper-digimon-naturalattribute")
+
+    # Families row has no id; find it by label, then capture the next <td>.
+    families: list[str] = []
+    m = re.search(r"Families:\s*</a>\s*</b>\s*</td>\s*<td[^>]*>(.*?)</td>",
+                  html, re.S)
+    if m:
+        cell = m.group(1)
+        for fm in re.finditer(
+            r'href="/wiki/Category:([^"]+)" title="Category:[^"]+">([^<]+)</a>',
+            cell,
+        ):
+            label = fm.group(2).strip()
+            if label and label not in families:
+                families.append(label)
+
+    if not (attr or natural or families):
+        return None
+
+    result: dict = {}
+    if attr:
+        result["attribute"] = attr
+        if attr in ABBR:
+            result["attribute_abbr"] = ABBR[attr]
+    if natural:
+        result["natural_attribute"] = natural
+    if families:
+        result["families"] = families
+    return result
+
+
+def lookup(name: str) -> tuple[dict, str] | None:
+    """Try OVERRIDES first, then each candidate slug. Return (attrs, slug)."""
+    slugs: list[str] = []
+    if name in OVERRIDES:
+        slugs.append(OVERRIDES[name])
+    slugs.extend(s for s in name_candidates(name) if s not in slugs)
+
+    for slug in slugs:
+        html = fetch_page(slug)
+        if html is None:
+            print(f"    ✗ {slug} (no page)")
+            continue
+        attrs = parse_attributes(html)
+        if attrs:
+            print(f"    ✓ {slug} → {attrs}")
+            return attrs, slug
+        unrel = "not released yet" in html
+        print(f"    ✗ {slug} ({'unreleased' if unrel else 'no infobox'})")
+    return None
+
+
+def main() -> None:
+    force = "--force" in sys.argv
+    data = json.loads(SCAN.read_text(encoding="utf-8"))
+
+    updated = 0
+    missing: list[str] = []
+    for kind in ("event", "patch"):
+        for idx, post in data.get(kind, {}).items():
+            existing = post.get("attributes") or {}
+            new_attrs = dict(existing) if not force else {}
+            for name in post["digimon"]:
+                if name in new_attrs and not force:
+                    continue
+                print(f"\n{kind}_{idx}: {name}")
+                hit = lookup(name)
+                if hit:
+                    new_attrs[name] = hit[0]
+                    updated += 1
+                else:
+                    missing.append(f"{kind} {idx}: {name}")
+            if new_attrs:
+                post["attributes"] = new_attrs
+
+    SCAN.write_text(json.dumps(data, ensure_ascii=False, indent=2),
+                    encoding="utf-8")
+    print(f"\n--- Updated {updated} digimon entries in {SCAN.name} ---")
+    if missing:
+        print(f"--- {len(missing)} entries had no DMW Wiki match: ---")
+        for m in missing:
+            print(f"  {m}")
+
+
+if __name__ == "__main__":
+    main()

@@ -70,11 +70,51 @@ CSS = """
   .digimon-list li { padding: 12px 18px; background: #fafbfc; border-radius: 8px; box-shadow: 0 0 0 2px #f39c12;
                      font-size: 16px; font-weight: 700; color: #1a4d8f; }
   .post.patch .digimon-list li { color: #9b3f1a; }
+  .digimon-name { display: block; margin-bottom: 6px; }
+
+  /* Attribute chips (Basic / Natural / Field) */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; font-weight: 500; font-size: 12px; }
+  .chip { padding: 3px 9px; border-radius: 999px; line-height: 1.4; letter-spacing: 0.3px; }
+  .chip-label { font-size: 10px; opacity: 0.8; margin-right: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+  /* Basic attribute colors */
+  .chip-attr-VA { background: #d6f0d6; color: #1f6b1f; }
+  .chip-attr-VI { background: #efd9ef; color: #6b1f6b; }
+  .chip-attr-DA { background: #d6e3f5; color: #1a4d8f; }
+  .chip-attr-FR { background: #f0e4cc; color: #8a6a1a; }
+  /* Natural attribute (element) — neutral grey base */
+  .chip-elem { background: #eef2f5; color: #2c3e50; border: 1px solid #d4dce3; }
+  /* Field / family — neutral pale orange */
+  .chip-field { background: #fff1d6; color: #9b6e1a; border: 1px solid #f1d49a; }
 
   /* Banner image (one per post) */
   .post-image { display: block; max-width: 100%; max-height: 360px; margin: 4px 0 14px 0;
                 border-radius: 6px; border: 1px solid #e7eef6; cursor: zoom-in; }
 """
+
+
+def render_digimon(name: str, attrs: dict | None) -> str:
+    """Render a digimon's name plus a chip row for its attributes (if known)."""
+    if not attrs:
+        return f'<span class="digimon-name">{name}</span>'
+    chips: list[str] = []
+    if attrs.get("attribute"):
+        abbr = attrs.get("attribute_abbr") or attrs["attribute"][:2].upper()
+        chips.append(
+            f'<span class="chip chip-attr-{abbr}" title="Basic Attribute">'
+            f'<span class="chip-label">Attr</span>{attrs["attribute"]}</span>'
+        )
+    if attrs.get("natural_attribute"):
+        chips.append(
+            f'<span class="chip chip-elem" title="Natural Attribute">'
+            f'<span class="chip-label">Element</span>{attrs["natural_attribute"]}</span>'
+        )
+    for fam in attrs.get("families", []):
+        chips.append(
+            f'<span class="chip chip-field" title="Field">'
+            f'<span class="chip-label">Field</span>{fam}</span>'
+        )
+    chip_row = f'<div class="chips">{"".join(chips)}</div>' if chips else ""
+    return f'<span class="digimon-name">{name}</span>{chip_row}'
 
 
 def render() -> str:
@@ -103,7 +143,11 @@ def render() -> str:
         prefix = "e" if kind == "event" else "p"
         patch_cls = " patch" if kind == "patch" else ""
         n = len(p["digimon"])
-        items = "\n      ".join(f"<li>{name}</li>" for name in p["digimon"])
+        attrs_map = p.get("attributes", {})
+        items = "\n      ".join(
+            f"<li>{render_digimon(name, attrs_map.get(name))}</li>"
+            for name in p["digimon"]
+        )
         img_block = (
             f'<a href="{p["image"]}" target="_blank"><img class="post-image" src="{p["image"]}" alt="idx {idx}" loading="lazy"></a>\n    '
             if p.get("image")
