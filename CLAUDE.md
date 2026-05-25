@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this project is
 
-A small set of Python scripts that scrape **dmo.gameking.com** (Digimon Masters Online news site) to detect "New Deck Add" announcements across `EventView` and `PatchNote` posts, and renders them into a static HTML report (`new_deck_report.html`). Not a package — just scripts run directly from the repo root.
+A small set of Python scripts that scrape **dmo.gameking.com** (Digimon Masters Online news site) to detect "New Deck Add" announcements across `EventView` and `PatchNote` posts, and renders them into a static HTML report (`docs/index.html`, published as GitHub Pages). Not a package — just scripts run directly from the repo root.
 
 ## Common commands
 
@@ -18,7 +18,7 @@ python reparse_cache.py
 # 3. Inspect Digimon List / Effect tables for specific cached posts
 python extract_deck_detail.py event 635 770 patch 4148
 
-# 4. Compare scan_result.json against new_deck_report.html (find missed/extra posts)
+# 4. Compare scan_result.json against docs/index.html (find missed/extra posts)
 python diff_report.py
 ```
 
@@ -33,9 +33,9 @@ scan_decks.py ──┐
                 ├──► cache/{event,patch}_<idx>.html  (raw HTML, persisted)
                 └──► scan_result.json                (parsed deck names per post)
                          │
-                         ├──► diff_report.py ──► diff.json  (vs. new_deck_report.html)
+                         ├──► diff_report.py ──► diff.json  (vs. docs/index.html)
                          │
-                         └──► (manual) ──► new_deck_report.html  (the published report)
+                         └──► (manual) ──► docs/index.html  (the published report, served via GitHub Pages)
 
 reparse_cache.py: rebuilds scan_result.json from cache/ without network
 extract_deck_detail.py: ad-hoc inspector for a single post's tables
@@ -47,21 +47,18 @@ Key design points:
 - **Enumeration vs. detail are separate phases.** `enumerate_idx()` pages an AJAX endpoint (`AjaxEventList.aspx` / `AjaxPatchNoteList.aspx`) to discover idx values; `fetch_detail()` then GETs each `EventView.aspx?idx=…` / `PatchNoteView.aspx?idx=…` in a 15-worker thread pool.
 - **Deck detection logic lives in `parse_decks()` in [scan_decks.py](scan_decks.py).** It strips HTML to plain text, finds positions of `[New Deck Add(ed)]` and `[Existing Deck Effect Changed]` / `[Modify Existing Deck]` markers, then walks every `[<Name>] Digimon List` anchor and classifies each by the *nearest preceding* marker. Don't move classification logic elsewhere — `reparse_cache.py` imports `parse_decks` and `html_to_text` directly from `scan_decks`.
 - **`extract_deck_detail.py` uses a different, table-aware parser** (finds the next `<table>` after each heading). It exists because `parse_decks()` only captures deck names, not the Digimon List / Effect tables.
-- **The HTML report is currently hand-curated.** No script auto-generates `new_deck_report.html` from `scan_result.json`; `diff_report.py` only reports drift between them. The report supports two layouts (old `<h2>idx N</h2>` and new `<section id="e<idx>">`) — `parse_report_idx()` handles both.
+- **The HTML report is currently hand-curated.** No script auto-generates `docs/index.html` from `scan_result.json`; `diff_report.py` only reports drift between them. The report supports two layouts (old `<h2>idx N</h2>` and new `<section id="e<idx>">`) — `parse_report_idx()` handles both.
 
 ## Publishing the report
 
-`new_deck_report.html` is mirrored to **https://dmo-hub.github.io/dmo-decks/** (GitHub Pages, repo `dmo-hub/dmo-decks`). The local working clone of that mirror lives at `C:\Users\kongp\AppData\Local\Temp\dmo-decks-deploy\` (a.k.a. `/tmp/dmo-decks-deploy/` in git-bash).
+`docs/index.html` is published as **https://dmo-hub.github.io/dmoDeck/** via GitHub Pages, configured to serve from this repo's `main` branch / `/docs` folder. No separate mirror repo — edit `docs/index.html`, commit, push to `origin/main` (SSH key at `~/.ssh/id_ed25519_github`), and Pages rebuilds in ~30s.
 
 ```bash
-# After editing new_deck_report.html, mirror to the Pages repo and push
-cp new_deck_report.html /tmp/dmo-decks-deploy/index.html
-cd /tmp/dmo-decks-deploy
-git add index.html && git commit -m "update" && git push
-# ↑ SSH auth via ~/.ssh/id_ed25519_github; Pages rebuilds in ~30s
+# After editing docs/index.html
+git add docs/index.html && git commit -m "update report" && git push
 ```
 
-The Pages repo is a separate one-way mirror — `index.html` there is just a renamed copy of `new_deck_report.html` here. If the working dir is missing (Windows tmp can be cleared), re-clone with `git clone git@github.com:dmo-hub/dmo-decks.git`.
+Plan for expansion: when adding more report types (e.g. new Digimon, new system features), keep them as separate files under `docs/` (e.g. `docs/digimon.html`, `docs/system.html`) and turn `docs/index.html` into a landing page that links to them.
 
 ## Conventions worth knowing
 

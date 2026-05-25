@@ -1,4 +1,4 @@
-"""Diff scan_result.json against the current new_deck_report.html.
+"""Diff scan_result.json against the current docs/index.html.
 
 Outputs:
   - Posts in scan but NOT in report (missed previously)
@@ -12,7 +12,7 @@ from pathlib import Path
 
 PROJ = Path(__file__).resolve().parent
 SCAN = PROJ / "scan_result.json"
-REPORT = PROJ / "new_deck_report.html"
+REPORT = PROJ / "docs/index.html"
 
 
 def parse_report_idx():
