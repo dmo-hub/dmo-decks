@@ -1,0 +1,712 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1"><title>
+	디지몬 마스터즈 온라인! 애니메이션의 감동과 재미를 그대로!!
+</title>
+	<link rel="stylesheet" type="text/css" href="/inc/css/default.css?20250701001"  />
+	<link rel="stylesheet" type="text/css" href="/inc/css/common.css?20250701001"  />
+	<link rel="stylesheet" type="text/css" href="/inc/css/renewal_sub.css?20250701001" />
+	
+<!-- HEAD PREFIX START -->
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="3D온라인 MMORPG 게임,디지몬 마스터즈 온라인! 애니메이션의 감동과 재미를 그대로!! ">
+	<meta property="og:title" content="디지몬 마스터즈 온라인">
+	<meta property="og:description" content="애니메이션의 감동을 그대로! 디지몬 마스터즈!">
+	<meta property="og:site_name" content="디지몬 마스터즈 온라인">
+	<meta property="og:url" content="https://www.digimonmasters.com">
+	<meta property="fb:app_id" content="2089211881308165">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://www.digimonmasters.com/images/event/kakao200.jpg">
+	<meta property="og:image:width" content="200">
+	<meta property="og:image:height" content="200">
+	<meta property="og:image:type" content="iamge/jpeg">
+
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+
+	
+    <link rel="stylesheet" type="text/css" href="/inc/css/swiper.css?20250701001"  />
+	<link rel="stylesheet" type="text/css" href="/inc/css/default.css?20250701001"  />
+	<link rel="stylesheet" type="text/css" href="/inc/css/common.css?20250701001"  />
+	<link rel="stylesheet" type="text/css" href="/inc/css/top.css?20250701001"  />
+	<link rel="Stylesheet" type="text/css" href="/inc/css/icon.css?20250701001" />
+	<link rel="Stylesheet" type="text/css" href="/inc/css/font.css?20250701001" />
+	<link rel="Stylesheet" type="text/css" href="/inc/css/renewal_main.css?20250701001" />
+	<link rel="Stylesheet" type="text/css" href="/inc/css/responsive_main.css?20250701001" />
+	<link rel="Stylesheet" type="text/css" href="/inc/css/responsive_sub.css?20250701001" />
+    <link rel="stylesheet" id="mo_css" type="text/css" href="/inc/css/responsive_top.css?20250701001"  />
+
+	<script type="text/javascript" src="/inc/script/swiper.js"></script>
+	<script type="text/javascript" src="/inc/script/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="/inc/script/popup_layer.js?20250701001"></script>
+	<script type="text/javascript" >
+	//<![CDATA[
+		document.domain = 'digimonmasters.com';
+		var http = 'http://www.digimonmasters.com';
+		var https = 'https://www.digimonmasters.com';
+		var g_domain = 'digimonmasters.com';
+		var g_hostname = 'www.digimonmasters.com';
+		//live=82 qa=12		
+        var LauncherType = '82';
+
+        function unavailableCashCharge() {
+			alert('캐시충전 및 아이템구매 기능을 사용할 수 없습니다.\n퀘스트를 달성 후 다시 시도해주세요.');
+		}
+	//]]>
+	</script>
+
+    
+	        <script type="text/javascript">
+	        //<![CDATA[
+		        function popCashCharge() {
+			        alert('로그인이 필요한 서비스입니다.');
+			        document.location.href = '/help/login/MemberLogin.aspx';
+	        }
+	        //]]>
+	        </script>
+	
+
+	<script>
+		if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+			window.location = 'microsoft-edge:' + window.location;
+			setTimeout(function() {
+			  window.location = 'https://go.microsoft.com/fwlink/?linkid=2135547';
+			}, 1);
+		}
+		//IE로 접속시 엣지로 리다이렉트 
+
+        function charge_complete() {
+            $('.mycash').load(location.href + " .mycash");
+        }
+	</script>
+
+	
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GT-PLTRD9Z"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'GT-PLTRD9Z');
+        gtag('config', 'G-YFSH910606');
+	    
+    </script>
+	<script language="javascript" type="text/javascript">  
+	//<![CDATA[
+		$(document).ready(function () {
+			//new BorwserSet().menu_off();
+
+			if (getCookie('RightNow') != 'false') {
+				$('RightNow').fadeIn();
+			}
+
+			if (getCookie('item') == "1") {
+				$('.popup_msg').fadeIn();
+				setCookie('item', '2');
+			}
+
+			$('.popup .link_close').click(function () {
+				setCookie('popup', 'false');
+				$('.popup').fadeOut();
+			});
+
+
+			$('.note_t_sub').mouseover(function () {
+				$(this).parent().css("background-image", "url('/images/" + $(this).attr('id') + ".gif')");
+				$('.note_div').css('display', 'none');
+				$('#div_' + $(this).attr('id')).css('display', 'block');
+			});
+
+			$('.r_menu').mouseover(function () {
+				var number = $(this).attr('id').substring(7, 9);
+				$('.r_ranking').each(function () {
+					if ($(this).attr('id').substring(10, 12) == number) $(this).css('display', 'block');
+					else $(this).css('display', 'none');
+				});
+
+				$('.r_menu').each(function () {
+					$(this).attr('src', '/images/' + $(this).attr('id') + '.gif');
+				});
+				$(this).attr('src', '/images/' + $(this).attr('id') + 'on.gif');
+			});
+
+			// 베스트 아이템 롤링
+			var item_best_obj = $(".item_best_img");
+			var item_best_now = 1;
+
+			if (item_best_obj.length > 0) {
+				item_list_change(item_best_obj, item_best_now, true);
+
+				setInterval(function () {
+					item_list_change(item_best_obj, item_best_now, false);
+					item_best_now = item_best_now == item_best_obj.length ? 1 : (item_best_now + 1);
+					item_list_change(item_best_obj, item_best_now, true);
+				}, 2000);
+			}
+
+			// 신규 아이템 롤링
+			var item_new_obj = $(".item_new_img");
+			var item_new_now = 1;
+
+			if (item_new_obj.length > 0) {
+				item_list_change(item_new_obj, item_new_now, true);
+
+				setInterval(function () {
+					item_list_change(item_new_obj, item_new_now, false);
+					item_new_now = item_new_now == item_new_obj.length ? 1 : (item_new_now + 1);
+					item_list_change(item_new_obj, item_new_now, true);
+				}, 2000);
+			}
+
+			so3 = new scrollObj('topNoticeList', false, 10, 1, 2, 50, false, 3000);
+		});
+
+		// 아이템 롤링 기능
+		function item_list_change(listobj, num, onoff) {
+			var o = listobj.eq(num - 1).attr("src", "/images/r_best" + (onoff ? "_on" : "") + ".gif").parent().parent().find("a").addClass("main_item_sel");
+			onoff ? o.addClass("main_item_sel") : o.removeClass("main_item_sel");
+			var img = listobj.parents("table").find("#" + listobj.eq(num - 1)[0].id + "_img");
+			onoff ? img.show() : img.hide();
+		}
+
+		function fung1() { return 9; }
+
+		function popClose(popNo, noDay) {
+			if (noDay) {
+				setCookie('popup_' + popNo.toString(), 'false');
+			}
+
+			$('#popup_' + popNo.toString()).fadeOut();
+		}
+
+		function MovePop(id) {
+			var f = document.frmPop;
+
+			f.userid.value = id;
+			f.action = "/popup/agree.aspx";
+			f.target = "MovePop";
+			var popOption = "width=590, height=575, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
+			window.open("", "MovePop", popOption);
+
+			f.submit();
+		}
+
+	//]]>
+	</script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('a').focus(function () { $(this).blur() });
+			$('input:checkbox').css({ 'vertical-align': "middle", 'border': "none", 'text-indent': "0px", 'width': 'auto' });
+			$('input:text').focus(function () { if ($(this).attr('class') != 'security') $(this).css({ 'border-color': '#2e82e4' }); });
+			$('input:text').blur(function () { if ($(this).attr('class') != 'security') $(this).css({ 'border-color': '#c8c8c8' }); });
+			$('input:password').focus(function () { if ($(this).attr('class') != 'security') $(this).css({ 'border-color': '#2e82e4' }); });
+			$('input:password').blur(function () { if ($(this).attr('class') != 'security') $(this).css({ 'border-color': '#c8c8c8' }); });
+		});
+	</script>
+
+
+	<script type="text/javascript" src="/inc/script/top.js?20250701001"></script> 
+	
+	<script type="text/javascript" src="/inc/script/loginMgr.js?20250701001"></script>  
+	
+
+
+    
+
+
+
+    
+
+
+
+    
+
+
+<script type="text/javascript" src="/inc/script/common.js?20250701001"></script>
+<!-- HEAD PREFIX FINISH -->
+	<script type="text/javascript" src="/inc/script/comm.js?20250701001"></script>
+	<script language="javascript" type="text/javascript">
+	//<![CDATA[
+		function fung1() { return 5; }
+		$(document).ready(function () {
+
+			$('#sel_text').keydown(function(e){                 
+					if(e.keyCode == 13)
+					__doPostBack('search','')
+			});
+			$('#search').click(function () {
+				var search = $('#sel_text').val();
+				if (search == null || search == '') {
+					alert('검색어를 입력해 주세요.');
+					$('#sel_text').focus();
+					return false;
+				}
+			});
+
+			// 게시판 이름과 active class 적용
+			pageNameActiveCss();
+		});
+	//]]>
+	</script>
+	 <style>        
+		.forum_list thead th{height:32px; border-top:solid 1px #000000;  border-bottom:solid 1px #e0e0e0; background-image:url('/images/dot6.gif'); background-color:#f1f1f1; background-repeat:no-repeat; background-position:left center;}         
+		.forum_list tbody td{background-image:url('/images/line1.gif'); background-repeat:repeat-x; background-position:center bottom; text-align:center;  line-height:130%;}
+		.forum_list tbody td a{color:#595959;}
+		.forum_list tbody .bottom_line{height:36px; background-image:none;}
+	</style>  
+</head>
+<body>
+	<form method="post" action="./newsBoard_list.aspx?Btype=Update" id="form1">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTMxMzcwMDAyOQ9kFgQCAQ9kFgICAQ9kFgRmD2QWAgIBDxYCHgdWaXNpYmxlaGQCAQ8WAh8AZ2QCAw9kFggCAg8QDxYEHghDc3NDbGFzcwUTaGlkZS1kcm9wZG93bi1hcnJvdx4EXyFTQgICZGRkZAIGDxYCHgRUZXh0BYsaPGxpIGNsYXNzPSJmb3J1bV9saXN0X2xpIj48YSBocmVmID0gJy9uZXdzL25ld3NCb2FyZF9zdWIuYXNweD9vPTgxNjc1NiZCdHlwZT1VcGRhdGUnPiAgICA8ZGl2IGNsYXNzPSJsaXN0X251bSI+PHA+MTAxMTwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF90aXRsZSI+PHA+NeyblCAxOeydvCjtmZQpIOyXheuNsOydtO2KuCDslYjrgrQ8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfaGl0Ij48aSBjbGFzcz0iendpY29uLWV5ZSI+PC9pPjxwPjk0NTk8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfZGF0ZSI+PHA+MjAyNi0wNS0xOTwvcD48L2Rpdj48L2E+PC9saT48bGkgY2xhc3M9ImZvcnVtX2xpc3RfbGkiPjxhIGhyZWYgPSAnL25ld3MvbmV3c0JvYXJkX3N1Yi5hc3B4P289ODE2NzU1JkJ0eXBlPVVwZGF0ZSc+ICAgIDxkaXYgY2xhc3M9Imxpc3RfbnVtIj48cD4xMDEwPC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X3RpdGxlIj48cD417JuUIDE57J28KO2ZlCkg7ZSE66Gc66qo7IWYIOyViOuCtDwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9oaXQiPjxpIGNsYXNzPSJ6d2ljb24tZXllIj48L2k+PHA+MzI5OTwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9kYXRlIj48cD4yMDI2LTA1LTE5PC9wPjwvZGl2PjwvYT48L2xpPjxsaSBjbGFzcz0iZm9ydW1fbGlzdF9saSI+PGEgaHJlZiA9ICcvbmV3cy9uZXdzQm9hcmRfc3ViLmFzcHg/bz04MTY1OTMmQnR5cGU9VXBkYXRlJz4gICAgPGRpdiBjbGFzcz0ibGlzdF9udW0iPjxwPjEwMDk8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfdGl0bGUiPjxwPjXsm5QgMTLsnbwo7ZmUKSDsl4XrjbDsnbTtirgg7JWI64K0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2hpdCI+PGkgY2xhc3M9Inp3aWNvbi1leWUiPjwvaT48cD42ODE2PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2RhdGUiPjxwPjIwMjYtMDUtMTI8L3A+PC9kaXY+PC9hPjwvbGk+PGxpIGNsYXNzPSJmb3J1bV9saXN0X2xpIj48YSBocmVmID0gJy9uZXdzL25ld3NCb2FyZF9zdWIuYXNweD9vPTgxNjU5MiZCdHlwZT1VcGRhdGUnPiAgICA8ZGl2IGNsYXNzPSJsaXN0X251bSI+PHA+MTAwODwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF90aXRsZSI+PHA+NeyblCAxMuydvCjtmZQpIO2UhOuhnOuqqOyFmCDslYjrgrQ8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfaGl0Ij48aSBjbGFzcz0iendpY29uLWV5ZSI+PC9pPjxwPjM1NzE8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfZGF0ZSI+PHA+MjAyNi0wNS0xMjwvcD48L2Rpdj48L2E+PC9saT48bGkgY2xhc3M9ImZvcnVtX2xpc3RfbGkiPjxhIGhyZWYgPSAnL25ld3MvbmV3c0JvYXJkX3N1Yi5hc3B4P289ODE2MzgzJkJ0eXBlPVVwZGF0ZSc+ICAgIDxkaXYgY2xhc3M9Imxpc3RfbnVtIj48cD4xMDA3PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X3RpdGxlIj48cD417JuUIDbsnbwo7IiYKSDsl4XrjbDsnbTtirgg7JWI64K0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2hpdCI+PGkgY2xhc3M9Inp3aWNvbi1leWUiPjwvaT48cD42MzQwPC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2RhdGUiPjxwPjIwMjYtMDUtMDY8L3A+PC9kaXY+PC9hPjwvbGk+PGxpIGNsYXNzPSJmb3J1bV9saXN0X2xpIj48YSBocmVmID0gJy9uZXdzL25ld3NCb2FyZF9zdWIuYXNweD9vPTgxNjM4MiZCdHlwZT1VcGRhdGUnPiAgICA8ZGl2IGNsYXNzPSJsaXN0X251bSI+PHA+MTAwNjwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF90aXRsZSI+PHA+NeyblCA27J28KOyImCkg7ZSE66Gc66qo7IWYIOyViOuCtDwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9oaXQiPjxpIGNsYXNzPSJ6d2ljb24tZXllIj48L2k+PHA+NTI0MDwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9kYXRlIj48cD4yMDI2LTA1LTA2PC9wPjwvZGl2PjwvYT48L2xpPjxsaSBjbGFzcz0iZm9ydW1fbGlzdF9saSI+PGEgaHJlZiA9ICcvbmV3cy9uZXdzQm9hcmRfc3ViLmFzcHg/bz04MTYwNDImQnR5cGU9VXBkYXRlJz4gICAgPGRpdiBjbGFzcz0ibGlzdF9udW0iPjxwPjEwMDU8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfdGl0bGUiPjxwPjTsm5QgMjjsnbwo7ZmUKSDsl4XrjbDsnbTtirgg7JWI64K0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2hpdCI+PGkgY2xhc3M9Inp3aWNvbi1leWUiPjwvaT48cD4xMjIxODwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9kYXRlIj48cD4yMDI2LTA0LTI4PC9wPjwvZGl2PjwvYT48L2xpPjxsaSBjbGFzcz0iZm9ydW1fbGlzdF9saSI+PGEgaHJlZiA9ICcvbmV3cy9uZXdzQm9hcmRfc3ViLmFzcHg/bz04MTYwNDEmQnR5cGU9VXBkYXRlJz4gICAgPGRpdiBjbGFzcz0ibGlzdF9udW0iPjxwPjEwMDQ8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfdGl0bGUiPjxwPiA07JuUIDI47J28KO2ZlCkg7ZSE66Gc66qo7IWYIOyViOuCtDwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9oaXQiPjxpIGNsYXNzPSJ6d2ljb24tZXllIj48L2k+PHA+NDUzMTwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0ibGlzdF9kYXRlIj48cD4yMDI2LTA0LTI4PC9wPjwvZGl2PjwvYT48L2xpPjxsaSBjbGFzcz0iZm9ydW1fbGlzdF9saSI+PGEgaHJlZiA9ICcvbmV3cy9uZXdzQm9hcmRfc3ViLmFzcHg/bz04MTU4NjImQnR5cGU9VXBkYXRlJz4gICAgPGRpdiBjbGFzcz0ibGlzdF9udW0iPjxwPjEwMDM8L3A+PC9kaXY+ICAgIDxkaXYgY2xhc3M9Imxpc3RfdGl0bGUiPjxwPjTsm5QgMjHsnbwo7ZmUKSDsl4XrjbDsnbTtirgg7JWI64K0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2hpdCI+PGkgY2xhc3M9Inp3aWNvbi1leWUiPjwvaT48cD41ODYzPC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2RhdGUiPjxwPjIwMjYtMDQtMjE8L3A+PC9kaXY+PC9hPjwvbGk+PGxpIGNsYXNzPSJmb3J1bV9saXN0X2xpIj48YSBocmVmID0gJy9uZXdzL25ld3NCb2FyZF9zdWIuYXNweD9vPTgxNTg2MSZCdHlwZT1VcGRhdGUnPiAgICA8ZGl2IGNsYXNzPSJsaXN0X251bSI+PHA+MTAwMjwvcD48L2Rpdj4gICAgPGRpdiBjbGFzcz0iYm90dG9tX2xpbmUiY2xhc3M9Imxpc3RfdGl0bGUiPjxwPjTsm5QgMjHsnbwo7ZmUKSDtlITroZzrqqjshZgg7JWI64K0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2hpdCI+PGkgY2xhc3M9Inp3aWNvbi1leWUiPjwvaT48cD4zNDU0PC9wPjwvZGl2PiAgICA8ZGl2IGNsYXNzPSJsaXN0X2RhdGUiPjxwPjIwMjYtMDQtMjE8L3A+PC9kaXY+PC9hPjwvbGk+ZAIHDxYCHwMFjAk8ZGl2IGNsYXNzPSJwYWdpbmF0aW9uIj48ZGl2IGNsYXNzPSJwYWdpbmF0aW9uX3ByZXYiPiA8aSBjbGFzcz0iendpY29uLWNoZXZyb24tZG91YmxlLWxlZnQiPjwvaT4gJm5ic3A7PGkgY2xhc3M9Inp3aWNvbi1jaGV2cm9uLWxlZnQiPjwvaT4gPC9kaXY+PHVsIGNsYXNzPXBhZ2luYXRpb25fdWw+PGxpIGNsYXNzPSJhY3RpdmUiPjxzcGFuPjE8L3NwYW4+PC9saT48bGk+PGEgaHJlZj0vbmV3cy9uZXdzQm9hcmRfbGlzdC5hc3B4P0J0eXBlPVVwZGF0ZSZwPTIgPjxzcGFuPjI8L3NwYW4+PC9hPjwvbGk+PGxpPjxhIGhyZWY9L25ld3MvbmV3c0JvYXJkX2xpc3QuYXNweD9CdHlwZT1VcGRhdGUmcD0zID48c3Bhbj4zPC9zcGFuPjwvYT48L2xpPjxsaT48YSBocmVmPS9uZXdzL25ld3NCb2FyZF9saXN0LmFzcHg/QnR5cGU9VXBkYXRlJnA9NCA+PHNwYW4+NDwvc3Bhbj48L2E+PC9saT48bGk+PGEgaHJlZj0vbmV3cy9uZXdzQm9hcmRfbGlzdC5hc3B4P0J0eXBlPVVwZGF0ZSZwPTUgPjxzcGFuPjU8L3NwYW4+PC9hPjwvbGk+PGxpPjxhIGhyZWY9L25ld3MvbmV3c0JvYXJkX2xpc3QuYXNweD9CdHlwZT1VcGRhdGUmcD02ID48c3Bhbj42PC9zcGFuPjwvYT48L2xpPjxsaT48YSBocmVmPS9uZXdzL25ld3NCb2FyZF9saXN0LmFzcHg/QnR5cGU9VXBkYXRlJnA9NyA+PHNwYW4+Nzwvc3Bhbj48L2E+PC9saT48bGk+PGEgaHJlZj0vbmV3cy9uZXdzQm9hcmRfbGlzdC5hc3B4P0J0eXBlPVVwZGF0ZSZwPTggPjxzcGFuPjg8L3NwYW4+PC9hPjwvbGk+PGxpPjxhIGhyZWY9L25ld3MvbmV3c0JvYXJkX2xpc3QuYXNweD9CdHlwZT1VcGRhdGUmcD05ID48c3Bhbj45PC9zcGFuPjwvYT48L2xpPjxsaT48YSBocmVmPS9uZXdzL25ld3NCb2FyZF9saXN0LmFzcHg/QnR5cGU9VXBkYXRlJnA9MTAgPjxzcGFuPjEwPC9zcGFuPjwvYT48L2xpPjwvdWw+PGRpdiBjbGFzcz0icGFnaW5hdGlvbl9uZXh0Ij48YSBocmVmPS9uZXdzL25ld3NCb2FyZF9saXN0LmFzcHg/QnR5cGU9VXBkYXRlJnA9MTE+PGkgY2xhc3M9Inp3aWNvbi1jaGV2cm9uLXJpZ2h0Ij48L2k+PC9hPiZuYnNwOzxhIGhyZWY9L25ld3MvbmV3c0JvYXJkX2xpc3QuYXNweD9CdHlwZT1VcGRhdGUmcD0xMDI+PGkgY2xhc3M9Inp3aWNvbi1jaGV2cm9uLWRvdWJsZS1yaWdodCI+PC9pPjwvYT48L2Rpdj48L2Rpdj5kAggPZBYCZg9kFgICAQ8WAh8AZ2RkUJq5+Gzl86aSacplWxiQvhhc+YnsFgxFB442CUHMRbk=" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="D9BBEA0D" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAjw6tAOHfC8HuSOZ1SH3DhdILVEdB7tqFFE7EbB+56W7csP+p9HF02nhd/fphqU1VnnZmWzQxaEmjShIAuxb4hW8t4eetHZWcdrWa+kRXhWSOxC2vPu9WZ9Bgnfp8oa2roMK4TDa3VSJqDRHLp/1yfF4CgZUgk3s462EToPmqUw3J+520plZfg9R55ku8XgZ/4cuKBNtz07YPyHjeyaeUDz" />
+	
+
+<object id="GameStartControl" classid="CLSID:B810C793-5D31-4611-BDE5-1EFEEA7E6A26" codebase='/inc/ActiveX/launcher/DigitalicLauncher.cab#version=20,6,23,1'  version="20,6,23,1" width="1" height="1" style="display:none;"></object>
+
+
+	<div id="main">
+		<div id="header">
+	<div class="header_top">
+		
+		<div class="layout_center">
+			<div class="layout_wrap">
+				<div class="mo_menu_trigger">
+					<i class="zwicon-hamburger-menu"></i>
+				</div>
+				<h1 class="logo"><a href="/index.aspx">
+					<img src="/images/header/dmo_logo.png" alt="DIGIMON MASTERS" style="max-width: 150px;"></a></h1>
+				<div class="gnb_mo_bg"></div>
+				<div id="gnb">
+					<div class="mo_menu_top">
+						<a href="/index.aspx">
+							<img src="/images/header/dmo_logo.png" style="max-width: 100px;" />
+						</a>
+						<div class="mo_gnb_close">
+							<i class="zwicon-close"></i>
+						</div>
+					</div>
+					<ul id="Header1_member" class="gnb_list">
+						<li class="menu01"><a href="/news/newsBoard_list.aspx?Btype=Notice">디마소식</a>
+							<ul class="depth02">
+								<li><a href="/news/newsBoard_list.aspx?Btype=Notice">공지사항</a></li>
+								<li><a href="/news/newsBoard_list.aspx?Btype=Update">업데이트</a></li>
+								<li><a href="/news/newsBoard_list_attach.aspx?Btype=WorkReport">개발노트</a></li>
+								<li><a href="/news/newsBoard_list_attach.aspx?Btype=Lab">GM노트</a></li>
+								<li><a href="/news/newsBoard_list.aspx?Btype=Poll">설문조사</a></li>
+							</ul>
+						</li>
+						<li class="menu02"><a href="/info/main.aspx">게임정보</a>
+						</li>
+						<li class="menu03"><a href="/ranking/tamer.aspx?type=100">랭킹</a>
+							<ul class="depth02">
+								<li><a href="/ranking/tamer.aspx?type=100">테이머랭킹</a></li>
+								<li><a href="/ranking/partner.aspx?type=100">파트너몬랭킹</a></li>
+								<li><a href="/ranking/sub.aspx?type=100">용병몬랭킹</a></li>
+								<li><a href="/ranking/main.aspx?type=100">길드랭킹</a></li>
+							</ul>
+						</li>
+						<li class="menu04"><a href="/shop/item.aspx?type=Best" id="ItemShop1">상점</a>
+							<ul class="depth02">
+								<li><a href="/shop/item.aspx?type=Item" id="ItemShop" class="ItemShop">아이템샵</a></li>
+								<li><a onclick="javascript:popCashCharge();" href="#" id="cashCharge1" class="cashCharge1">캐시충전</a></li>
+								<li><a href="/cash/charge.aspx" id="chargeHist" class="chargeHist">내충전내역</a></li>
+                                <li><a href="/info/Probability.aspx">확률공개</a></li>
+							</ul>
+						</li>
+						<li class="menu05"><a href="/comm/board.aspx?Btype=Free">커뮤니티</a>
+							<ul class="depth02">
+								<li><a href="/comm/board.aspx?Btype=Free">자유 게시판</a></li>
+								<li><a href="/comm/board_attach.aspx?Btype=Screen">이미지</a></li>
+								<li><a href="/comm/board_attach.aspx?Btype=GuildScreen">길드홍보</a></li>
+								<li><a href="/comm/board_server.aspx?Btype=TradeBoard2">거래장터</a></li>
+                                
+                                <li><a href="/comm/board_attach.aspx?Btype=Video">동영상</a></li>
+							</ul>
+						</li>
+						<li class="menu06 header_none"><a href="/down/main.aspx">다운로드</a>
+						</li>
+						<li class="menu07"><a href="/customer/main.aspx">고객센터</a>
+							<ul class="depth02">
+								<li><a href="/customer/main.aspx">FAQ</a></li>							
+								<li><a href="/customer/user.aspx" id="customerUser">1:1 문의</a></li>
+							</ul>
+						</li>
+					</ul>
+					
+				</div>
+				<div class="header_right_wrap">
+					<div class="login_on active" id="login_on">						
+						
+						<a href="/mypage/mypage_main.aspx" class="login">
+							<i class="zwicon-user"></i>
+							<span>
+								<span id="Header1_uc_secuName" class="user_login"></span>님 환영합니다
+							</span>
+						</a>
+						
+						<a href="/help/Login/MemberLogout.aspx" class="log_out">
+							<i class="zwicon-sign-out" style="color: black; font-weight: bold"></i>
+						</a>
+						
+					</div>
+					
+					<a href="/help/login/MemberLogin.aspx" class="login" id="login_off">
+						<i class="zwicon-user"></i>
+						<span>로그인</span>
+					</a>
+					<input name="Header1$strSecuName" type="text" id="Header1_strSecuName" style="display: none;" />
+					<input name="Header1$strSecuType" type="text" id="Header1_strSecuType" style="display: none;" />
+					<input name="Header1$strIPAddr" type="text" id="Header1_strIPAddr" style="display: none;" />
+					<input name="Header1$strSecuId" type="text" id="Header1_strSecuId" style="display: none;" />
+					<div class="gamestart_gnb_wrap" style="margin-right: 0px;">
+						<a href="javascript:void(0);" id="gamestart_gnb" class="gamestart_gnb" style="background-position: 0px 82px;"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+
+			var logoutBtn = $("#login_on");
+			var loginBtn = $("#login_off");
+
+
+			if (isLogged()) {
+				logoutBtn.show();
+				loginBtn.hide();
+			} else {
+				loginBtn.show();
+				logoutBtn.hide();
+			}
+
+			//var strMsg = $('#strMsg').val();
+			var strSecuName = $('#strSecuName').val();
+			var strSecuType = $('#strSecuType').val(); // 회원종류
+			var strIPAddr = $('#strIPAddr').val();
+			var strSecuId = $('#strSecuId').val();
+
+			//alert('해더 strSecuName [' + strSecuName + '] strSecuType [' + strSecuType + '] strIPAddr [' + strIPAddr + '] strSecuId [' + strSecuId + '] timeInspec [' + timeInspec + '] strMsg [' + strMsg + ']');
+
+			// 점검 중일때 런처 
+			if ('N' == 'Y') {
+				$("#gamestart_gnb").attr('href', '').unbind('click');
+				$("#gamestart_gnb").addClass('disabled');
+
+			} else {
+				$("#gamestart_gnb").removeClass('disabled');
+			}
+
+
+			// 충전메뉴
+			//alert('timeInspec xxx 해더 : ' + $('#timeInspec').val());
+			if ('N' == 'Y') {
+
+				$("#ItemShop").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#ItemShop1").fadeTo("fast", 0.5).removeAttr("onclick");
+
+				$("#cashCharge").fadeTo("fast", 0.5).removeAttr("onclick");
+				$("#cashCharge1").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#cashCharge1").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#cashCharge2").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#cashCharge3").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#cashCharge4").fadeTo("fast", 0.5).removeAttr("onclick");
+
+				$("#chargeHist").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#chargeHist1").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#chargeHist2").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#chargeHist3").fadeTo("fast", 0.5).removeAttr("onclick");
+				//$("#chargeHist4").fadeTo("fast", 0.5).removeAttr("onclick");
+
+				$(".ItemShop").on("click", function (event) {
+					//alert(' 1 ' + strMsg);
+					alert('**** NOT INSPEC TIME ****');
+					return false;
+				});
+				
+				$(".cashCharge").on("click", function (event) {
+					//alert(' 1 ' + strMsg);
+					alert('**** NOT INSPEC TIME ****');
+					return false;
+				});
+				$(".cashCharge1").on("click", function (event) {
+					//alert(' 1 ' + strMsg);
+					alert('**** NOT INSPEC TIME ****');
+					return false;
+				});
+				
+				$(".chargeHist").on("click", function (event) {
+					//alert(' 1 ' + strMsg);
+					alert('**** NOT INSPEC TIME ****');
+					return false;
+				});
+				
+
+			} else {
+				
+				// 미성년 체크 시작
+				//alert('해더 성인 책 ' + adultYn);
+				if ('' == 'N') {
+					$("#cashCharge").attr("onclick", "javascript:popCashChargeKid();");
+					$("#cashCharge1").attr("onclick", "javascript:popCashChargeKid();");
+					//$("#cashCharge2").attr("onclick", "javascript:popCashChargeKid();");
+					//$("#cashCharge3").attr("onclick", "javascript:popCashChargeKid();");
+					//$("#cashCharge4").attr("onclick", "javascript:popCashChargeKid();");
+				} else {
+					$("#cashCharge").attr("onclick", "javascript:popCashCharge();");
+					$("#cashCharge1").attr("onclick", "javascript:popCashCharge();");
+					//$("#cashCharge2").attr("onclick", "javascript:popCashCharge();");
+					//$("#cashCharge3").attr("onclick", "javascript:popCashCharge();");
+					//$("#cashCharge4").attr("onclick", "javascript:popCashCharge();");
+				}
+				
+				// 미성년 체크 끝
+
+				//$("#ItemShop").attr("href");
+				//console.log($("#ItemShop").attr("href"));
+				//$("#ItemShop1").attr("href");
+
+				//$("#cashCharge1").attr("href");
+				//$("#cashCharge2").attr("href");
+				//$("#cashCharge3").attr("href");
+				//$("#cashCharge4").attr("href");
+
+				//$("#chargeHist1").attr("href");
+				//$("#chargeHist2").attr("href");
+				//$("#chargeHist3").attr("href");
+				//$("#chargeHist4").attr("href");
+			}
+
+			$("#gamestart_gnb").on("click", function (event) {
+				event.preventDefault();
+				
+						alert("로그인이 필요한 서비스입니다.");
+						location.href = "/help/login/MemberLogin.aspx";
+						return;
+									
+					top_flash(0, 1);
+				
+			});
+		});
+
+		function isLogged() {
+            
+			    if ($('#Header1_uc_secuName').text() !== '') {
+				    return true;
+			    } else {
+				    return false;
+                }
+            
+		}
+	</script>
+</div>
+		<div id="center">	
+			<div id="content" >                                         
+				<div id="body" >
+					<div class="sub_banner">
+						<div class="sub_banner_img comm_banner">
+							<span>
+								디마소식
+							</span>
+						</div>
+						<div class="container">
+							<div class="sub_tab_menu">
+							<ul>
+								<li id="Notice">
+									<a href="/news/newsBoard_list.aspx?Btype=Notice">
+										<span>공지사항</span>
+									</a>
+								</li>
+								<li id="Update">
+									<a href="/news/newsBoard_list.aspx?Btype=Update">
+										<span>업데이트</span>
+									</a>
+								</li>
+								<li id="WorkReport">
+									<a href="/news/newsBoard_list_attach.aspx?Btype=WorkReport">
+										<span>개발노트</span>
+									</a>
+								</li>
+								<li id="Lab">
+									<a href="/news/newsBoard_list_attach.aspx?Btype=Lab">
+										<span>GM노트</span>
+									</a>
+								</li>
+								<li id="EventT">
+									<a href="/news/newsBoard_list_tab.aspx?Btype=EventNow">
+										<span>이벤트</span>
+									</a>
+								</li>
+								<li id="Poll">
+									<a href="/news/newsBoard_list.aspx?Btype=Poll">
+										<span>설문조사</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						</div>
+					</div>
+					<div class="container sub_container">
+						<div class="content_title_wrap">
+								<h2 id="board_title"></h2>
+								<div class="content_search_wrap">
+									<select name="sel" id="sel" class="hide-dropdown-arrow" style="vertical-align:middle;">
+	<option value="title">제목</option>
+
+</select>
+									<div class="content_search_input_wrap">
+										<input name="sel_text" type="text" id="sel_text" Class="search_input" />
+										<a id="search" class="search_btn" href="javascript:__doPostBack(&#39;search&#39;,&#39;&#39;)">
+											<i class="zwicon-search"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						<div class="forum_list">
+							<ul>
+								<li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816756&Btype=Update'>    <div class="list_num"><p>1011</p></div>    <div class="list_title"><p>5월 19일(화) 업데이트 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>9459</p></div>    <div class="list_date"><p>2026-05-19</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816755&Btype=Update'>    <div class="list_num"><p>1010</p></div>    <div class="list_title"><p>5월 19일(화) 프로모션 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>3299</p></div>    <div class="list_date"><p>2026-05-19</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816593&Btype=Update'>    <div class="list_num"><p>1009</p></div>    <div class="list_title"><p>5월 12일(화) 업데이트 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>6816</p></div>    <div class="list_date"><p>2026-05-12</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816592&Btype=Update'>    <div class="list_num"><p>1008</p></div>    <div class="list_title"><p>5월 12일(화) 프로모션 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>3571</p></div>    <div class="list_date"><p>2026-05-12</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816383&Btype=Update'>    <div class="list_num"><p>1007</p></div>    <div class="list_title"><p>5월 6일(수) 업데이트 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>6340</p></div>    <div class="list_date"><p>2026-05-06</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816382&Btype=Update'>    <div class="list_num"><p>1006</p></div>    <div class="list_title"><p>5월 6일(수) 프로모션 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>5240</p></div>    <div class="list_date"><p>2026-05-06</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816042&Btype=Update'>    <div class="list_num"><p>1005</p></div>    <div class="list_title"><p>4월 28일(화) 업데이트 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>12218</p></div>    <div class="list_date"><p>2026-04-28</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=816041&Btype=Update'>    <div class="list_num"><p>1004</p></div>    <div class="list_title"><p> 4월 28일(화) 프로모션 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>4531</p></div>    <div class="list_date"><p>2026-04-28</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=815862&Btype=Update'>    <div class="list_num"><p>1003</p></div>    <div class="list_title"><p>4월 21일(화) 업데이트 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>5863</p></div>    <div class="list_date"><p>2026-04-21</p></div></a></li><li class="forum_list_li"><a href = '/news/newsBoard_sub.aspx?o=815861&Btype=Update'>    <div class="list_num"><p>1002</p></div>    <div class="bottom_line"class="list_title"><p>4월 21일(화) 프로모션 안내</p></div>    <div class="list_hit"><i class="zwicon-eye"></i><p>3454</p></div>    <div class="list_date"><p>2026-04-21</p></div></a></li>
+							</ul>
+						</div>
+						<div class="pagination"><div class="pagination_prev"> <i class="zwicon-chevron-double-left"></i> &nbsp;<i class="zwicon-chevron-left"></i> </div><ul class=pagination_ul><li class="active"><span>1</span></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=2 ><span>2</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=3 ><span>3</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=4 ><span>4</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=5 ><span>5</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=6 ><span>6</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=7 ><span>7</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=8 ><span>8</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=9 ><span>9</span></a></li><li><a href=/news/newsBoard_list.aspx?Btype=Update&p=10 ><span>10</span></a></li></ul><div class="pagination_next"><a href=/news/newsBoard_list.aspx?Btype=Update&p=11><i class="zwicon-chevron-right"></i></a>&nbsp;<a href=/news/newsBoard_list.aspx?Btype=Update&p=102><i class="zwicon-chevron-double-right"></i></a></div></div>
+					</div>
+				</div>                 
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		
+<div>
+    
+    <div class="footer_wrap">
+        <div class="container">
+            <div class="policy_wrap">
+                <ul>
+                    <li>
+                        <a href="/policy/stipulation.html?menu_name=menu_stipulation" target="_blank">
+                            <span>이용약관</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/stipulation.html?menu_name=menu_privacy" target="_blank">
+                            <span>개인정보처리방침</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/stipulation.html?menu_name=menu_youthprotection" target="_blank">
+                            <span>청소년보호정책</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/policy/stipulation.html?menu_name=menu_operation_policy" target="_blank">
+                            <span>운영정책</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer_logo_wrap">
+                <a class="dmo_logo" href="javascript:void(0);">
+                    <img src="/images/header/dmo_logo.png" />
+                </a>
+                <a class="move_logo" href="javascript:void(0);">
+                    <img src="/images/renewal_main/footer/logo.svg" />
+                </a>
+                <a class="bandai_logo" href="javascript:void(0);">
+                    <img src="/images/renewal_main/footer/bandai_logo.png">
+                </a>
+                <a class="toei_logo" href="javascript:void(0);">
+                    <img src="/images/renewal_main/footer/toel_logo_w.png">
+                </a>
+            </div>
+            <div class="conpany_info_wrap">
+                <ul>
+                    <li>
+                        <ul>
+                            <li><span>(주)무브인터렉티브</span></li>
+                            <li><span>서울특별시 마포구 월드컵북로 400, 2층 D-17호</span></li>
+                            <li><span>대표이사: 김동성</span></li>
+                            <li><span>대표전화:02-1566-6932</span></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            
+                            <li><span>사업자 등록 번호 : 314-81-48576</span></li>
+                            <li><span>E-mail:dmsupport@moveint.io</span></li>
+                            <li><span>통신판매업 신고번호:2018-서울마포-2112</span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="grade_wrap">
+                <div class="grade_img">
+                    <img src="/images/renewal_main/footer/12.png" />
+                    <img src="/images/renewal_main/footer/violent.png" />
+                </div>
+                <div class="grade_table">
+                    <ul class="main_ul">
+                        <li class="line_li">
+                            <ul>
+                                <li>제명</li>
+                                <li>디지몬 마스터즈</li>
+                            </ul>
+                            <ul>
+                                <li>상호</li>
+                                <li>(주)무브인터렉티브</li>
+                            </ul>
+                        </li>
+                        <div class="row_li_wrap">
+                            <li class="line_li row_li">
+                                <ul>
+                                    <li>이용등급</li>
+                                    <li>12세 이용가</li>
+                                </ul>
+                                <ul>
+                                    <li>제작업신고번호</li>
+                                    <li>제2018-000021호</li>
+                                </ul>
+                            </li>
+                            
+                            <li class="line_li row_li">
+                                <ul>
+                                    <li>등급분류일자</li>
+                                    <li>2010년 09월 03일</li>
+                                </ul>
+                                <ul>
+                                    <li>등급분류번호</li>
+                                    <li>CC-NP-100903-027</li>
+                                </ul>
+
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="copy_wrap">
+                <span class="copy mo_none">© Akiyoshi Hongo, Toei Animation © 2009 MOVEINTERACTIVE Co., Ltd. All Rights Reserved</span>
+                <span class="copy mo_block">© Akiyoshi Hongo, Toei Animation<br /> © 2009 MOVEINTERACTIVE Co., Ltd. All Rights Reserved</span>
+                <span style="color:#111111">2</span>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+</div>
+	</div>
+	</form>
+	<form method="get" action="" id="form2"></form>
+</body>
+</html>
