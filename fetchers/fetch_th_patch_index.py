@@ -26,9 +26,9 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-OUT = PROJ / "th_patch_index.json"
+OUT = PROJ / "data" / "th_patch_index.json"
 
 LIST_URL_FIRST = "https://www.vplay.in.th/category/news/patch-note/"
 LIST_URL_PAGE = "https://www.vplay.in.th/category/news/patch-note/page/{page}/"

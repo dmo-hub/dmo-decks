@@ -19,8 +19,8 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
-SCAN = PROJ / "scan_result_digimon.json"
+PROJ = Path(__file__).resolve().parent.parent
+SCAN = PROJ / "data" / "scan_result_digimon.json"
 IMG_DIR = PROJ / "docs" / "img" / "digimon"
 
 WIKI = "https://digitalmastersworld.wiki.gg/images"

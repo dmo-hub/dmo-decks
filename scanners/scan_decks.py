@@ -23,7 +23,7 @@ from pathlib import Path
 
 import requests
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
 CACHE.mkdir(exist_ok=True)
 
@@ -287,7 +287,7 @@ def main():
         "errors": errors,
     }
 
-    out_file = PROJ / "scan_result.json"
+    out_file = PROJ / "data" / "scan_result.json"
     out_file.write_text(
         json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"
     )

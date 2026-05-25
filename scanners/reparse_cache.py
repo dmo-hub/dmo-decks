@@ -22,11 +22,11 @@ from scan_decks import (
     parse_decks,
 )
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 
 # Preserve prior subject/date from existing scan_result.json if present
 prior = {}
-sr = PROJ / "scan_result.json"
+sr = PROJ / "data" / "scan_result.json"
 prior_data = {}
 if sr.exists():
     try:

@@ -19,9 +19,9 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-SCAN = PROJ / "scan_result_digimon.json"
+SCAN = PROJ / "data" / "scan_result_digimon.json"
 IMG_DIR = PROJ / "docs" / "img" / "digimon"
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (dmoDeck/1.0)"}

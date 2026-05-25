@@ -23,7 +23,7 @@ from playwright.sync_api import sync_playwright
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 OUT = PROJ / "docs" / "img" / "icons"
 CDP_URL = "http://localhost:9222"
 

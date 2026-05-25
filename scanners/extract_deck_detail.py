@@ -15,7 +15,7 @@ except Exception:
         sys.stdout.buffer, encoding="utf-8", errors="replace"
     )
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
 
 

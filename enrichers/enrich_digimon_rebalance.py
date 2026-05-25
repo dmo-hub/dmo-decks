@@ -32,8 +32,8 @@ sys.stdout.reconfigure(encoding="utf-8")
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from enrich_digimon_gameking import FIELD_MAP, html_to_text  # type: ignore
 
-PROJ = Path(__file__).resolve().parent
-SCAN = PROJ / "scan_result_digimon.json"
+PROJ = Path(__file__).resolve().parent.parent
+SCAN = PROJ / "data" / "scan_result_digimon.json"
 CACHE = PROJ / "cache"
 
 # Match an "Addition of Family Attributes" / "Family Attributes info" block

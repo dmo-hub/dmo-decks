@@ -18,9 +18,9 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
-DIGIMON = PROJ / "scan_result_digimon.json"
-TH_DIGIMON = PROJ / "th_patch_digimon.json"
+PROJ = Path(__file__).resolve().parent.parent
+DIGIMON = PROJ / "data" / "scan_result_digimon.json"
+TH_DIGIMON = PROJ / "data" / "th_patch_digimon.json"
 
 # (EN_substring, TH_substring, required_th_modifier_or_None).
 # Match logic:

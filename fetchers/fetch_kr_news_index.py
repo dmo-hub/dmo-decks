@@ -26,9 +26,9 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-OUT = PROJ / "kr_news_index.json"
+OUT = PROJ / "data" / "kr_news_index.json"
 
 BASE = "https://www.digimonmasters.com/news"
 LIST_URL = f"{BASE}/newsBoard_list.aspx?Btype=Update&p={{page}}"

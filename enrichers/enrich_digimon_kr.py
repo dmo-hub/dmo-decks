@@ -31,10 +31,10 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
-DIGIMON = PROJ / "scan_result_digimon.json"
-KR_RELEASES = PROJ / "kr_digimon_releases.json"
-KR_INDEX = PROJ / "kr_news_index.json"
+PROJ = Path(__file__).resolve().parent.parent
+DIGIMON = PROJ / "data" / "scan_result_digimon.json"
+KR_RELEASES = PROJ / "data" / "kr_digimon_releases.json"
+KR_INDEX = PROJ / "data" / "kr_news_index.json"
 
 # (EN_substring, KR_substring). For each EN digimon name, the FIRST keyword whose
 # `en_kw` appears in the name (case-insensitive) is used. Order matters: list more

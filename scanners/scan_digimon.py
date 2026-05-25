@@ -12,9 +12,9 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-OUT = PROJ / "scan_result_digimon.json"
+OUT = PROJ / "data" / "scan_result_digimon.json"
 
 # Reuse same date regex as scan_decks.py (MM-DD-YYYY format in raw HTML)
 DATE_RE = re.compile(r">\s*(\d{2}-\d{2}-\d{4})\s*<")

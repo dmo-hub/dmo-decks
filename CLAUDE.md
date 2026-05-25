@@ -8,77 +8,98 @@ A set of Python scripts that scrape **dmo.gameking.com** (Digimon Masters Online
 
 The site is structured as a hub: `docs/index.html` is a landing page linking to topic-specific reports (`docs/decks.html`, `docs/digimon.html`, and future ones like `docs/system.html`).
 
+## Repo layout
+
+Scripts are grouped by pipeline stage so it's easy to locate a step:
+
+```
+fetchers/    # network scrapers (fetch_*)
+scanners/    # cache-only parsers (scan_*, reparse_cache, extract_deck_detail)
+enrichers/   # add fields to scan_result_digimon.json (enrich_*, apply_image_choices)
+extractors/  # download images per post (extract_*_images)
+builders/    # generate HTML report / audit (build_digimon_html, diff_report, compare_digimon_sources)
+data/        # all JSON outputs (scan_result*, kr_*, th_*, diff)
+docs/        # GitHub Pages output (index.html, decks.html, digimon.html, img/)
+cache/       # raw HTML cache (regenerated; gitignored)
+```
+
+All scripts use `PROJ = Path(__file__).resolve().parent.parent` so they
+resolve the repo root regardless of which subfolder they live in. JSON paths
+are `PROJ / "data" / "<name>.json"`. Run scripts from the repo root using the
+subfolder prefix (e.g. `python scanners/scan_digimon.py`).
+
 ## Common commands
 
 ```powershell
-# 1. Full scrape + parse (network) — populates cache/ and writes scan_result.json
-python scan_decks.py
+# 1. Full scrape + parse (network) — populates cache/ and writes data/scan_result.json
+python scanners/scan_decks.py
 
 # 2. Re-parse only from cached HTML (no network) — use after tweaking parser logic
-python reparse_cache.py
+python scanners/reparse_cache.py
 
 # 3. Inspect Digimon List / Effect tables for specific cached posts
-python extract_deck_detail.py event 635 770 patch 4148
+python scanners/extract_deck_detail.py event 635 770 patch 4148
 
-# 4. Compare scan_result.json against docs/decks.html (find missed/extra posts)
-python diff_report.py
+# 4. Compare data/scan_result.json against docs/decks.html (find missed/extra posts)
+python builders/diff_report.py
 
-# 5. Scan cache for "[New Digimon ...]" markers → scan_result_digimon.json
-python scan_digimon.py
+# 5. Scan cache for "[New Digimon ...]" markers → data/scan_result_digimon.json
+python scanners/scan_digimon.py
 
 # 6. Extract banner image per post → docs/img/digimon/<idx>.<ext>; updates JSON's `image` field
-python extract_digimon_images.py
+python extractors/extract_digimon_images.py
 
-# 7. Generate docs/digimon.html from scan_result_digimon.json (uses `image` if present)
-python build_digimon_html.py
+# 7. Generate docs/digimon.html from data/scan_result_digimon.json (uses `image` if present)
+python builders/build_digimon_html.py
 
-# 8. Scrape KR news board list (digimonmasters.com Btype=Update) → kr_news_index.json
-python fetch_kr_news_index.py
+# 8. Scrape KR news board list (digimonmasters.com Btype=Update) → data/kr_news_index.json
+python fetchers/fetch_kr_news_index.py
 
 # 9. Fetch each KR update post body & extract `[ 신규 디지몬 추가 - <name> ]` markers
-#    → kr_digimon_releases.json (the authoritative KR-release list)
-python scan_kr_digimon_releases.py
+#    → data/kr_digimon_releases.json (the authoritative KR-release list)
+python scanners/scan_kr_digimon_releases.py
 
 # 10. Match EN ↔ KR by content (EN→KR keyword dict + date tiebreaker)
-#     → adds `source_kr` to scan_result_digimon.json
-python enrich_digimon_kr.py
+#     → adds `source_kr` to data/scan_result_digimon.json
+python enrichers/enrich_digimon_kr.py
 
 # 10b. Extract KR-side digimon image from each KR post body → docs/img/digimon/<idx>_kr.<ext>
-#      Adds `image_kr` field. build_digimon_html.py renders EN + KR images side-by-side
-#      so a human can pick the better one later.
-python extract_kr_digimon_images.py
+python extractors/extract_kr_digimon_images.py
 
 # 10c. Thai-server (vplay.in.th) pipeline. Thai lags NA/KR by 10–12 months, so
 #      most recent NA posts have no TH equivalent yet — that's expected.
-python fetch_th_patch_index.py        # paginate /category/news/patch-note/ → th_patch_index.json
-python scan_th_patch_digimon.py       # extract `ดิจิมอนใหม่ : <name>` markers + banner URLs
-python enrich_digimon_th.py           # match TH ↔ EN by transliteration → adds source_th + date_th
-python extract_th_digimon_images.py   # download TH banner → image_th (becomes primary image)
+python fetchers/fetch_th_patch_index.py        # → data/th_patch_index.json
+python scanners/scan_th_patch_digimon.py       # → data/th_patch_digimon.json
+python enrichers/enrich_digimon_th.py          # → adds source_th + date_th
+python extractors/extract_th_digimon_images.py # → image_th (becomes primary image)
 
 # 11. Fetch dmowiki.com digimon pages via CDP (Cloudflare-blocked, needs a
 #     Chrome session past CAPTCHA). Launch Chrome first:
 #       chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\chrome-cdp
 #     then open https://dmowiki.com, solve the CAPTCHA, then:
-python fetch_dmowiki_digimon.py
+python fetchers/fetch_dmowiki_digimon.py
 #     Saves to cache/dmowiki_<safe-slug>.html.
 
-# 12. Parse cache/dmowiki_*.html and seed `attributes` dict on each digimon
-#     in scan_result_digimon.json.
-python enrich_digimon_attributes.py            # missing only
-python enrich_digimon_attributes.py --force    # re-parse every digimon
+# 12. Parse cache/dmowiki_*.html and seed `attributes` dict on each digimon.
+python enrichers/enrich_digimon_attributes.py            # missing only
+python enrichers/enrich_digimon_attributes.py --force    # re-parse every digimon
 
 # 13. Pull Basic/Natural Attribute + Affiliated Field straight from the
-#     gameking EventView/PatchNote stat block (and KR `cache/kr_view_o<N>.html`
-#     fallback for posts without a gameking translation, e.g. e664). This is
-#     the in-game-canonical source — its values override the dmowiki seed
-#     from #12 where present.
-python enrich_digimon_gameking.py
+#     gameking EventView/PatchNote stat block. In-game-canonical — overrides
+#     the dmowiki seed from #12 where present.
+python enrichers/enrich_digimon_gameking.py
 
 # 14. Audit: dump attribute/element/families from gameking, KR, and dmowiki
 #     side-by-side per digimon so divergences are easy to spot.
-python compare_digimon_sources.py              # all digimon
-python compare_digimon_sources.py 731          # just one idx
+python builders/compare_digimon_sources.py              # all digimon
+python builders/compare_digimon_sources.py 731          # just one idx
 ```
+
+⚠️ **`scanners/scan_digimon.py` is destructive.** It rewrites
+`data/scan_result_digimon.json` from cache, blowing away manually-curated fields
+(`image`, `image_th`, `image_kr`, `source_kr`, `source_th`, `attributes`, the
+Rank-U filter on `e810`, etc.). Only re-run after a fresh `scanners/scan_decks.py`
+pull when you want to integrate new posts; otherwise stick with the enrichers.
 
 **Trusted-sources policy:** only `dmowiki.com`, gameking EventView/PatchNote,
 and the KR site (digimonmasters.com) are trusted for digimon stats.
@@ -93,41 +114,55 @@ There is no test suite, lint config, package manifest, or virtualenv setup. Only
 The three scripts form a pipeline; understanding their data flow matters more than any single file:
 
 ```
-scan_decks.py ──┐
-                ├──► cache/{event,patch}_<idx>.html  (raw HTML, persisted)
-                └──► scan_result.json                (parsed deck names per post)
-                         │
-                         ├──► diff_report.py ──► diff.json  (vs. docs/decks.html)
-                         │
-                         └──► (manual hand-curation) ──► docs/decks.html  (deck report, published)
-
-cache/*.html ──► scan_digimon.py ──► scan_result_digimon.json
-                          │                    │
-                          │                    └──► extract_digimon_images.py
-                          │                                    │
-                          │                                    ├──► docs/img/digimon/<idx>.<ext>
-                          │                                    └──► (adds `image` field to JSON)
-                          │                    │
-                          │                    └──► build_digimon_html.py ──► docs/digimon.html
-                          │                                                       (digimon report, auto-generated)
-                          │
-                          └──► enrich_digimon_kr.py (content-matches via EN→KR keyword dict)
-                                                    │
-                                                    └──► (adds `source_kr` field to scan_result_digimon.json)
-
-fetch_kr_news_index.py ──► cache/kr_list_p<N>.html  (raw KR list pages)
-                       └──► kr_news_index.json     (date-indexed list of KR Update posts)
-                                                    │
-                                                    ▼
-                              scan_kr_digimon_releases.py
+scanners/scan_decks.py ──┐
+                         ├──► cache/{event,patch}_<idx>.html  (raw HTML, persisted)
+                         └──► data/scan_result.json           (parsed deck names per post)
                                   │
-                                  ├──► cache/kr_view_o<N>.html   (raw KR post bodies)
-                                  └──► kr_digimon_releases.json  (KR posts w/ `신규 디지몬` markers)
+                                  ├──► builders/diff_report.py ──► data/diff.json  (vs. docs/decks.html)
+                                  │
+                                  └──► (manual hand-curation) ──► docs/decks.html  (published)
+
+cache/*.html ──► scanners/scan_digimon.py ──► data/scan_result_digimon.json
+                                                  │
+                                                  ├──► extractors/extract_digimon_images.py
+                                                  │       ├──► docs/img/digimon/<idx>.<ext>
+                                                  │       └──► (adds `image` field to JSON)
+                                                  │
+                                                  ├──► enrichers/enrich_digimon_kr.py
+                                                  │       (content-match EN→KR, adds `source_kr`)
+                                                  │
+                                                  ├──► enrichers/enrich_digimon_th.py
+                                                  │       (content-match EN→TH, adds `source_th`/`date_th`)
+                                                  │
+                                                  ├──► enrichers/enrich_digimon_attributes.py
+                                                  │   + enrichers/enrich_digimon_gameking.py
+                                                  │       (adds `attributes` dict w/ basic/element/families)
+                                                  │
+                                                  └──► builders/build_digimon_html.py ──► docs/digimon.html
+
+fetchers/fetch_kr_news_index.py ──► cache/kr_list_p<N>.html
+                                └──► data/kr_news_index.json (108 KR Update posts)
+                                          │
+                                          ▼
+                  scanners/scan_kr_digimon_releases.py
+                      ├──► cache/kr_view_o<N>.html
+                      └──► data/kr_digimon_releases.json (24 posts w/ `신규 디지몬` markers)
+
+fetchers/fetch_th_patch_index.py ──► cache/th_list_p<N>.html
+                                └──► data/th_patch_index.json (189 TH patch-note posts)
+                                          │
+                                          ▼
+                  scanners/scan_th_patch_digimon.py
+                      ├──► cache/th_view_<slug>.html
+                      └──► data/th_patch_digimon.json (53 posts w/ `ดิจิมอนใหม่` markers)
 
 docs/index.html  (hand-written landing page linking to decks.html + digimon.html)
 
-reparse_cache.py: rebuilds scan_result.json from cache/ without network
-extract_deck_detail.py: ad-hoc inspector for a single post's tables
+scanners/reparse_cache.py: rebuilds data/scan_result.json from cache/ without network
+scanners/extract_deck_detail.py: ad-hoc inspector for a single post's tables
+extractors/extract_kr_digimon_images.py + extract_th_digimon_images.py: dual to
+the NA image extractor, downloading per-server banners (KR base64-inline, TH from
+wp-content/uploads). Image priority in builder: TH > NA > KR.
 ```
 
 Key design points:

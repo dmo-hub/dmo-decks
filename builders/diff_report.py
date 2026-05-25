@@ -10,8 +10,8 @@ import json
 import re
 from pathlib import Path
 
-PROJ = Path(__file__).resolve().parent
-SCAN = PROJ / "scan_result.json"
+PROJ = Path(__file__).resolve().parent.parent
+SCAN = PROJ / "data" / "scan_result.json"
 REPORT = PROJ / "docs/decks.html"
 
 
@@ -109,7 +109,7 @@ def main():
             "extra_in_report": sorted(report_idx - scan_idx),
             "common": sorted(scan_idx & report_idx),
         }
-    (PROJ / "diff.json").write_text(
+    (PROJ / "data" / "diff.json").write_text(
         json.dumps(diff_out, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print(f"Saved: {PROJ / 'diff.json'}")

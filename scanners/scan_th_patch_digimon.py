@@ -21,10 +21,10 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-INDEX = PROJ / "th_patch_index.json"
-OUT = PROJ / "th_patch_digimon.json"
+INDEX = PROJ / "data" / "th_patch_index.json"
+OUT = PROJ / "data" / "th_patch_digimon.json"
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
                          "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}

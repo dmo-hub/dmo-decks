@@ -22,10 +22,10 @@ import requests
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
+PROJ = Path(__file__).resolve().parent.parent
 CACHE = PROJ / "cache"
-INDEX = PROJ / "kr_news_index.json"
-OUT = PROJ / "kr_digimon_releases.json"
+INDEX = PROJ / "data" / "kr_news_index.json"
+OUT = PROJ / "data" / "kr_digimon_releases.json"
 
 # Marker variants seen in the wild:
 #   `[ 신규 디지몬 추가 - <name> ]`      (most common)
