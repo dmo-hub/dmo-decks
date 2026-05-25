@@ -81,14 +81,21 @@ CSS = """
   .chip-attr-VI { background: #efd9ef; color: #6b1f6b; }
   .chip-attr-DA { background: #d6e3f5; color: #1a4d8f; }
   .chip-attr-FR { background: #f0e4cc; color: #8a6a1a; }
+  .chip-attr-UN { background: #ebebeb; color: #555; }
   /* Natural attribute (element) — neutral grey base */
   .chip-elem { background: #eef2f5; color: #2c3e50; border: 1px solid #d4dce3; }
   /* Field / family — neutral pale orange */
   .chip-field { background: #fff1d6; color: #9b6e1a; border: 1px solid #f1d49a; }
 
-  /* Banner image (one per post) */
-  .post-image { display: block; max-width: 100%; max-height: 360px; margin: 4px 0 14px 0;
-                border-radius: 6px; border: 1px solid #e7eef6; cursor: zoom-in; }
+  /* Banner image — when both EN + KR are present, lay them side by side */
+  .post-images { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 14px 0; }
+  .post-image-wrap { flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .post-image-wrap .img-label { font-size: 11px; color: #95a5a6; text-transform: uppercase;
+                                letter-spacing: 0.5px; font-weight: 600; }
+  .post-image-wrap.kr .img-label { color: #c0392b; }
+  .post-image { display: block; max-width: 100%; max-height: 360px; width: auto;
+                border-radius: 6px; border: 1px solid #e7eef6; cursor: zoom-in;
+                object-fit: contain; align-self: flex-start; }
 """
 
 
@@ -98,7 +105,9 @@ def render_digimon(name: str, attrs: dict | None) -> str:
         return f'<span class="digimon-name">{name}</span>'
     chips: list[str] = []
     if attrs.get("attribute"):
-        abbr = attrs.get("attribute_abbr") or attrs["attribute"][:2].upper()
+        abbr_map = {"Vaccine": "VA", "Virus": "VI", "Data": "DA",
+                    "Free": "FR", "Unknown": "UN"}
+        abbr = attrs.get("attribute_abbr") or abbr_map.get(attrs["attribute"], "UN")
         chips.append(
             f'<span class="chip chip-attr-{abbr}" title="Basic Attribute">'
             f'<span class="chip-label">Attr</span>{attrs["attribute"]}</span>'
@@ -148,10 +157,23 @@ def render() -> str:
             f"<li>{render_digimon(name, attrs_map.get(name))}</li>"
             for name in p["digimon"]
         )
+        def img_wrap(path: str, label: str, label_cls: str = "") -> str:
+            return (
+                f'<div class="post-image-wrap{(" " + label_cls) if label_cls else ""}">'
+                f'<span class="img-label">{label}</span>'
+                f'<a href="{path}" target="_blank">'
+                f'<img class="post-image" src="{path}" alt="idx {idx} ({label})" loading="lazy">'
+                f'</a></div>'
+            )
+
+        img_parts = []
+        if p.get("image"):
+            img_parts.append(img_wrap(p["image"], "EN"))
+        if p.get("image_kr"):
+            img_parts.append(img_wrap(p["image_kr"], "KR", "kr"))
         img_block = (
-            f'<a href="{p["image"]}" target="_blank"><img class="post-image" src="{p["image"]}" alt="idx {idx}" loading="lazy"></a>\n    '
-            if p.get("image")
-            else ""
+            f'<div class="post-images">{"".join(img_parts)}</div>\n    '
+            if img_parts else ""
         )
         def src_span(url: str) -> str:
             is_kr = "digimonmasters.com" in url

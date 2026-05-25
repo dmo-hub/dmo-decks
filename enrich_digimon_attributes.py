@@ -1,13 +1,17 @@
-"""Fetch Basic Attribute / Natural Attribute / Field for each digimon
-from Digital Masters World Wiki, and add them to scan_result_digimon.json.
+"""Fetch Basic Attribute / Natural Attribute / Field for each digimon and
+add them to scan_result_digimon.json.
 
-Source:  https://digitalmastersworld.wiki.gg/wiki/<slug>
-Fields extracted (from the infobox):
-  - attribute            (id="scraper-digimon-attribute")          e.g. "Vaccine"
-  - natural_attribute    (id="scraper-digimon-naturalattribute")   e.g. "Light"
-  - families             (<td> after the Families: label)          e.g. ["Virus Busters", ...]
+Sources tried, in order:
+  1. cache/dmowiki_<slug>.html   — fetched manually via fetch_dmowiki_digimon.py
+                                    (CDP/Playwright since dmowiki.com is behind CF)
+  2. https://digitalmastersworld.wiki.gg/wiki/<slug>  — plain requests, no CF
 
-Caches the raw HTML at cache/dmw_<slug>.html so reruns are cheap.
+Fields extracted:
+  - attribute            "Vaccine" / "Virus" / "Data" / "Free"
+  - natural_attribute    "Light" / "Fire" / "Wood" / ... (element)
+  - families             ["Virus Busters", "Wind Guardians", ...] (fields)
+
+dmw cache files live at cache/dmw_<slug>.html so reruns are cheap.
 
 The result is attached per-digimon as a parallel `attributes` dict on each
 post so existing readers that expect `digimon: list[str]` still work:
@@ -52,6 +56,20 @@ HEADERS = {
 }
 
 ABBR = {"Vaccine": "VA", "Virus": "VI", "Data": "DA", "Free": "FR"}
+
+BASIC_ATTRS = {"Vaccine", "Virus", "Data", "Free"}
+# Natural attributes (elements) seen on dmwiki. Categories named
+# "<Name> Attribute" that fall outside BASIC_ATTRS land here.
+NATURAL_ATTRS = {
+    "Fire", "Water", "Earth", "Wind", "Wood", "Light",
+    "Steel", "Thunder", "Pitch Black", "Neutral",
+}
+# Known digimon family / "Field" names (used to split categories).
+FAMILIES = {
+    "Virus Busters", "Wind Guardians", "Nightmare Soldiers", "Jungle Troopers",
+    "Nature Spirits", "Deep Savers", "Metal Empire", "Dragon's Roar",
+    "Unknown", "Dark Area",
+}
 
 # Manual name → DMW slug overrides for pages whose URL can't be derived from
 # the gameking name (different parenthesization, alt spelling, etc.). Append
@@ -126,6 +144,41 @@ def strip_tags(html: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", html)).strip()
 
 
+def parse_dmowiki(html: str) -> dict | None:
+    """Parse a dmowiki.com page (saved via Playwright/CDP). Both wikis are
+    MediaWiki, so we first try the same scraper-digimon-* infobox ids, and
+    fall back to MediaWiki categories (wgCategories JSON in RLCONF) which
+    dmowiki tags every digimon page with — e.g. "Vaccine Attribute",
+    "Light Attribute", "Virus Busters".
+    """
+    # 1) infobox path — works if dmowiki uses the same template structure
+    via_infobox = parse_attributes(html)
+    if via_infobox:
+        return via_infobox
+
+    # 2) wgCategories path
+    m = re.search(r'"wgCategories":\[([^\]]+)\]', html)
+    if not m:
+        return None
+    cats = [c.strip().strip('"') for c in m.group(1).split(",")]
+
+    result: dict = {}
+    for c in cats:
+        if c.endswith(" Attribute"):
+            name = c[: -len(" Attribute")].strip()
+            if name in BASIC_ATTRS:
+                result["attribute"] = name
+                if name in ABBR:
+                    result["attribute_abbr"] = ABBR[name]
+            elif name in NATURAL_ATTRS or name not in BASIC_ATTRS:
+                # Treat any "<X> Attribute" that isn't basic as natural.
+                result.setdefault("natural_attribute", name)
+        elif c in FAMILIES:
+            result.setdefault("families", []).append(c)
+
+    return result or None
+
+
 def parse_attributes(html: str) -> dict | None:
     """Pull Basic Attribute, Natural Attribute, and Families from the infobox.
 
@@ -170,8 +223,40 @@ def parse_attributes(html: str) -> dict | None:
     return result
 
 
+def try_dmowiki_cache(name: str) -> tuple[dict, str] | None:
+    """Look for a manually-fetched dmowiki page that matches this name. Uses
+    the same resolve_slug() the fetcher used (rank_u.html + OVERRIDES), so
+    matching is exact — no fuzzy `in` substring traps like Abbadomon vs
+    Abbadomon Core."""
+    try:
+        from fetch_dmowiki_digimon import (
+            build_rank_u_map,
+            resolve_slug,
+            safe_filename,
+        )
+    except Exception:
+        return None
+    if not hasattr(try_dmowiki_cache, "_rank_map"):
+        try_dmowiki_cache._rank_map = build_rank_u_map()  # type: ignore[attr-defined]
+    slug = resolve_slug(name, try_dmowiki_cache._rank_map)  # type: ignore[attr-defined]
+    if not slug:
+        return None
+    f = CACHE / f"dmowiki_{safe_filename(slug)}.html"
+    if not f.exists():
+        return None
+    attrs = parse_dmowiki(f.read_text(encoding="utf-8"))
+    if attrs:
+        return attrs, slug
+    return None
+
+
 def lookup(name: str) -> tuple[dict, str] | None:
-    """Try OVERRIDES first, then each candidate slug. Return (attrs, slug)."""
+    """First check a dmowiki CDP-fetched cache, then try DMW Wiki candidates."""
+    hit = try_dmowiki_cache(name)
+    if hit:
+        print(f"    ✓ dmowiki:{hit[1]} → {hit[0]}")
+        return hit
+
     slugs: list[str] = []
     if name in OVERRIDES:
         slugs.append(OVERRIDES[name])
@@ -180,14 +265,14 @@ def lookup(name: str) -> tuple[dict, str] | None:
     for slug in slugs:
         html = fetch_page(slug)
         if html is None:
-            print(f"    ✗ {slug} (no page)")
+            print(f"    ✗ dmw:{slug} (no page)")
             continue
         attrs = parse_attributes(html)
         if attrs:
-            print(f"    ✓ {slug} → {attrs}")
+            print(f"    ✓ dmw:{slug} → {attrs}")
             return attrs, slug
         unrel = "not released yet" in html
-        print(f"    ✗ {slug} ({'unreleased' if unrel else 'no infobox'})")
+        print(f"    ✗ dmw:{slug} ({'unreleased' if unrel else 'no infobox'})")
     return None
 
 

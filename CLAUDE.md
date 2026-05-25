@@ -42,6 +42,30 @@ python scan_kr_digimon_releases.py
 # 10. Match EN ↔ KR by content (EN→KR keyword dict + date tiebreaker)
 #     → adds `source_kr` to scan_result_digimon.json
 python enrich_digimon_kr.py
+
+# 10b. Extract KR-side digimon image from each KR post body → docs/img/digimon/<idx>_kr.<ext>
+#      Adds `image_kr` field. build_digimon_html.py renders EN + KR images side-by-side
+#      so a human can pick the better one later.
+python extract_kr_digimon_images.py
+
+# 11. Fetch Basic/Natural Attribute + Field from DMW Wiki (no CF, free HTTP)
+#     → caches cache/dmw_<slug>.html, adds `attributes` dict to JSON
+python enrich_digimon_attributes.py            # missing only
+python enrich_digimon_attributes.py --force    # re-fetch all
+
+# 12. Fill in attributes the DMW Wiki doesn't have yet by fetching dmowiki.com
+#     via CDP (Cloudflare). Requires Chrome launched with
+#       chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\chrome-cdp
+#     and a manually-solved CAPTCHA on any dmowiki page first.
+#     Saves cache/dmowiki_<slug>.html. Then re-run #11 to parse them.
+python fetch_dmowiki_digimon.py
+
+# 13. Pull Basic/Natural Attribute + Affiliated Field straight from the
+#     gameking EventView/PatchNote stat block (and KR `cache/kr_view_o<N>.html`
+#     fallback for posts without a gameking translation, e.g. e664). This is
+#     the in-game-canonical source — its values override the wiki enrichers
+#     (#11, #12) where present.
+python enrich_digimon_gameking.py
 ```
 
 There is no test suite, lint config, package manifest, or virtualenv setup. Only runtime dep is `requests`.

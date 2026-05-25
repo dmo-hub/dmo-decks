@@ -14,9 +14,9 @@
           "attribute_abbr": "VA",
           "natural_attribute": "Light",
           "families": [
+            "Metal Empire",
             "Virus Busters",
-            "Wind Guardians",
-            "Metal Empire"
+            "Wind Guardians"
           ]
         }
       }
@@ -28,7 +28,18 @@
         "Shoutmon X7 Superior Mode"
       ],
       "image": "img/digimon/e664.jpeg",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=784466&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=784466&Btype=Update",
+      "attributes": {
+        "Shoutmon X7 Superior Mode": {
+          "attribute": "Data",
+          "attribute_abbr": "DA",
+          "natural_attribute": "Steel",
+          "families": [
+            "Virus Busters"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e664_kr.jpeg"
     },
     "673": {
       "date": "06-11-2024",
@@ -37,7 +48,19 @@
         "Kuzuhamon MikoMode"
       ],
       "image": "img/digimon/e673.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787200&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787200&Btype=Update",
+      "attributes": {
+        "Kuzuhamon MikoMode": {
+          "attribute": "Data",
+          "attribute_abbr": "DA",
+          "natural_attribute": "Pitch Black",
+          "families": [
+            "Nightmare Soldiers",
+            "Unknown"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e673_kr.png"
     },
     "683": {
       "date": "08-20-2024",
@@ -53,12 +76,13 @@
           "attribute_abbr": "VI",
           "natural_attribute": "Light",
           "families": [
-            "Virus Busters",
             "Metal Empire",
+            "Virus Busters",
             "Wind Guardians"
           ]
         }
-      }
+      },
+      "image_kr": "img/digimon/e683_kr.png"
     },
     "692": {
       "date": "11-12-2024",
@@ -67,7 +91,15 @@
         "Eosmon"
       ],
       "image": "img/digimon/e692.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update",
+      "attributes": {
+        "Eosmon": {
+          "attribute": "Unknown",
+          "natural_attribute": "Thunder",
+          "attribute_abbr": "UN"
+        }
+      },
+      "image_kr": "img/digimon/e692_kr.png"
     },
     "705": {
       "date": "02-25-2025",
@@ -83,12 +115,11 @@
           "attribute_abbr": "VA",
           "natural_attribute": "Wood",
           "families": [
-            "Jungle Troopers",
-            "Nature Spirits",
             "Unknown"
           ]
         }
-      }
+      },
+      "image_kr": "img/digimon/e705_kr.png"
     },
     "708": {
       "date": "03-18-2025",
@@ -96,7 +127,19 @@
       "digimon": [
         "ZeedMillenniummon (Awaken)"
       ],
-      "image": "img/digimon/e708.png"
+      "image": "img/digimon/e708.png",
+      "attributes": {
+        "ZeedMillenniummon (Awaken)": {
+          "attribute": "Virus",
+          "attribute_abbr": "VI",
+          "natural_attribute": "Pitch Black",
+          "families": [
+            "Dark Area"
+          ]
+        }
+      },
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798287&Btype=Update",
+      "image_kr": "img/digimon/e708_kr.png"
     },
     "731": {
       "date": "05-13-2025",
@@ -111,11 +154,14 @@
           "attribute_abbr": "VA",
           "natural_attribute": "Light",
           "families": [
-            "Metal Empire",
-            "Virus Busters"
+            "Virus Busters",
+            "Deep Savers",
+            "Wind Guardians"
           ]
         }
-      }
+      },
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=801540&Btype=Update",
+      "image_kr": "img/digimon/e731_kr.png"
     },
     "743": {
       "date": "06-17-2025",
@@ -129,9 +175,13 @@
         "Alphamon Ouryuken [Extreme]": {
           "attribute": "Vaccine",
           "attribute_abbr": "VA",
-          "natural_attribute": "Light"
+          "natural_attribute": "Light",
+          "families": [
+            "Virus Busters"
+          ]
         }
-      }
+      },
+      "image_kr": "img/digimon/e743_kr.jpeg"
     },
     "759": {
       "date": "07-22-2025",
@@ -144,9 +194,16 @@
         "Lucemon: Satan Mode (Extreme)": {
           "attribute": "Virus",
           "attribute_abbr": "VI",
-          "natural_attribute": "Pitch Black"
+          "natural_attribute": "Pitch Black",
+          "families": [
+            "Dark Area",
+            "Nightmare Soldiers",
+            "Virus Busters"
+          ]
         }
-      }
+      },
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808086&Btype=Update",
+      "image_kr": "img/digimon/e759_kr.png"
     },
     "770": {
       "date": "08-19-2025",
@@ -155,7 +212,19 @@
         "Last Evolution: Kizuna"
       ],
       "image": "img/digimon/e770.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809411&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809411&Btype=Update",
+      "attributes": {
+        "Last Evolution: Kizuna": {
+          "attribute": "Unknown",
+          "natural_attribute": "Light",
+          "attribute_abbr": "UN",
+          "families": [
+            "Virus Busters",
+            "Unknown"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e770_kr.png"
     },
     "782": {
       "date": "09-23-2025",
@@ -165,7 +234,30 @@
         "Holydramon (Awaken)"
       ],
       "image": "img/digimon/e782.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update",
+      "attributes": {
+        "Goddramon": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Fire",
+          "families": [
+            "Dragon's Roar",
+            "Wind Guardians",
+            "Virus Busters"
+          ]
+        },
+        "Holydramon (Awaken)": {
+          "attribute": "Vaccine",
+          "attribute_abbr": "VA",
+          "natural_attribute": "Wind",
+          "families": [
+            "Dragon's Roar",
+            "Wind Guardians",
+            "Nature Spirits"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e782_kr.png"
     },
     "784": {
       "date": "10-01-2025",
@@ -181,11 +273,13 @@
           "attribute_abbr": "VA",
           "natural_attribute": "Thunder",
           "families": [
-            "Nightmare Soldiers",
-            "Virus Busters"
+            "Virus Busters",
+            "Deep Savers",
+            "Nature Spirits"
           ]
         }
-      }
+      },
+      "image_kr": "img/digimon/e784_kr.png"
     },
     "791": {
       "date": "11-11-2025",
@@ -199,11 +293,12 @@
           "attribute_abbr": "VI",
           "natural_attribute": "Pitch Black",
           "families": [
-            "Nightmare Soldiers",
-            "Dark Area"
+            "Dark Area",
+            "Nightmare Soldiers"
           ]
         }
-      }
+      },
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811713&Btype=Update"
     },
     "798": {
       "date": "12-10-2025",
@@ -212,7 +307,18 @@
         "DoneDevimon"
       ],
       "image": "img/digimon/e798.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812305&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812305&Btype=Update",
+      "attributes": {
+        "DoneDevimon": {
+          "attribute": "Virus",
+          "attribute_abbr": "VI",
+          "natural_attribute": "Pitch Black",
+          "families": [
+            "Nightmare Soldiers"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e798_kr.png"
     },
     "810": {
       "date": "01-14-2026",
@@ -220,7 +326,18 @@
       "digimon": [
         "Abbadomon"
       ],
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update",
+      "attributes": {
+        "Abbadomon": {
+          "attribute": "Unknown",
+          "natural_attribute": "Pitch Black",
+          "attribute_abbr": "UN",
+          "families": [
+            "Unknown"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/e810_kr.png"
     }
   },
   "patch": {
@@ -231,7 +348,18 @@
         "Abbadomon Core"
       ],
       "image": "img/digimon/p4110.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update",
+      "attributes": {
+        "Abbadomon Core": {
+          "attribute": "Unknown",
+          "natural_attribute": "Pitch Black",
+          "attribute_abbr": "UN",
+          "families": [
+            "Unknown"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/p4110_kr.png"
     },
     "4121": {
       "date": "03-17-2026",
@@ -246,12 +374,13 @@
           "attribute_abbr": "VA",
           "natural_attribute": "Light",
           "families": [
-            "Wind Guardians",
+            "Metal Empire",
             "Virus Busters",
-            "Metal Empire"
+            "Nature Spirits"
           ]
         }
-      }
+      },
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update"
     },
     "4148": {
       "date": "05-20-2026",
@@ -260,7 +389,19 @@
         "QUANTUMON"
       ],
       "image": "img/digimon/p4148.png",
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816756&Btype=Update"
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816756&Btype=Update",
+      "attributes": {
+        "QUANTUMON": {
+          "attribute": "Data",
+          "attribute_abbr": "DA",
+          "natural_attribute": "Water",
+          "families": [
+            "Deep Savers",
+            "Unknown"
+          ]
+        }
+      },
+      "image_kr": "img/digimon/p4148_kr.png"
     }
   }
 }
