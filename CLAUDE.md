@@ -48,6 +48,13 @@ python enrich_digimon_kr.py
 #      so a human can pick the better one later.
 python extract_kr_digimon_images.py
 
+# 10c. Thai-server (vplay.in.th) pipeline. Thai lags NA/KR by 10–12 months, so
+#      most recent NA posts have no TH equivalent yet — that's expected.
+python fetch_th_patch_index.py        # paginate /category/news/patch-note/ → th_patch_index.json
+python scan_th_patch_digimon.py       # extract `ดิจิมอนใหม่ : <name>` markers + banner URLs
+python enrich_digimon_th.py           # match TH ↔ EN by transliteration → adds source_th + date_th
+python extract_th_digimon_images.py   # download TH banner → image_th (becomes primary image)
+
 # 11. Fetch dmowiki.com digimon pages via CDP (Cloudflare-blocked, needs a
 #     Chrome session past CAPTCHA). Launch Chrome first:
 #       chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\chrome-cdp

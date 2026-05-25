@@ -6,6 +6,7 @@ Re-run after scan_digimon.py to refresh the published Digimon report.
 import json
 import re
 import sys
+import urllib.parse
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -32,15 +33,32 @@ def fmt_iso_date(iso: str | None) -> str:
     return f"{d}.{m}.{y}"
 
 
+def _link_text(url: str, kind: str) -> str:
+    """Short, readable text for a source link.
+    TH URLs have long URL-encoded Thai slugs — collapse to just the trailing
+    `patch-N` if present, else decode the slug to Thai text."""
+    slug = url.rstrip("/").rsplit("/", 1)[-1]
+    if kind == "th":
+        # If slug ends with `-NUMBER`, show just that (e.g., "patch-87")
+        m = re.search(r"(patch|รายละเอียดการอัพเดท)?-?(\d+)$", urllib.parse.unquote(slug))
+        if m and m.group(2):
+            return f"patch -{m.group(2)}"
+        # Fall back to decoded Thai slug
+        return urllib.parse.unquote(slug)
+    return slug
+
+
 def canonical_src_key(url: str) -> tuple[str, str]:
     """Canonical (kind, id) per source URL, so two URLs pointing to the same
-    KR post (different query-string order) dedupe correctly."""
+    post (different query-string order) dedupe correctly."""
     if "digimonmasters.com" in url:
         m = re.search(r"[?&]o=(\d+)", url)
         return ("kr", m.group(1) if m else url)
     if "gameking.com" in url:
         m = re.search(r"[?&]idx=(\d+)", url)
         return ("na", m.group(1) if m else url)
+    if "vplay.in.th" in url:
+        return ("th", url.rstrip("/").rsplit("/", 1)[-1])
     return ("other", url)
 
 
@@ -87,6 +105,7 @@ CSS = """
   .src .src-label { color: #95a5a6; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
   .src .src-date { color: #95a5a6; font-size: 11px; margin: 0 4px; }
   .src .src-kr a { color: #c0392b; }
+  .src .src-th a { color: #1f8c4d; }
 
   /* Digimon list — orange-border cards matching deck style */
   .digimon-list { list-style: none; padding: 0; margin: 8px 0 0 0; display: grid; gap: 10px; }
@@ -255,7 +274,8 @@ def render() -> str:
             f"<li>{render_digimon(name, attrs_map.get(name), show_name=(n > 1))}</li>"
             for name in names
         )
-        img_path = p.get("image") or p.get("image_kr")
+        # Image priority: TH > NA > KR (user prefers Thai-server banner when available).
+        img_path = p.get("image_th") or p.get("image") or p.get("image_kr")
         img_block = (
             f'<a href="{img_path}" target="_blank">'
             f'<img class="post-image" src="{img_path}" alt="idx {idx}" loading="lazy">'
@@ -264,21 +284,26 @@ def render() -> str:
         )
         def src_span(url: str) -> str:
             kind, oid = canonical_src_key(url)
-            is_kr = kind == "kr"
-            cls = "src-kr" if is_kr else "src-en"
-            label = "KR" if is_kr else "NA"
-            date_str = fmt_iso_date(kr_dates.get(oid)) if is_kr else fmt_date(p["date"])
+            cls = {"kr": "src-kr", "th": "src-th", "na": "src-en"}.get(kind, "src-en")
+            label = {"kr": "KR", "th": "TH", "na": "NA"}.get(kind, "?")
+            if kind == "kr":
+                date_str = fmt_iso_date(kr_dates.get(oid))
+            elif kind == "th":
+                date_str = fmt_iso_date(p.get("date_th"))
+            else:
+                date_str = fmt_date(p["date"])
             return (
                 f'<span class="{cls}"><span class="src-label">{label}</span>'
                 f'<span class="src-date">{date_str}</span>'
-                f'<a href="{url}" target="_blank">{url.split("/")[-1]} ↗</a></span>'
+                f'<a href="{url}" target="_blank">{_link_text(url, kind)} ↗</a></span>'
             )
 
-        # Dedupe by canonical key — two URLs pointing to the same KR post but
+        # Dedupe by canonical key — two URLs pointing to the same post but
         # with different query-string ordering should collapse to one entry.
+        # Order: NA, KR, TH (renders left-to-right in that order).
         seen: set[tuple[str, str]] = set()
         src_parts: list[str] = []
-        for u in (p["source"], p.get("source_kr")):
+        for u in (p["source"], p.get("source_kr"), p.get("source_th")):
             if not u:
                 continue
             key = canonical_src_key(u)
