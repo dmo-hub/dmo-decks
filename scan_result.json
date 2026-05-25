@@ -1,0 +1,302 @@
+{
+  "scan_date": "2026-05-21 03:50:10 (re-parsed from cache)",
+  "scanned": {
+    "event": 0,
+    "patch": 0
+  },
+  "matched_posts": 21,
+  "new_deck_count": 35,
+  "existing_deck_count": 1,
+  "matches": [
+    {
+      "kind": "event",
+      "idx": 622,
+      "date": "05-02-2023",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=622",
+      "new_decks": [
+        "D5 and Ultimate DigiXros"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 635,
+      "date": "07-25-2023",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=635",
+      "new_decks": [
+        "Knights of Vaccine"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 663,
+      "date": "03-05-2024",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=663",
+      "new_decks": [
+        "White Wings: Gurei Tou of Courage",
+        "White Wings: Garuru Hou of Friendship"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 673,
+      "date": "06-11-2024",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=673",
+      "new_decks": [
+        "God’s Will",
+        "Leader of the Awakened Four Holy Beasts"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 683,
+      "date": "08-20-2024",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=683",
+      "new_decks": [
+        "Divine Spear and Sacred Sword of Light",
+        "Guardians of the Digital World"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 692,
+      "date": "11-12-2024",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=692",
+      "new_decks": [
+        "The Goddess of the False Neverland"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 708,
+      "date": "03-18-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=708",
+      "new_decks": [
+        "The End, The Ultimate Holy War!"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 731,
+      "date": "05-13-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=731",
+      "new_decks": [
+        "White Wings: Sorrow and Determination"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 734,
+      "date": "05-27-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=734",
+      "new_decks": [
+        "Justice Veiled in Darkness",
+        "Savior Who Protects Peace",
+        "Corrupted Purification Ritual"
+      ],
+      "existing_decks": [
+        "Digital World The Guardian"
+      ],
+      "has_new_marker": true,
+      "has_existing_marker": true
+    },
+    {
+      "kind": "event",
+      "idx": 743,
+      "date": "06-17-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=743",
+      "new_decks": [
+        "Reunion"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 759,
+      "date": "07-22-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=759",
+      "new_decks": [
+        "Invasion of the Real World"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 770,
+      "date": "08-19-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=770",
+      "new_decks": [
+        "Last Evolution: Kizuna"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 782,
+      "date": "09-23-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=782",
+      "new_decks": [
+        "Our hope, our light"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 784,
+      "date": "10-01-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=784",
+      "new_decks": [
+        "Transcending Time, The Beginning of a Legend!",
+        "Guardians of the Digital World",
+        "Saviors Who Protect Peace"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 791,
+      "date": "11-11-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=791",
+      "new_decks": [
+        "Wings of Temptation and Wings of Justice"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 798,
+      "date": "12-10-2025",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=798",
+      "new_decks": [
+        "Demon of the Final Phase",
+        "Abnormal Status Occurred: Virus",
+        "Fight against the Virus!"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "event",
+      "idx": 810,
+      "date": "01-14-2026",
+      "subject": "",
+      "url": "https://dmo.gameking.com/news/EventView.aspx?idx=810",
+      "new_decks": [
+        "Fear of the Abyss"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "patch",
+      "idx": 4110,
+      "date": "02-25-2026",
+      "subject": "",
+      "url": "https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4110",
+      "new_decks": [
+        "Abyssal Fear",
+        "Perfect data, and data of unknown origin"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "patch",
+      "idx": 4114,
+      "date": "03-04-2026",
+      "subject": "",
+      "url": "https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4114",
+      "new_decks": [
+        "The True Form of the Destroyer"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": true
+    },
+    {
+      "kind": "patch",
+      "idx": 4121,
+      "date": "03-17-2026",
+      "subject": "",
+      "url": "https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4121",
+      "new_decks": [
+        "Wings of Justice",
+        "Tempting Wings of Justice",
+        "The Nullifiers"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    },
+    {
+      "kind": "patch",
+      "idx": 4148,
+      "date": "05-20-2026",
+      "subject": "",
+      "url": "https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4148",
+      "new_decks": [
+        "One who resides in Lark",
+        "A being that sends Digimon to the human world",
+        "Neutral type Digimon"
+      ],
+      "existing_decks": [],
+      "has_new_marker": true,
+      "has_existing_marker": false
+    }
+  ],
+  "errors": []
+}

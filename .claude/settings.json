@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk '$2 > 50000' sizes.txt)",
+      "Bash(sort -k2 -n -r)",
+      "Bash(awk '$2 == 30515' sizes.txt)",
+      "Bash(echo \"Empty \\(30515\\): $\\(awk '$2 == 30515' sizes.txt)",
+      "Bash(xargs -P 20 -I '{}' sh -c ' *)",
+      "Bash(sort -k1 -n)",
+      "Bash(awk '$2 > 30515 && $2 <= 50000' sizes.txt)",
+      "Bash(cat /mnt/c/Users/kongp/AppData/Local/Temp/claude/c--Users-kongp-OneDrive--------dmoDeck/74b6bae3-8643-4de0-8b09-59faaa3139f7/tasks/bbuq6t6fo.output 2>/dev/null || cat \"C:\\\\Users\\\\kongp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-kongp-OneDrive--------dmoDeck\\\\74b6bae3-8643-4de0-8b09-59faaa3139f7\\\\tasks\\\\bbuq6t6fo.output\")",
+      "Read(//mnt/c/Users/kongp/AppData/Local/Temp/claude/c--Users-kongp-OneDrive--------dmoDeck/74b6bae3-8643-4de0-8b09-59faaa3139f7/tasks/**)",
+      "Bash(python3 -)",
+      "Bash(awk '$2 < 35000' sizes.txt)",
+      "WebFetch(domain:dmowiki.com)",
+      "Bash(curl -s -L --max-time 20 -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120 Safari/537.36\" \"https://dmowiki.com/Category:Digimon_Rank_U\" -o /tmp/dmowiki_u.html)",
+      "Bash(curl -s -L --max-time 10 \"https://dmo.gameking.com/News/EventView.aspx?idx=683\" -o e683.html)",
+      "Bash(mkdir -p img683)",
+      "Bash(curl -s -o img683/divine_digimon.png \"https://clan.akamai.steamstatic.com/images//26628811/a53de059b76ca3b7afc66b91cf8a96196762e02c.png\")",
+      "Bash(curl -s -o img683/divine_effect.png \"https://clan.akamai.steamstatic.com/images//26628811/70768ba7dd6c7dd2cdf1986ff2336cfe0139a875.png\")",
+      "Bash(curl -s -o img683/guardians_digimon.png \"https://clan.akamai.steamstatic.com/images//26628811/0a8b9b0a847b162f1e89dac54fca316dc4cd1cae.png\")",
+      "Bash(curl -s -o img683/guardians_effect.png \"https://clan.akamai.steamstatic.com/images//26628811/89944d6d741123f2fd782294a5fff8fb7781ac29.png\")",
+      "Read(//c/Users/kongp/AppData/Local/Temp/dmo_events/img683/**)",
+      "Bash(mkdir -p img_new)",
+      "Bash(curl -s -o \"img_new/622_d5_digimon.png\" \"https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans//26628811/9e7c7b49e07528ab0076470828bcdf6c7ec1a636.png\")",
+      "Bash(curl -s -o \"img_new/622_d5_effect.png\" \"https://cdn.akamai.steamstatic.com/steamcommunity/public/images/clans//26628811/1134d7e82837777c85ecedeb90fc0d2c92cd8b80.png\")",
+      "Bash(curl -s -o \"img_new/635_kv_digimon.jpg\" \"https://clan.akamai.steamstatic.com/images//26628811/9aec122b2ce8ba40e93bbf00180e23b65d3e4c2a.jpg\")",
+      "Bash(curl -s -o \"img_new/635_kv_effect.jpg\" \"https://clan.akamai.steamstatic.com/images//26628811/337845fe43684ec4459dde4e37a984f992ec9859.jpg\")",
+      "Bash(curl -s -L -o \"622_d5_digimon.png\" \"https://clan.akamai.steamstatic.com/images//26628811/9e7c7b49e07528ab0076470828bcdf6c7ec1a636.png\")",
+      "Bash(curl -s -L -o \"622_d5_effect.png\" \"https://clan.akamai.steamstatic.com/images//26628811/1134d7e82837777c85ecedeb90fc0d2c92cd8b80.png\")",
+      "Read(//c/Users/kongp/AppData/Local/Temp/dmo_events/img_new/**)",
+      "Bash(python -u scan_decks.py)",
+      "Bash(tee scan_log.txt)"
+    ]
+  }
+}
