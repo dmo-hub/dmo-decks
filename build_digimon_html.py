@@ -95,33 +95,60 @@ CSS = """
 """
 
 
-def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str:
-    """Render a digimon's chip row (attribute/element/families).
+ATTR_ABBR_MAP = {"Vaccine": "VA", "Virus": "VI", "Data": "DA",
+                 "Free": "FR", "Unknown": "UN"}
 
-    If `show_name` is True the name is prepended — used for multi-digimon
-    posts where the list still needs to disambiguate which chip set belongs
-    to which digimon. Single-digimon posts pass `show_name=False` because
-    the name already appears in the section <h2>.
+ELEM_ICON = {
+    "Light": "Light", "Fire": "Fire", "Water": "Water", "Wind": "Wind",
+    "Wood": "Wood", "Earth": "Earth", "Steel": "Steel", "Thunder": "Thunder",
+    "Ice": "Ice", "Neutral": "Neutral", "Pitch Black": "Pitch_Black",
+}
+FAMILY_ICON = {
+    "Virus Busters": "Virus_Busters",
+    "Wind Guardians": "Wind_Guardians",
+    "Nightmare Soldiers": "Nightmare_Soldiers",
+    "Jungle Troopers": "Jungle_Troopers",
+    "Nature Spirits": "Nature_Spirits",
+    "Deep Savers": "Deep_Savers",
+    "Metal Empire": "Metal_Empire",
+    "Dragon's Roar": "Dragons_Roar",
+    "Unknown": "Unknown",
+    "Dark Area": "Dark_Area",
+    "TBD": "TBD",
+}
+
+
+def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str:
+    """Render a digimon's chip row (attribute / element / families) as
+    icon + name chips. Icons live in docs/img/icons/<category>-<slug>.png.
+
+    `show_name` is False for single-digimon posts — the name is already in
+    the section <h2>, so the chip row stands alone.
     """
     chips: list[str] = []
     if attrs:
         if attrs.get("attribute"):
-            abbr_map = {"Vaccine": "VA", "Virus": "VI", "Data": "DA",
-                        "Free": "FR", "Unknown": "UN"}
-            abbr = attrs.get("attribute_abbr") or abbr_map.get(attrs["attribute"], "UN")
+            value = attrs["attribute"]
+            abbr = attrs.get("attribute_abbr") or ATTR_ABBR_MAP.get(value, "UN")
             chips.append(
-                f'<span class="chip chip-attr-{abbr}" title="Basic Attribute">'
-                f'<span class="chip-label">Attr</span>{attrs["attribute"]}</span>'
+                f'<span class="chip chip-attr-{abbr}" title="Basic Attribute: {value}">'
+                f'<img class="chip-icon" src="img/icons/attr-{value}.png" alt="">'
+                f'{value}</span>'
             )
         if attrs.get("natural_attribute"):
+            value = attrs["natural_attribute"]
+            slug = ELEM_ICON.get(value, value.replace(" ", "_"))
             chips.append(
-                f'<span class="chip chip-elem" title="Natural Attribute">'
-                f'<span class="chip-label">Element</span>{attrs["natural_attribute"]}</span>'
+                f'<span class="chip chip-elem" title="Natural Attribute: {value}">'
+                f'<img class="chip-icon" src="img/icons/elem-{slug}.png" alt="">'
+                f'{value}</span>'
             )
         for fam in attrs.get("families", []):
+            slug = FAMILY_ICON.get(fam, fam.replace(" ", "_"))
             chips.append(
-                f'<span class="chip chip-field" title="Field">'
-                f'<span class="chip-label">Field</span>{fam}</span>'
+                f'<span class="chip chip-families" title="Families: {fam}">'
+                f'<img class="chip-icon" src="img/icons/field-{slug}.png" alt="">'
+                f'{fam}</span>'
             )
     chip_row = f'<div class="chips">{"".join(chips)}</div>' if chips else ""
     name_html = f'<span class="digimon-name">{name}</span>' if show_name else ""
