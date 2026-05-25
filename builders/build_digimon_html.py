@@ -11,9 +11,9 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PROJ = Path(__file__).resolve().parent
-SRC = PROJ / "scan_result_digimon.json"
-KR_INDEX = PROJ / "kr_news_index.json"
+PROJ = Path(__file__).resolve().parent.parent
+SRC = PROJ / "data" / "scan_result_digimon.json"
+KR_INDEX = PROJ / "data" / "kr_news_index.json"
 OUT = PROJ / "docs" / "digimon.html"
 
 
@@ -88,15 +88,10 @@ CSS = """
   .hero-stat .num { font-size: 30px; font-weight: 700; line-height: 1; }
   .hero-stat .lbl { font-size: 10.5px; opacity: 0.88; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
-  /* Section headers */
-  .section-title { font-size: 22px; color: #fff; background: linear-gradient(135deg, #1a4d8f, #2c6fb8); padding: 12px 18px; border-radius: 8px; margin: 32px 0 16px 0; box-shadow: 0 2px 6px rgba(26,77,143,0.2); }
-  .section-title.patch { background: linear-gradient(135deg, #9b3f1a, #c0573a); box-shadow: 0 2px 6px rgba(155,63,26,0.2); }
-
   /* Post card */
   .post { background: white; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .post-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
   .post-header .idx-badge { background: #1a4d8f; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-  .post-header.patch .idx-badge { background: #9b3f1a; }
   .post-header h2 { color: #2c3e50; font-size: 19px; margin: 0; }
   .post-header .date { color: #95a5a6; font-size: 13px; }
   .src { font-size: 12px; margin: 0 0 16px 0; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
@@ -111,7 +106,6 @@ CSS = """
   .digimon-list { list-style: none; padding: 0; margin: 8px 0 0 0; display: grid; gap: 10px; }
   .digimon-list li { padding: 12px 18px; background: #fafbfc; border-radius: 8px; box-shadow: 0 0 0 2px #f39c12;
                      font-size: 16px; font-weight: 700; color: #1a4d8f; }
-  .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
   /* Attribute chips — one row per category (Attribute / Element / Families)
@@ -258,23 +252,33 @@ def render() -> str:
     total_posts = len(events) + len(patches)
     total_digimon = sum(len(p["digimon"]) for p in list(events.values()) + list(patches.values()))
 
-    # Sort by idx ascending
-    sorted_events = sorted(events.items(), key=lambda kv: int(kv[0]))
-    sorted_patches = sorted(patches.items(), key=lambda kv: int(kv[0]))
+    def _sort_key(item: tuple[str, str, dict]) -> tuple[str, int]:
+        """Sort posts chronologically by gameking date (MM-DD-YYYY → YYYYMMDD).
+        Tie-break by idx so order is stable within a single day."""
+        _kind, idx, p = item
+        d = p.get("date") or "00-00-0000"
+        mm, dd, yyyy = d.split("-")
+        return (f"{yyyy}{mm}{dd}", int(idx))
 
-    # TOC links
-    toc_event_links = "\n  ".join(
-        f'<a href="#e{idx}">idx {idx} — {", ".join(p["digimon"])[:50]}{"..." if len(", ".join(p["digimon"])) > 50 else ""}</a>'
-        for idx, p in sorted_events
+    # Merge events + patches into a single chronological list.
+    # Anchor prefix `e`/`p` is kept so old deep-links keep working and the
+    # filter JS can still distinguish them via data-* if ever needed.
+    merged = sorted(
+        [("event", idx, p) for idx, p in events.items()]
+        + [("patch", idx, p) for idx, p in patches.items()],
+        key=_sort_key,
     )
-    toc_patch_links = "\n  ".join(
-        f'<a href="#p{idx}">idx {idx} — {", ".join(p["digimon"])[:50]}{"..." if len(", ".join(p["digimon"])) > 50 else ""}</a>'
-        for idx, p in sorted_patches
+
+    # TOC: single chronological list — no more EventView/PatchNote split.
+    toc_links = "\n  ".join(
+        f'<a href="#{("e" if kind == "event" else "p")}{idx}">idx {idx} — '
+        f'{", ".join(p["digimon"])[:50]}'
+        f'{"..." if len(", ".join(p["digimon"])) > 50 else ""}</a>'
+        for kind, idx, p in merged
     )
 
     def render_post(idx: str, p: dict, kind: str) -> str:
         prefix = "e" if kind == "event" else "p"
-        patch_cls = " patch" if kind == "patch" else ""
         names = p["digimon"]
         n = len(names)
         attrs_map = p.get("attributes", {})
@@ -335,8 +339,8 @@ def render() -> str:
             f'data-elem="{",".join(all_elems)}" '
             f'data-family="{",".join(all_fams)}"'
         )
-        return f"""  <section class="post{patch_cls}" id="{prefix}{idx}" {data_attrs}>
-    <div class="post-header{patch_cls}">
+        return f"""  <section class="post" id="{prefix}{idx}" {data_attrs}>
+    <div class="post-header">
       <span class="idx-badge">idx {idx}</span>
       <h2>{h2_text}</h2>
     </div>
@@ -347,8 +351,7 @@ def render() -> str:
   </section>
 """
 
-    event_sections = "\n".join(render_post(idx, p, "event") for idx, p in sorted_events)
-    patch_sections = "\n".join(render_post(idx, p, "patch") for idx, p in sorted_patches)
+    all_sections = "\n".join(render_post(idx, p, kind) for kind, idx, p in merged)
 
     # Collect unique attribute/element/family values seen across all posts
     # for the filter bar. Order: deterministic for chip groups.
@@ -427,18 +430,6 @@ def render() -> str:
       s.style.display = show ? '' : 'none';
       if (show) visible++;
     });
-    // Hide section-title groups whose content is fully hidden
-    document.querySelectorAll('.section-title').forEach(h => {
-      let next = h.nextElementSibling;
-      let anyVisible = false;
-      while (next && !next.matches('.section-title')) {
-        if (next.matches('section.post') && next.style.display !== 'none') {
-          anyVisible = true; break;
-        }
-        next = next.nextElementSibling;
-      }
-      h.style.display = anyVisible ? '' : 'none';
-    });
     const active = [
       state.attr, state.elem, ...state.family
     ].filter(Boolean);
@@ -498,13 +489,8 @@ def render() -> str:
 
 <aside class="toc">
   <a href="./" class="nav-home">← Home</a>
-  <h3>สารบัญ</h3>
-
-  <h4>EventView ({len(events)} โพสต์)</h4>
-  {toc_event_links}
-
-  <h4>PatchNote ({len(patches)} โพสต์)</h4>
-  {toc_patch_links}
+  <h3>สารบัญ ({total_posts} โพสต์)</h3>
+  {toc_links}
 </aside>
 
 <main>
@@ -518,10 +504,7 @@ def render() -> str:
 
 {filter_bar}
 
-  <h3 class="section-title">📅 EventView Posts</h3>
-{event_sections}
-  <h3 class="section-title patch">🔧 PatchNote Posts</h3>
-{patch_sections}
+{all_sections}
   <footer style="margin-top:40px;padding:20px 0 8px;text-align:center;color:#7f8c8d;font-size:12px;border-top:1px solid #e7eef6;">
     Generated with <a href="https://claude.ai/" target="_blank" style="color:#1a4d8f;text-decoration:none;font-weight:600;">Claude AI</a>
   </footer>

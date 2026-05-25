@@ -29,15 +29,10 @@
   .hero-stat .num { font-size: 30px; font-weight: 700; line-height: 1; }
   .hero-stat .lbl { font-size: 10.5px; opacity: 0.88; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
-  /* Section headers */
-  .section-title { font-size: 22px; color: #fff; background: linear-gradient(135deg, #1a4d8f, #2c6fb8); padding: 12px 18px; border-radius: 8px; margin: 32px 0 16px 0; box-shadow: 0 2px 6px rgba(26,77,143,0.2); }
-  .section-title.patch { background: linear-gradient(135deg, #9b3f1a, #c0573a); box-shadow: 0 2px 6px rgba(155,63,26,0.2); }
-
   /* Post card */
   .post { background: white; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .post-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
   .post-header .idx-badge { background: #1a4d8f; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-  .post-header.patch .idx-badge { background: #9b3f1a; }
   .post-header h2 { color: #2c3e50; font-size: 19px; margin: 0; }
   .post-header .date { color: #95a5a6; font-size: 13px; }
   .src { font-size: 12px; margin: 0 0 16px 0; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
@@ -52,7 +47,6 @@
   .digimon-list { list-style: none; padding: 0; margin: 8px 0 0 0; display: grid; gap: 10px; }
   .digimon-list li { padding: 12px 18px; background: #fafbfc; border-radius: 8px; box-shadow: 0 0 0 2px #f39c12;
                      font-size: 16px; font-weight: 700; color: #1a4d8f; }
-  .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
   /* Attribute chips — one row per category (Attribute / Element / Families)
@@ -107,9 +101,7 @@
 
 <aside class="toc">
   <a href="./" class="nav-home">← Home</a>
-  <h3>สารบัญ</h3>
-
-  <h4>EventView (16 โพสต์)</h4>
+  <h3>สารบัญ (19 โพสต์)</h3>
   <a href="#e663">idx 663 — Omegamon – Merciful Mode</a>
   <a href="#e664">idx 664 — Shoutmon X7 Superior Mode</a>
   <a href="#e673">idx 673 — Kuzuhamon MikoMode</a>
@@ -126,8 +118,6 @@
   <a href="#e791">idx 791 — Lilithmon X (Awaken)</a>
   <a href="#e798">idx 798 — DoneDevimon</a>
   <a href="#e810">idx 810 — Abbadomon</a>
-
-  <h4>PatchNote (3 โพสต์)</h4>
   <a href="#p4110">idx 4110 — Abbadomon Core</a>
   <a href="#p4121">idx 4121 — Omegamon X Extreme</a>
   <a href="#p4148">idx 4148 — QUANTUMON</a>
@@ -151,7 +141,6 @@
     <div class="filter-group"><button class="filter-pill chip-families" data-filter="family" data-value="Dark Area"><img src="img/icons/field-Dark_Area.png" alt="">Dark Area</button><button class="filter-pill chip-families" data-filter="family" data-value="Deep Savers"><img src="img/icons/field-Deep_Savers.png" alt="">Deep Savers</button><button class="filter-pill chip-families" data-filter="family" data-value="Dragon's Roar"><img src="img/icons/field-Dragons_Roar.png" alt="">Dragon's Roar</button><button class="filter-pill chip-families" data-filter="family" data-value="Metal Empire"><img src="img/icons/field-Metal_Empire.png" alt="">Metal Empire</button><button class="filter-pill chip-families" data-filter="family" data-value="Nature Spirits"><img src="img/icons/field-Nature_Spirits.png" alt="">Nature Spirits</button><button class="filter-pill chip-families" data-filter="family" data-value="Nightmare Soldiers"><img src="img/icons/field-Nightmare_Soldiers.png" alt="">Nightmare Soldiers</button><button class="filter-pill chip-families" data-filter="family" data-value="TBD"><img src="img/icons/field-TBD.png" alt="">TBD</button><button class="filter-pill chip-families" data-filter="family" data-value="Unknown"><img src="img/icons/field-Unknown.png" alt="">Unknown</button><button class="filter-pill chip-families" data-filter="family" data-value="Virus Busters"><img src="img/icons/field-Virus_Busters.png" alt="">Virus Busters</button><button class="filter-pill chip-families" data-filter="family" data-value="Wind Guardians"><img src="img/icons/field-Wind_Guardians.png" alt="">Wind Guardians</button><button class="filter-reset" id="filter-reset">reset</button><span class="filter-count" id="filter-count"></span></div>
   </div>
 
-  <h3 class="section-title">📅 EventView Posts</h3>
   <section class="post" id="e663" data-attr="Vaccine" data-elem="Light" data-family="Metal Empire,Virus Busters,Wind Guardians">
     <div class="post-header">
       <span class="idx-badge">idx 663</span>
@@ -345,9 +334,8 @@
     </ul>
   </section>
 
-  <h3 class="section-title patch">🔧 PatchNote Posts</h3>
-  <section class="post patch" id="p4110" data-attr="Unknown" data-elem="Pitch Black" data-family="TBD,Unknown">
-    <div class="post-header patch">
+  <section class="post" id="p4110" data-attr="Unknown" data-elem="Pitch Black" data-family="TBD,Unknown">
+    <div class="post-header">
       <span class="idx-badge">idx 4110</span>
       <h2>Abbadomon Core</h2>
     </div>
@@ -358,8 +346,8 @@
     </ul>
   </section>
 
-  <section class="post patch" id="p4121" data-attr="Vaccine" data-elem="Light" data-family="Metal Empire,Nature Spirits,Virus Busters">
-    <div class="post-header patch">
+  <section class="post" id="p4121" data-attr="Vaccine" data-elem="Light" data-family="Metal Empire,Nature Spirits,Virus Busters">
+    <div class="post-header">
       <span class="idx-badge">idx 4121</span>
       <h2>Omegamon X Extreme</h2>
     </div>
@@ -370,8 +358,8 @@
     </ul>
   </section>
 
-  <section class="post patch" id="p4148" data-attr="Data" data-elem="Water" data-family="Deep Savers,TBD,Unknown">
-    <div class="post-header patch">
+  <section class="post" id="p4148" data-attr="Data" data-elem="Water" data-family="Deep Savers,TBD,Unknown">
+    <div class="post-header">
       <span class="idx-badge">idx 4148</span>
       <h2>QUANTUMON</h2>
     </div>
@@ -412,18 +400,6 @@
       }
       s.style.display = show ? '' : 'none';
       if (show) visible++;
-    });
-    // Hide section-title groups whose content is fully hidden
-    document.querySelectorAll('.section-title').forEach(h => {
-      let next = h.nextElementSibling;
-      let anyVisible = false;
-      while (next && !next.matches('.section-title')) {
-        if (next.matches('section.post') && next.style.display !== 'none') {
-          anyVisible = true; break;
-        }
-        next = next.nextElementSibling;
-      }
-      h.style.display = anyVisible ? '' : 'none';
     });
     const active = [
       state.attr, state.elem, ...state.family
