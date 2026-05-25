@@ -4,6 +4,7 @@ Re-run after scan_digimon.py to refresh the published Digimon report.
 """
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -11,6 +12,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 PROJ = Path(__file__).resolve().parent
 SRC = PROJ / "scan_result_digimon.json"
+KR_INDEX = PROJ / "kr_news_index.json"
 OUT = PROJ / "docs" / "digimon.html"
 
 
@@ -20,6 +22,26 @@ def fmt_date(mmddyyyy: str | None) -> str:
         return ""
     mm, dd, yyyy = mmddyyyy.split("-")
     return f"{dd}.{mm}.{yyyy}"
+
+
+def fmt_iso_date(iso: str | None) -> str:
+    """YYYY-MM-DD → DD.MM.YYYY."""
+    if not iso:
+        return ""
+    y, m, d = iso.split("-")
+    return f"{d}.{m}.{y}"
+
+
+def canonical_src_key(url: str) -> tuple[str, str]:
+    """Canonical (kind, id) per source URL, so two URLs pointing to the same
+    KR post (different query-string order) dedupe correctly."""
+    if "digimonmasters.com" in url:
+        m = re.search(r"[?&]o=(\d+)", url)
+        return ("kr", m.group(1) if m else url)
+    if "gameking.com" in url:
+        m = re.search(r"[?&]idx=(\d+)", url)
+        return ("na", m.group(1) if m else url)
+    return ("other", url)
 
 
 CSS = """
@@ -63,6 +85,7 @@ CSS = """
   .src a { color: #2c6fb8; text-decoration: none; }
   .src a:hover { text-decoration: underline; }
   .src .src-label { color: #95a5a6; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .src .src-date { color: #95a5a6; font-size: 11px; margin: 0 4px; }
   .src .src-kr a { color: #c0392b; }
 
   /* Digimon list — orange-border cards matching deck style */
@@ -160,6 +183,13 @@ def render() -> str:
     events = data.get("event", {})
     patches = data.get("patch", {})
 
+    # Per-source dates: KR posts carry their own release date (different from
+    # gameking's translation date). Look up by `o` id from kr_news_index.json.
+    kr_dates: dict[str, str] = {}
+    if KR_INDEX.exists():
+        for p in json.loads(KR_INDEX.read_text(encoding="utf-8"))["posts"]:
+            kr_dates[p["o"]] = p["date"]
+
     total_posts = len(events) + len(patches)
     total_digimon = sum(len(p["digimon"]) for p in list(events.values()) + list(patches.values()))
 
@@ -199,23 +229,34 @@ def render() -> str:
             if img_path else ""
         )
         def src_span(url: str) -> str:
-            is_kr = "digimonmasters.com" in url
+            kind, oid = canonical_src_key(url)
+            is_kr = kind == "kr"
             cls = "src-kr" if is_kr else "src-en"
             label = "KR" if is_kr else "NA"
+            date_str = fmt_iso_date(kr_dates.get(oid)) if is_kr else fmt_date(p["date"])
             return (
-                f'<span class="{cls}"><span class="src-label">{label}</span> '
+                f'<span class="{cls}"><span class="src-label">{label}</span>'
+                f'<span class="src-date">{date_str}</span>'
                 f'<a href="{url}" target="_blank">{url.split("/")[-1]} ↗</a></span>'
             )
 
-        urls = [p["source"]]
-        if p.get("source_kr") and p["source_kr"] != p["source"]:
-            urls.append(p["source_kr"])
-        src_html = "".join(src_span(u) for u in urls)
+        # Dedupe by canonical key — two URLs pointing to the same KR post but
+        # with different query-string ordering should collapse to one entry.
+        seen: set[tuple[str, str]] = set()
+        src_parts: list[str] = []
+        for u in (p["source"], p.get("source_kr")):
+            if not u:
+                continue
+            key = canonical_src_key(u)
+            if key in seen:
+                continue
+            seen.add(key)
+            src_parts.append(src_span(u))
+        src_html = "".join(src_parts)
         return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
       <h2>{h2_text}</h2>
-      <span class="date">{fmt_date(p["date"])}</span>
     </div>
     <p class="src">{src_html}</p>
     {img_block}<ul class="digimon-list">
