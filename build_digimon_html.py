@@ -95,21 +95,40 @@ CSS = """
   .post.patch .digimon-list li { color: #9b3f1a; }
   .digimon-name { display: block; margin-bottom: 6px; }
 
-  /* Attribute chips (Basic / Natural / Families) — icon + name layout */
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; font-weight: 500; font-size: 12px; }
-  .chip { padding: 3px 9px 3px 4px; border-radius: 999px; line-height: 1.4; letter-spacing: 0.3px;
-          display: inline-flex; align-items: center; gap: 4px; }
-  .chip-icon { width: 18px; height: 18px; vertical-align: middle; object-fit: contain; flex-shrink: 0; }
+  /* Attribute chips — icon-only, two rows per digimon
+     (row 1: basic attribute + natural attribute, row 2: families) */
+  .chips-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; align-items: center; }
+  .chips-row + .chips-row { margin-top: 4px; }
+  .chip-icon-only { width: 28px; height: 28px; object-fit: contain; cursor: help;
+                    transition: transform 0.12s ease; }
+  .chip-icon-only:hover { transform: scale(1.18); }
+
+  /* Filter bar at top of report — repurposes the old text+pill chip look */
+  .filter-bar { background: white; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .filter-bar h4 { margin: 0 0 6px 0; font-size: 11px; color: #888;
+                   text-transform: uppercase; letter-spacing: 0.6px; }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; align-items: center; }
+  .filter-group:last-child { margin-bottom: 0; }
+  .filter-pill { padding: 4px 11px 4px 6px; border-radius: 999px; font-size: 12px;
+                 font-weight: 500; letter-spacing: 0.3px; border: 1px solid transparent;
+                 display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+                 user-select: none; opacity: 0.55; transition: opacity 0.12s, transform 0.12s; }
+  .filter-pill:hover { opacity: 1; }
+  .filter-pill.active { opacity: 1; transform: scale(1.04);
+                        box-shadow: 0 0 0 2px rgba(26,77,143,0.35); }
+  .filter-pill img { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+  .filter-reset { background: transparent; color: #2c6fb8; border: none; padding: 4px 8px;
+                  font-size: 11px; cursor: pointer; text-decoration: underline; }
+  .filter-count { font-size: 11px; color: #95a5a6; margin-left: auto; }
   /* Basic attribute colors */
-  .chip-attr-VA { background: #d6f0d6; color: #1f6b1f; }
-  .chip-attr-VI { background: #efd9ef; color: #6b1f6b; }
-  .chip-attr-DA { background: #d6e3f5; color: #1a4d8f; }
-  .chip-attr-FR { background: #f0e4cc; color: #8a6a1a; }
-  .chip-attr-UN { background: #ebebeb; color: #555; }
-  /* Natural attribute (element) — neutral grey base */
-  .chip-elem { background: #eef2f5; color: #2c3e50; border: 1px solid #d4dce3; }
-  /* Families (was "Field") — neutral pale orange */
-  .chip-families { background: #fff1d6; color: #9b6e1a; border: 1px solid #f1d49a; }
+  .filter-pill.chip-attr-VA { background: #d6f0d6; color: #1f6b1f; }
+  .filter-pill.chip-attr-VI { background: #efd9ef; color: #6b1f6b; }
+  .filter-pill.chip-attr-DA { background: #d6e3f5; color: #1a4d8f; }
+  .filter-pill.chip-attr-FR { background: #f0e4cc; color: #8a6a1a; }
+  .filter-pill.chip-attr-UN { background: #ebebeb; color: #555; }
+  .filter-pill.chip-elem { background: #eef2f5; color: #2c3e50; border-color: #d4dce3; }
+  .filter-pill.chip-families { background: #fff1d6; color: #9b6e1a; border-color: #f1d49a; }
 
   /* Banner image (one per post) */
   .post-image { display: block; max-width: 100%; max-height: 360px; margin: 4px 0 14px 0;
@@ -141,41 +160,52 @@ FAMILY_ICON = {
 }
 
 
-def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str:
-    """Render a digimon's chip row (attribute / element / families) as
-    icon + name chips. Icons live in docs/img/icons/<category>-<slug>.png.
+def elem_slug(value: str) -> str:
+    return ELEM_ICON.get(value, value.replace(" ", "_"))
 
-    `show_name` is False for single-digimon posts — the name is already in
-    the section <h2>, so the chip row stands alone.
+
+def family_slug(value: str) -> str:
+    return FAMILY_ICON.get(value, value.replace(" ", "_"))
+
+
+def render_digimon(name: str, attrs: dict | None, show_name: bool = True) -> str:
+    """Render a digimon's attribute icons in two rows:
+      row 1 — basic attribute + natural attribute (icon only, no text)
+      row 2 — families (icon only, no text)
+    Icon files: docs/img/icons/<category>-<slug>.png. Hover/title shows the
+    full canonical name. Coloured text-pill versions of these chips now live
+    in the filter bar at the top of the report.
     """
-    chips: list[str] = []
+    rows: list[str] = []
+    primary: list[str] = []
     if attrs:
         if attrs.get("attribute"):
-            value = attrs["attribute"]
-            abbr = attrs.get("attribute_abbr") or ATTR_ABBR_MAP.get(value, "UN")
-            chips.append(
-                f'<span class="chip chip-attr-{abbr}" title="Basic Attribute: {value}">'
-                f'<img class="chip-icon" src="img/icons/attr-{value}.png" alt="">'
-                f'{value}</span>'
+            v = attrs["attribute"]
+            primary.append(
+                f'<img class="chip-icon-only" src="img/icons/attr-{v}.png" '
+                f'alt="{v}" title="Basic Attribute: {v}">'
             )
         if attrs.get("natural_attribute"):
-            value = attrs["natural_attribute"]
-            slug = ELEM_ICON.get(value, value.replace(" ", "_"))
-            chips.append(
-                f'<span class="chip chip-elem" title="Natural Attribute: {value}">'
-                f'<img class="chip-icon" src="img/icons/elem-{slug}.png" alt="">'
-                f'{value}</span>'
+            v = attrs["natural_attribute"]
+            primary.append(
+                f'<img class="chip-icon-only" src="img/icons/elem-{elem_slug(v)}.png" '
+                f'alt="{v}" title="Natural Attribute: {v}">'
             )
-        for fam in attrs.get("families", []):
-            slug = FAMILY_ICON.get(fam, fam.replace(" ", "_"))
-            chips.append(
-                f'<span class="chip chip-families" title="Families: {fam}">'
-                f'<img class="chip-icon" src="img/icons/field-{slug}.png" alt="">'
-                f'{fam}</span>'
-            )
-    chip_row = f'<div class="chips">{"".join(chips)}</div>' if chips else ""
+    if primary:
+        rows.append(f'<div class="chips-row">{"".join(primary)}</div>')
+
+    families = (attrs or {}).get("families", [])
+    if families:
+        fam_html = "".join(
+            f'<img class="chip-icon-only" src="img/icons/field-{family_slug(f)}.png" '
+            f'alt="{f}" title="Families: {f}">'
+            for f in families
+        )
+        rows.append(f'<div class="chips-row">{fam_html}</div>')
+
+    chip_block = "".join(rows)
     name_html = f'<span class="digimon-name">{name}</span>' if show_name else ""
-    return f"{name_html}{chip_row}" or "&nbsp;"
+    return f"{name_html}{chip_block}" or "&nbsp;"
 
 
 def render() -> str:
@@ -253,7 +283,18 @@ def render() -> str:
             seen.add(key)
             src_parts.append(src_span(u))
         src_html = "".join(src_parts)
-        return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
+        # Per-section data attributes so the filter JS can hide non-matching
+        # posts without re-rendering. Comma-separated lists for multi-digimon
+        # posts so a partial match (any digimon matches) keeps the section.
+        all_attrs = sorted({a.get("attribute") for a in attrs_map.values() if a.get("attribute")})
+        all_elems = sorted({a.get("natural_attribute") for a in attrs_map.values() if a.get("natural_attribute")})
+        all_fams = sorted({f for a in attrs_map.values() for f in a.get("families", [])})
+        data_attrs = (
+            f'data-attr="{",".join(all_attrs)}" '
+            f'data-elem="{",".join(all_elems)}" '
+            f'data-family="{",".join(all_fams)}"'
+        )
+        return f"""  <section class="post{patch_cls}" id="{prefix}{idx}" {data_attrs}>
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
       <h2>{h2_text}</h2>
@@ -267,6 +308,121 @@ def render() -> str:
 
     event_sections = "\n".join(render_post(idx, p, "event") for idx, p in sorted_events)
     patch_sections = "\n".join(render_post(idx, p, "patch") for idx, p in sorted_patches)
+
+    # Collect unique attribute/element/family values seen across all posts
+    # for the filter bar. Order: deterministic for chip groups.
+    all_posts = list(events.values()) + list(patches.values())
+    seen_attrs: list[str] = []
+    seen_elems: list[str] = []
+    seen_fams: list[str] = []
+    for p in all_posts:
+        for a in p.get("attributes", {}).values():
+            if a.get("attribute") and a["attribute"] not in seen_attrs:
+                seen_attrs.append(a["attribute"])
+            if a.get("natural_attribute") and a["natural_attribute"] not in seen_elems:
+                seen_elems.append(a["natural_attribute"])
+            for f in a.get("families", []):
+                if f not in seen_fams:
+                    seen_fams.append(f)
+    # Sort with a friendly order for the basic-attribute row.
+    attr_order = ["Vaccine", "Virus", "Data", "Free", "Unknown"]
+    seen_attrs.sort(key=lambda x: (attr_order.index(x) if x in attr_order else 999, x))
+    seen_elems.sort()
+    seen_fams.sort()
+
+    def filter_pill(category: str, value: str, slug: str, cls: str, icon_dir: str) -> str:
+        return (
+            f'<button class="filter-pill {cls}" '
+            f'data-filter="{category}" data-value="{value}">'
+            f'<img src="img/icons/{icon_dir}-{slug}.png" alt="">{value}</button>'
+        )
+
+    attr_pills = "".join(
+        filter_pill("attr", v, v, f"chip-attr-{ATTR_ABBR_MAP.get(v, 'UN')}", "attr")
+        for v in seen_attrs
+    )
+    elem_pills = "".join(
+        filter_pill("elem", v, elem_slug(v), "chip-elem", "elem")
+        for v in seen_elems
+    )
+    fam_pills = "".join(
+        filter_pill("family", v, family_slug(v), "chip-families", "field")
+        for v in seen_fams
+    )
+
+    filter_bar = f"""  <div class="filter-bar">
+    <h4>Basic Attribute</h4>
+    <div class="filter-group">{attr_pills}</div>
+    <h4>Natural Attribute</h4>
+    <div class="filter-group">{elem_pills}</div>
+    <h4>Families</h4>
+    <div class="filter-group">{fam_pills}<button class="filter-reset" id="filter-reset">reset</button><span class="filter-count" id="filter-count"></span></div>
+  </div>"""
+
+    filter_js = """
+<script>
+(() => {
+  const state = {attr: null, elem: null, family: null};
+  const pills = document.querySelectorAll('.filter-pill');
+  const posts = document.querySelectorAll('section.post');
+  const countEl = document.getElementById('filter-count');
+
+  function apply() {
+    let visible = 0;
+    posts.forEach(s => {
+      const a = (s.dataset.attr   || '').split(',');
+      const e = (s.dataset.elem   || '').split(',');
+      const f = (s.dataset.family || '').split(',');
+      let show = true;
+      if (state.attr   && !a.includes(state.attr))   show = false;
+      if (state.elem   && !e.includes(state.elem))   show = false;
+      if (state.family && !f.includes(state.family)) show = false;
+      s.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    // Hide section-title groups whose content is fully hidden
+    document.querySelectorAll('.section-title').forEach(h => {
+      let next = h.nextElementSibling;
+      let anyVisible = false;
+      while (next && !next.matches('.section-title')) {
+        if (next.matches('section.post') && next.style.display !== 'none') {
+          anyVisible = true; break;
+        }
+        next = next.nextElementSibling;
+      }
+      h.style.display = anyVisible ? '' : 'none';
+    });
+    const active = [state.attr, state.elem, state.family].filter(Boolean);
+    countEl.textContent = active.length
+      ? `${visible} โพสต์ ตรงตาม ${active.join(' + ')}`
+      : '';
+  }
+
+  pills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter;
+      const val = btn.dataset.value;
+      if (state[key] === val) {
+        state[key] = null;
+        btn.classList.remove('active');
+      } else {
+        // Toggle off others in the same group
+        document.querySelectorAll(`.filter-pill[data-filter="${key}"]`)
+          .forEach(b => b.classList.remove('active'));
+        state[key] = val;
+        btn.classList.add('active');
+      }
+      apply();
+    });
+  });
+
+  document.getElementById('filter-reset').addEventListener('click', () => {
+    state.attr = state.elem = state.family = null;
+    pills.forEach(b => b.classList.remove('active'));
+    apply();
+  });
+})();
+</script>"""
 
     return f"""<!DOCTYPE html>
 <html lang="th">
@@ -298,6 +454,8 @@ def render() -> str:
     </div>
   </div>
 
+{filter_bar}
+
   <h3 class="section-title">📅 EventView Posts</h3>
 {event_sections}
   <h3 class="section-title patch">🔧 PatchNote Posts</h3>
@@ -306,6 +464,7 @@ def render() -> str:
     Generated with <a href="https://claude.ai/" target="_blank" style="color:#1a4d8f;text-decoration:none;font-weight:600;">Claude AI</a>
   </footer>
 </main>
+{filter_js}
 
 </div>
 </body>
