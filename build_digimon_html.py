@@ -191,7 +191,7 @@ def render() -> str:
         return f"""  <section class="post{patch_cls}" id="{prefix}{idx}">
     <div class="post-header{patch_cls}">
       <span class="idx-badge">idx {idx}</span>
-      <h2>{n} New Digimon</h2>
+      <h2>{n} Digimon</h2>
       <span class="date">{fmt_date(p["date"])}</span>
     </div>
     <p class="src">{src_html}</p>
@@ -208,7 +208,7 @@ def render() -> str:
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>DMO New Digimon Report</title>
+<title>DMO Digimon Report</title>
 <style>{CSS}</style>
 </head>
 <body>
@@ -227,7 +227,7 @@ def render() -> str:
 
 <main>
   <div class="hero">
-    <h1>DMO – New Digimon Report</h1>
+    <h1>DMO – Digimon Report</h1>
     <div class="hero-stats">
       <div class="hero-stat"><div class="num">{total_posts}</div><div class="lbl">โพสต์</div></div>
       <div class="hero-stat"><div class="num">{total_digimon}</div><div class="lbl">digimon ใหม่</div></div>
