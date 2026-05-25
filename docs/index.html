@@ -2,83 +2,209 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>DMO Tracker — dmo-hub</title>
+<title>DMO Tracker — Home</title>
+<link rel="stylesheet" href="css/site.css">
 <style>
-  * { box-sizing: border-box; }
-  body { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; margin: 0; color: #2c3e50; background: #f5f7fa; line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; }
-  .container { max-width: 1000px; margin: 0 auto; padding: 48px 24px; flex: 1; width: 100%; }
-
-  .hero { background: linear-gradient(135deg, #1a4d8f, #2c6fb8); border-radius: 12px; padding: 32px 32px; margin-bottom: 28px;
-          box-shadow: 0 6px 18px rgba(26,77,143,0.22); color: white; }
-  .hero h1 { margin: 0 0 6px 0; font-size: 28px; letter-spacing: 0.3px; }
-  .hero p { margin: 0; opacity: 0.9; font-size: 14px; }
-
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-
-  .card { background: white; border-radius: 10px; padding: 24px; text-decoration: none; color: inherit;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.06); transition: transform 0.15s, box-shadow 0.15s;
-          display: flex; flex-direction: column; gap: 8px; border: 2px solid transparent; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(26,77,143,0.15); border-color: #2c6fb8; }
-  .card.disabled { opacity: 0.55; cursor: not-allowed; }
-  .card.disabled:hover { transform: none; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border-color: transparent; }
-
-  .card .icon { font-size: 36px; line-height: 1; }
-  .card h2 { margin: 0; color: #1a4d8f; font-size: 20px; }
-  .card .desc { color: #7f8c8d; font-size: 13px; margin: 0; }
-  .card .stats { display: flex; gap: 18px; margin-top: 6px; padding-top: 12px; border-top: 1px solid #e7eef6; }
-  .card .stat { font-size: 12px; color: #7f8c8d; }
-  .card .stat b { color: #1a4d8f; font-size: 16px; display: block; }
-  .card .badge { display: inline-block; background: #f39c12; color: white; padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; align-self: flex-start; }
-  .card.disabled .badge { background: #95a5a6; }
-
-  footer { text-align: center; color: #7f8c8d; font-size: 12px; padding: 24px; }
-  footer a { color: #1a4d8f; text-decoration: none; font-weight: 600; }
-  footer a:hover { text-decoration: underline; }
+  /* Index-only tweaks */
+  .feed-card { display: block; padding-bottom: 12px; }
+  .feed-card .card-head { padding-top: 12px; }
+  .feed-card .feed-title {
+    margin: 4px 18px 6px; font-size: 14.5px; font-weight: 600; color: var(--text);
+    line-height: 1.4;
+  }
+  .feed-card:hover { transform: translateY(-1px); }
+  .card-kind-badge.is-digimon { background: #e6eef8; color: var(--accent); }
+  .card-kind-badge.is-decks { background: var(--orange-bg); color: #9b5b1a; }
 </style>
 </head>
 <body>
 
-<div class="container">
+<header class="site-nav">
+  <div class="site-nav-inner">
+    <a class="brand" href="./"><span class="dot"></span>DMO Tracker</a>
+    <nav>
+      <a href="./" class="is-active">Home</a>
+      <a href="decks.html">Decks</a>
+      <a href="digimon.html">Digimon</a>
+    </nav>
+    <span class="nav-meta">scrape: dmo.gameking.com</span>
+  </div>
+</header>
+
+<main class="page">
 
   <div class="hero">
-    <h1>🎮 DMO Tracker</h1>
-    <p>News tracking สำหรับ Digimon Masters Online — scrape จาก dmo.gameking.com อัตโนมัติ</p>
+    <div>
+      <h1>🎮 DMO Tracker</h1>
+      <p class="lead">News tracking สำหรับ Digimon Masters Online — scrape จาก dmo.gameking.com อัตโนมัติ</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">41</div><div class="lbl">โพสต์</div></div>
+      <div class="hero-stat"><div class="num">35</div><div class="lbl">deck</div></div>
+      <div class="hero-stat"><div class="num">20</div><div class="lbl">digimon</div></div>
+    </div>
   </div>
 
-  <div class="card-grid">
-
-    <a href="decks.html" class="card">
+  <div class="feature-grid">
+    <a href="decks.html" class="feature">
       <div class="icon">📊</div>
-      <h2>New Deck</h2>
-      <p class="desc">Deck ใหม่ที่ถูกเพิ่มในเกม พร้อม Digimon List + Effect tables</p>
-      <div class="stats">
-        <div class="stat"><b>20</b>โพสต์</div>
-        <div class="stat"><b>34</b>deck</div>
+      <h3>New Decks</h3>
+      <p>Deck ใหม่ที่ถูกเพิ่มในเกม พร้อม Digimon List + Effect tables</p>
+      <div class="feature-stats">
+        <div class="stat"><b>22</b>โพสต์</div>
+        <div class="stat"><b>35</b>deck</div>
       </div>
     </a>
 
-    <a href="digimon.html" class="card">
+    <a href="digimon.html" class="feature">
       <div class="icon">🐉</div>
-      <h2>New Digimon</h2>
-      <p class="desc">Digimon ใหม่ที่ถูกเพิ่มในเกม (เช่น Mode evolution, Extreme forms)</p>
-      <div class="stats">
-        <div class="stat"><b>17</b>โพสต์</div>
+      <h3>New Digimon</h3>
+      <p>Digimon ใหม่ที่ถูกเพิ่มในเกม (Mode evolution, Extreme forms)</p>
+      <div class="feature-stats">
+        <div class="stat"><b>19</b>โพสต์</div>
         <div class="stat"><b>20</b>digimon</div>
       </div>
     </a>
 
-    <div class="card disabled">
+    <div class="feature disabled">
       <div class="icon">⚙️</div>
-      <h2>New System</h2>
-      <p class="desc">ระบบเกม/feature ใหม่ (เร็วๆ นี้)</p>
+      <h3>New System</h3>
+      <p>ระบบเกม/feature ใหม่ (เร็วๆ นี้)</p>
       <span class="badge">Coming Soon</span>
     </div>
-
   </div>
 
-</div>
+  <div class="section-header">
+    <h2>Recent activity</h2>
+    <span class="see-all">40 updates tracked</span>
+  </div>
 
-<footer>
+  <div class="timeline">
+      <div class="tl-month">
+        <span class="tl-month-label">May 2026</span>
+        <span class="tl-month-count">2 updates</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#p4148">
+          <div class="card-head">
+            <span class="card-date">20.05.2026</span>
+            <span class="card-kind-badge is-decks">Decks · PatchNote</span>
+            <span class="card-idx">idx 4148</span>
+          </div>
+          <div class="feed-title">One who resides in Lark, A being that sends Digimon to the human world + 1 more</div>
+        </a>
+        <a class="card tl-entry feed-card" href="digimon.html#p4148">
+          <div class="card-head">
+            <span class="card-date">20.05.2026</span>
+            <span class="card-kind-badge is-digimon">Digimon · PatchNote</span>
+            <span class="card-idx">idx 4148</span>
+          </div>
+          <div class="feed-title">QUANTUMON</div>
+        </a>
+      <div class="tl-month">
+        <span class="tl-month-label">March 2026</span>
+        <span class="tl-month-count">3 updates</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#p4121">
+          <div class="card-head">
+            <span class="card-date">17.03.2026</span>
+            <span class="card-kind-badge is-decks">Decks · PatchNote</span>
+            <span class="card-idx">idx 4121</span>
+          </div>
+          <div class="feed-title">Wings of Justice, Tempting Wings of Justice + 1 more</div>
+        </a>
+        <a class="card tl-entry feed-card" href="digimon.html#p4121">
+          <div class="card-head">
+            <span class="card-date">17.03.2026</span>
+            <span class="card-kind-badge is-digimon">Digimon · PatchNote</span>
+            <span class="card-idx">idx 4121</span>
+          </div>
+          <div class="feed-title">Omegamon X Extreme</div>
+        </a>
+        <a class="card tl-entry feed-card" href="decks.html#p4114">
+          <div class="card-head">
+            <span class="card-date">04.03.2026</span>
+            <span class="card-kind-badge is-decks">Decks · PatchNote</span>
+            <span class="card-idx">idx 4114</span>
+          </div>
+          <div class="feed-title">The True Form of the Destroyer</div>
+        </a>
+      <div class="tl-month">
+        <span class="tl-month-label">February 2026</span>
+        <span class="tl-month-count">2 updates</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#p4110">
+          <div class="card-head">
+            <span class="card-date">25.02.2026</span>
+            <span class="card-kind-badge is-decks">Decks · PatchNote</span>
+            <span class="card-idx">idx 4110</span>
+          </div>
+          <div class="feed-title">Abyssal Fear, Perfect data, and data of unknown origin</div>
+        </a>
+        <a class="card tl-entry feed-card" href="digimon.html#p4110">
+          <div class="card-head">
+            <span class="card-date">25.02.2026</span>
+            <span class="card-kind-badge is-digimon">Digimon · PatchNote</span>
+            <span class="card-idx">idx 4110</span>
+          </div>
+          <div class="feed-title">Abbadomon Core</div>
+        </a>
+      <div class="tl-month">
+        <span class="tl-month-label">January 2026</span>
+        <span class="tl-month-count">2 updates</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#e810">
+          <div class="card-head">
+            <span class="card-date">14.01.2026</span>
+            <span class="card-kind-badge is-decks">Decks · EventView</span>
+            <span class="card-idx">idx 810</span>
+          </div>
+          <div class="feed-title">Fear of the Abyss</div>
+        </a>
+        <a class="card tl-entry feed-card" href="digimon.html#e810">
+          <div class="card-head">
+            <span class="card-date">14.01.2026</span>
+            <span class="card-kind-badge is-digimon">Digimon · EventView</span>
+            <span class="card-idx">idx 810</span>
+          </div>
+          <div class="feed-title">Abbadomon</div>
+        </a>
+      <div class="tl-month">
+        <span class="tl-month-label">December 2025</span>
+        <span class="tl-month-count">2 updates</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#e798">
+          <div class="card-head">
+            <span class="card-date">10.12.2025</span>
+            <span class="card-kind-badge is-decks">Decks · EventView</span>
+            <span class="card-idx">idx 798</span>
+          </div>
+          <div class="feed-title">Demon of the Final Phase, Abnormal Status Occurred: Virus + 1 more</div>
+        </a>
+        <a class="card tl-entry feed-card" href="digimon.html#e798">
+          <div class="card-head">
+            <span class="card-date">10.12.2025</span>
+            <span class="card-kind-badge is-digimon">Digimon · EventView</span>
+            <span class="card-idx">idx 798</span>
+          </div>
+          <div class="feed-title">DoneDevimon</div>
+        </a>
+      <div class="tl-month">
+        <span class="tl-month-label">November 2025</span>
+        <span class="tl-month-count">1 update</span>
+      </div>
+        <a class="card tl-entry feed-card" href="decks.html#e791">
+          <div class="card-head">
+            <span class="card-date">11.11.2025</span>
+            <span class="card-kind-badge is-decks">Decks · EventView</span>
+            <span class="card-idx">idx 791</span>
+          </div>
+          <div class="feed-title">Wings of Temptation and Wings of Justice</div>
+        </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
   Generated with <a href="https://claude.ai/" target="_blank">Claude AI</a>
   &nbsp;·&nbsp; <a href="https://github.com/dmo-hub/dmo" target="_blank">Source on GitHub</a>
 </footer>
