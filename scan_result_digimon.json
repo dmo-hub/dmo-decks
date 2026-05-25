@@ -29,6 +29,7 @@
       ],
       "image": "img/digimon/e664.jpeg",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=784466&Btype=Update",
+      "image_kr": "img/digimon/e664_kr.jpeg",
       "attributes": {
         "Shoutmon X7 Superior Mode": {
           "attribute": "Data",
@@ -38,8 +39,7 @@
             "Virus Busters"
           ]
         }
-      },
-      "image_kr": "img/digimon/e664_kr.jpeg"
+      }
     },
     "673": {
       "date": "06-11-2024",
@@ -49,6 +49,7 @@
       ],
       "image": "img/digimon/e673.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787200&Btype=Update",
+      "image_kr": "img/digimon/e673_kr.png",
       "attributes": {
         "Kuzuhamon MikoMode": {
           "attribute": "Data",
@@ -59,8 +60,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/e673_kr.png"
+      }
     },
     "683": {
       "date": "08-20-2024",
@@ -70,6 +70,7 @@
       ],
       "image": "img/digimon/e683.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789668&Btype=Update",
+      "image_kr": "img/digimon/e683_kr.png",
       "attributes": {
         "Gallantmon Crimson Mode": {
           "attribute": "Virus",
@@ -81,8 +82,7 @@
             "Wind Guardians"
           ]
         }
-      },
-      "image_kr": "img/digimon/e683_kr.png"
+      }
     },
     "692": {
       "date": "11-12-2024",
@@ -92,14 +92,14 @@
       ],
       "image": "img/digimon/e692.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update",
+      "image_kr": "img/digimon/e692_kr.png",
       "attributes": {
         "Eosmon": {
           "attribute": "Unknown",
           "natural_attribute": "Thunder",
           "attribute_abbr": "UN"
         }
-      },
-      "image_kr": "img/digimon/e692_kr.png"
+      }
     },
     "705": {
       "date": "02-25-2025",
@@ -109,6 +109,7 @@
       ],
       "image": "img/digimon/e705.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797630&Btype=Update",
+      "image_kr": "img/digimon/e705_kr.png",
       "attributes": {
         "Bloomlordmon": {
           "attribute": "Vaccine",
@@ -118,8 +119,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/e705_kr.png"
+      }
     },
     "708": {
       "date": "03-18-2025",
@@ -128,6 +128,8 @@
         "ZeedMillenniummon (Awaken)"
       ],
       "image": "img/digimon/e708.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798287&Btype=Update",
+      "image_kr": "img/digimon/e708_kr.png",
       "attributes": {
         "ZeedMillenniummon (Awaken)": {
           "attribute": "Virus",
@@ -137,9 +139,7 @@
             "Dark Area"
           ]
         }
-      },
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=798287&Btype=Update",
-      "image_kr": "img/digimon/e708_kr.png"
+      }
     },
     "731": {
       "date": "05-13-2025",
@@ -148,6 +148,8 @@
         "Imperialdramon Paladin Mode (Awaken)"
       ],
       "image": "img/digimon/e731.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=801540&Btype=Update",
+      "image_kr": "img/digimon/e731_kr.png",
       "attributes": {
         "Imperialdramon Paladin Mode (Awaken)": {
           "attribute": "Vaccine",
@@ -159,9 +161,7 @@
             "Wind Guardians"
           ]
         }
-      },
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=801540&Btype=Update",
-      "image_kr": "img/digimon/e731_kr.png"
+      }
     },
     "743": {
       "date": "06-17-2025",
@@ -171,6 +171,7 @@
       ],
       "image": "img/digimon/e743.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=804377&Btype=Update",
+      "image_kr": "img/digimon/e743_kr.jpeg",
       "attributes": {
         "Alphamon Ouryuken [Extreme]": {
           "attribute": "Vaccine",
@@ -180,8 +181,7 @@
             "Virus Busters"
           ]
         }
-      },
-      "image_kr": "img/digimon/e743_kr.jpeg"
+      }
     },
     "759": {
       "date": "07-22-2025",
@@ -190,6 +190,8 @@
         "Lucemon: Satan Mode (Extreme)"
       ],
       "image": "img/digimon/e759.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808086&Btype=Update",
+      "image_kr": "img/digimon/e759_kr.png",
       "attributes": {
         "Lucemon: Satan Mode (Extreme)": {
           "attribute": "Virus",
@@ -201,9 +203,7 @@
             "Virus Busters"
           ]
         }
-      },
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808086&Btype=Update",
-      "image_kr": "img/digimon/e759_kr.png"
+      }
     },
     "770": {
       "date": "08-19-2025",
@@ -213,6 +213,7 @@
       ],
       "image": "img/digimon/e770.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=809411&Btype=Update",
+      "image_kr": "img/digimon/e770_kr.png",
       "attributes": {
         "Last Evolution: Kizuna": {
           "attribute": "Unknown",
@@ -223,8 +224,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/e770_kr.png"
+      }
     },
     "782": {
       "date": "09-23-2025",
@@ -235,6 +235,7 @@
       ],
       "image": "img/digimon/e782.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810885&Btype=Update",
+      "image_kr": "img/digimon/e782_kr.png",
       "attributes": {
         "Goddramon": {
           "attribute": "Vaccine",
@@ -256,8 +257,7 @@
             "Nature Spirits"
           ]
         }
-      },
-      "image_kr": "img/digimon/e782_kr.png"
+      }
     },
     "784": {
       "date": "10-01-2025",
@@ -267,6 +267,7 @@
       ],
       "image": "img/digimon/e784.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810988&Btype=Update",
+      "image_kr": "img/digimon/e784_kr.png",
       "attributes": {
         "[Extreme] Susanoomon": {
           "attribute": "Vaccine",
@@ -278,8 +279,7 @@
             "Nature Spirits"
           ]
         }
-      },
-      "image_kr": "img/digimon/e784_kr.png"
+      }
     },
     "791": {
       "date": "11-11-2025",
@@ -287,6 +287,7 @@
       "digimon": [
         "Lilithmon X (Awaken)"
       ],
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811713&Btype=Update",
       "attributes": {
         "Lilithmon X (Awaken)": {
           "attribute": "Virus",
@@ -297,8 +298,7 @@
             "Nightmare Soldiers"
           ]
         }
-      },
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811713&Btype=Update"
+      }
     },
     "798": {
       "date": "12-10-2025",
@@ -308,6 +308,7 @@
       ],
       "image": "img/digimon/e798.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812305&Btype=Update",
+      "image_kr": "img/digimon/e798_kr.png",
       "attributes": {
         "DoneDevimon": {
           "attribute": "Virus",
@@ -317,8 +318,7 @@
             "Nightmare Soldiers"
           ]
         }
-      },
-      "image_kr": "img/digimon/e798_kr.png"
+      }
     },
     "810": {
       "date": "01-14-2026",
@@ -327,6 +327,7 @@
         "Abbadomon"
       ],
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update",
+      "image_kr": "img/digimon/e810_kr.png",
       "attributes": {
         "Abbadomon": {
           "attribute": "Unknown",
@@ -336,8 +337,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/e810_kr.png"
+      }
     }
   },
   "patch": {
@@ -349,6 +349,7 @@
       ],
       "image": "img/digimon/p4110.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update",
+      "image_kr": "img/digimon/p4110_kr.png",
       "attributes": {
         "Abbadomon Core": {
           "attribute": "Unknown",
@@ -358,8 +359,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/p4110_kr.png"
+      }
     },
     "4121": {
       "date": "03-17-2026",
@@ -368,6 +368,7 @@
         "Omegamon X Extreme"
       ],
       "image": "img/digimon/p4121.png",
+      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update",
       "attributes": {
         "Omegamon X Extreme": {
           "attribute": "Vaccine",
@@ -379,8 +380,7 @@
             "Nature Spirits"
           ]
         }
-      },
-      "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update"
+      }
     },
     "4148": {
       "date": "05-20-2026",
@@ -390,6 +390,7 @@
       ],
       "image": "img/digimon/p4148.png",
       "source_kr": "https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816756&Btype=Update",
+      "image_kr": "img/digimon/p4148_kr.png",
       "attributes": {
         "QUANTUMON": {
           "attribute": "Data",
@@ -400,8 +401,7 @@
             "Unknown"
           ]
         }
-      },
-      "image_kr": "img/digimon/p4148_kr.png"
+      }
     }
   }
 }

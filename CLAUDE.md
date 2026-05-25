@@ -48,25 +48,36 @@ python enrich_digimon_kr.py
 #      so a human can pick the better one later.
 python extract_kr_digimon_images.py
 
-# 11. Fetch Basic/Natural Attribute + Field from DMW Wiki (no CF, free HTTP)
-#     → caches cache/dmw_<slug>.html, adds `attributes` dict to JSON
-python enrich_digimon_attributes.py            # missing only
-python enrich_digimon_attributes.py --force    # re-fetch all
-
-# 12. Fill in attributes the DMW Wiki doesn't have yet by fetching dmowiki.com
-#     via CDP (Cloudflare). Requires Chrome launched with
+# 11. Fetch dmowiki.com digimon pages via CDP (Cloudflare-blocked, needs a
+#     Chrome session past CAPTCHA). Launch Chrome first:
 #       chrome.exe --remote-debugging-port=9222 --user-data-dir=C:\temp\chrome-cdp
-#     and a manually-solved CAPTCHA on any dmowiki page first.
-#     Saves cache/dmowiki_<slug>.html. Then re-run #11 to parse them.
+#     then open https://dmowiki.com, solve the CAPTCHA, then:
 python fetch_dmowiki_digimon.py
+#     Saves to cache/dmowiki_<safe-slug>.html.
+
+# 12. Parse cache/dmowiki_*.html and seed `attributes` dict on each digimon
+#     in scan_result_digimon.json.
+python enrich_digimon_attributes.py            # missing only
+python enrich_digimon_attributes.py --force    # re-parse every digimon
 
 # 13. Pull Basic/Natural Attribute + Affiliated Field straight from the
 #     gameking EventView/PatchNote stat block (and KR `cache/kr_view_o<N>.html`
 #     fallback for posts without a gameking translation, e.g. e664). This is
-#     the in-game-canonical source — its values override the wiki enrichers
-#     (#11, #12) where present.
+#     the in-game-canonical source — its values override the dmowiki seed
+#     from #12 where present.
 python enrich_digimon_gameking.py
+
+# 14. Audit: dump attribute/element/families from gameking, KR, and dmowiki
+#     side-by-side per digimon so divergences are easy to spot.
+python compare_digimon_sources.py              # all digimon
+python compare_digimon_sources.py 731          # just one idx
 ```
+
+**Trusted-sources policy:** only `dmowiki.com`, gameking EventView/PatchNote,
+and the KR site (digimonmasters.com) are trusted for digimon stats.
+`digitalmastersworld.wiki.gg` (formerly cached as `cache/dmw_*.html`) is
+**blocklisted** — its Awaken/Extreme pages return base-form data that
+disagrees with the game. Do not re-introduce it.
 
 There is no test suite, lint config, package manifest, or virtualenv setup. Only runtime dep is `requests`.
 
