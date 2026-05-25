@@ -6,7 +6,7 @@
       "digimon": [
         "Omegamon – Merciful Mode"
       ],
-      "image": "img/digimon/e663.png"
+      "image": "img/digimon/e663.jpg"
     },
     "664": {
       "date": "03-20-2024",
@@ -45,7 +45,8 @@
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=705",
       "digimon": [
         "Bloomlordmon"
-      ]
+      ],
+      "image": "img/digimon/e705.png"
     },
     "708": {
       "date": "03-18-2025",
@@ -76,8 +77,7 @@
       "source": "https://dmo.gameking.com/news/EventView.aspx?idx=759",
       "digimon": [
         "[Extreme] Lucemon : Satan Mode"
-      ],
-      "image": "img/digimon/e759.png"
+      ]
     },
     "770": {
       "date": "08-19-2025",
