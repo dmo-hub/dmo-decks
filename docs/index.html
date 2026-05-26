@@ -3,18 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>DMO Tracker — Home</title>
+<script src="js/theme.js"></script>
 <link rel="stylesheet" href="css/site.css">
 <style>
   /* Index-only tweaks */
-  .feed-card { display: block; padding-bottom: 12px; }
-  .feed-card .card-head { padding-top: 12px; }
+  .feed-card { display: block; padding-bottom: 14px; }
+  .feed-card .card-head { padding-top: 14px; }
   .feed-card .feed-title {
-    margin: 4px 18px 6px; font-size: 14.5px; font-weight: 600; color: var(--text);
+    margin: 6px 20px 8px; font-size: 16px; font-weight: 500; color: var(--ink);
     line-height: 1.4;
+    font-family: var(--display-font);
+    letter-spacing: -0.2px;
   }
-  .feed-card:hover { transform: translateY(-1px); }
-  .card-kind-badge.is-digimon { background: #e6eef8; color: var(--accent); }
-  .card-kind-badge.is-decks { background: var(--orange-bg); color: #9b5b1a; }
+  .feed-card:hover { transform: translateY(-1px); border-color: var(--coral); }
+  .card-kind-badge.is-digimon { background: var(--surface-card); color: var(--ink); }
+  .card-kind-badge.is-decks { background: var(--coral); color: var(--on-primary); }
 </style>
 </head>
 <body>
