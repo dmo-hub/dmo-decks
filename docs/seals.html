@@ -10,8 +10,32 @@
   .card-kind-badge.sv-na { background: var(--surface-card); color: var(--body); }
   .card-kind-badge.sv-kr { background: var(--coral); color: var(--on-primary); }
   .card-kind-badge.sv-th { background: var(--teal); color: var(--on-primary); }
-  .filter-pill.sv-kr { background: var(--coral); color: var(--on-primary); border-color: var(--coral); }
-  .filter-pill.sv-th { background: var(--teal); color: var(--on-primary); border-color: var(--teal); }
+  /* Server tabs */
+  .server-tabs {
+    display: flex; flex-wrap: wrap; gap: 2px;
+    border-bottom: 1px solid var(--hairline);
+    margin: 0 0 22px;
+  }
+  .server-tab {
+    appearance: none; background: none; border: 0;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    padding: 9px 14px; font: inherit; font-size: 13px; font-weight: 500;
+    color: var(--muted-soft); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px;
+    transition: color .12s ease, border-color .12s ease;
+  }
+  .server-tab:hover { color: var(--ink); }
+  .server-tab .tab-count {
+    font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 9999px;
+    background: var(--surface-soft); color: var(--muted-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .server-tab.is-active { color: var(--ink); border-bottom-color: var(--ink); }
+  .server-tab.tab-kr.is-active { color: var(--coral); border-bottom-color: var(--coral); }
+  .server-tab.tab-th.is-active { color: var(--teal); border-bottom-color: var(--teal); }
+  .server-tab.is-active .tab-count { background: var(--surface-card); color: var(--ink); }
+  .server-tab.tab-kr.is-active .tab-count { background: var(--coral); color: var(--on-primary); }
+  .server-tab.tab-th.is-active .tab-count { background: var(--teal); color: var(--on-primary); }
   .seal-note { margin: 0; padding: 0 20px 16px; color: var(--muted-soft); font-size: 13px; line-height: 1.5; }
   .seal-note .gloss { color: var(--body); }
   .card-tag-system {
@@ -50,15 +74,11 @@
     </div>
   </div>
 
-  <div class="filter-bar">
-    <h4>Server <span class="hint">(เลือกได้หลายอัน — แสดงเฉพาะที่เลือก)</span></h4>
-    <div class="filter-group">
-      <button class="filter-pill sv-na" data-filter="server" data-value="NA">NA · gameking <span style="opacity:.7">(18)</span></button>
-      <button class="filter-pill sv-kr" data-filter="server" data-value="KR">KR · digimonmasters <span style="opacity:.7">(25)</span></button>
-      <button class="filter-pill sv-th" data-filter="server" data-value="TH">TH · vplay <span style="opacity:.7">(13)</span></button>
-      <button class="filter-reset" id="filter-reset">reset</button>
-      <span class="filter-count" id="filter-count"></span>
-    </div>
+  <div class="server-tabs" role="tablist" aria-label="เลือกเซิร์ฟเวอร์">
+    <button class="server-tab is-active" data-server="all" role="tab" aria-selected="true">ทั้งหมด <span class="tab-count">56</span></button>
+    <button class="server-tab tab-na" data-server="NA" role="tab" aria-selected="false">NA · gameking <span class="tab-count">18</span></button>
+    <button class="server-tab tab-kr" data-server="KR" role="tab" aria-selected="false">KR · digimonmasters <span class="tab-count">25</span></button>
+    <button class="server-tab tab-th" data-server="TH" role="tab" aria-selected="false">TH · vplay <span class="tab-count">13</span></button>
   </div>
 
   <div class="timeline">
@@ -463,18 +483,14 @@
 
 <script>
 (() => {
-  const pills  = document.querySelectorAll('.filter-pill[data-filter="server"]');
+  const tabs   = document.querySelectorAll('.server-tab');
   const cards  = document.querySelectorAll('.tl-entry');
   const months = document.querySelectorAll('.tl-month');
-  const countEl = document.getElementById('filter-count');
-  const active = new Set();
 
-  function apply() {
-    let visible = 0;
+  function select(server) {
     cards.forEach(c => {
-      const show = active.size === 0 || active.has(c.dataset.server);
+      const show = server === 'all' || c.dataset.server === server;
       c.style.display = show ? '' : 'none';
-      if (show) visible++;
     });
     months.forEach(m => {
       let next = m.nextElementSibling, any = false;
@@ -484,21 +500,14 @@
       }
       m.style.display = any ? '' : 'none';
     });
-    countEl.textContent = active.size ? `${visible} โพสต์ · ${[...active].join(' + ')}` : '';
   }
 
-  pills.forEach(btn => btn.addEventListener('click', () => {
-    const v = btn.dataset.value;
-    if (active.has(v)) { active.delete(v); btn.classList.remove('active'); }
-    else { active.add(v); btn.classList.add('active'); }
-    apply();
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+    tab.classList.add('is-active');
+    tab.setAttribute('aria-selected', 'true');
+    select(tab.dataset.server);
   }));
-
-  document.getElementById('filter-reset').addEventListener('click', () => {
-    active.clear();
-    pills.forEach(b => b.classList.remove('active'));
-    apply();
-  });
 })();
 </script>
 </body>
