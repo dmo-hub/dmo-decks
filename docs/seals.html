@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>DMO Seal Exchange — Activity Feed</title>
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/site.css">
+<style>
+  /* Seal-page server colour-coding */
+  .card-kind-badge.sv-na { background: var(--surface-card); color: var(--body); }
+  .card-kind-badge.sv-kr { background: var(--coral); color: var(--on-primary); }
+  .card-kind-badge.sv-th { background: var(--teal); color: var(--on-primary); }
+  .filter-pill.sv-kr { background: var(--coral); color: var(--on-primary); border-color: var(--coral); }
+  .filter-pill.sv-th { background: var(--teal); color: var(--on-primary); border-color: var(--teal); }
+  .seal-note { margin: 0; padding: 0 20px 16px; color: var(--muted-soft); font-size: 13px; line-height: 1.5; }
+  .seal-note .gloss { color: var(--body); }
+  .card-tag-system {
+    font-size: 9.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 9999px; margin-left: 6px;
+    background: var(--surface-soft); color: var(--muted-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="site-nav-inner">
+    <a class="brand" href="./"><span class="dot"></span>DMO Tracker</a>
+    <nav>
+      <a href="./">Home</a>
+      <a href="decks.html">Decks</a>
+      <a href="digimon.html">Digimon</a>
+      <a href="seals.html" class="is-active">Seal</a>
+    </nav>
+    <span class="nav-meta">scrape: gameking · KR · TH</span>
+  </div>
+</header>
+
+<main class="page">
+
+  <div class="hero">
+    <div>
+      <h1>Seal Exchange Feed</h1>
+      <p class="lead">กิจกรรม/ระบบ Seal Exchange (씰 교환 · แลกซีล) รวมทุกเซิร์ฟ NA · KR · TH — เรียงตามวันที่</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">56</div><div class="lbl">โพสต์</div></div>
+      <div class="hero-stat"><div class="num">3</div><div class="lbl">เซิร์ฟ</div></div>
+      <div class="hero-stat"><div class="num">2017</div><div class="lbl">ตั้งแต่</div></div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <h4>Server <span class="hint">(เลือกได้หลายอัน — แสดงเฉพาะที่เลือก)</span></h4>
+    <div class="filter-group">
+      <button class="filter-pill sv-na" data-filter="server" data-value="NA">NA · gameking <span style="opacity:.7">(18)</span></button>
+      <button class="filter-pill sv-kr" data-filter="server" data-value="KR">KR · digimonmasters <span style="opacity:.7">(25)</span></button>
+      <button class="filter-pill sv-th" data-filter="server" data-value="TH">TH · vplay <span style="opacity:.7">(13)</span></button>
+      <button class="filter-reset" id="filter-reset">reset</button>
+      <span class="filter-count" id="filter-count"></span>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <div class="tl-month"><span class="tl-month-label">May 2026</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-816593" data-server="KR">
+        <div class="card-head"><span class="card-date">12.05.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 816593</span></div>
+        <h2 class="card-title">이벤트 씰 교환권 Bit로 얻자</h2>
+        <p class="seal-note"><span class="gloss">Get Event Seal Exchange Vouchers with Bits</span> — คราฟต์ใบแลกซีลด้วย Bit ที่ NPC 오유민</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">12.05.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=816593&Btype=Update" target="_blank">newsBoard_sub.aspx?o=816593 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">April 2026</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="na-4129" data-server="NA">
+        <div class="card-head"><span class="card-date">01.04.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4129</span></div>
+        <h2 class="card-title">[Seal Exchange] Event added</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">01.04.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4129" target="_blank">PatchNoteView.aspx?idx=4129 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">March 2026</span><span class="tl-month-count">6 posts</span></div>
+      <article class="card tl-entry" id="na-4121" data-server="NA">
+        <div class="card-head"><span class="card-date">17.03.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4121</span></div>
+        <h2 class="card-title">[Seal Exchange] Event added</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">17.03.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4121" target="_blank">PatchNoteView.aspx?idx=4121 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814935" data-server="KR">
+        <div class="card-head"><span class="card-date">17.03.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814935</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">17.03.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814935&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814935 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-4118" data-server="NA">
+        <div class="card-head"><span class="card-date">11.03.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4118</span></div>
+        <h2 class="card-title">[Limited Seal Exchange] Event added</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">11.03.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4118" target="_blank">PatchNoteView.aspx?idx=4118 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814707" data-server="KR">
+        <div class="card-head"><span class="card-date">10.03.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814707</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — รายการคราฟต์ 이벤트 씰 교환권, NPC 오유민</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">10.03.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814707&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814707 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-4114" data-server="NA">
+        <div class="card-head"><span class="card-date">04.03.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4114</span></div>
+        <h2 class="card-title">[Seal Exchange] Event added</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">04.03.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4114" target="_blank">PatchNoteView.aspx?idx=4114 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814605" data-server="KR">
+        <div class="card-head"><span class="card-date">03.03.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814605</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">03.03.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814605&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814605 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">February 2026</span><span class="tl-month-count">4 posts</span></div>
+      <article class="card tl-entry" id="na-4110" data-server="NA">
+        <div class="card-head"><span class="card-date">25.02.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4110</span></div>
+        <h2 class="card-title">[Seal Exchangement] + [Limited Seal Exchange] Events added</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">25.02.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4110" target="_blank">PatchNoteView.aspx?idx=4110 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814493" data-server="KR">
+        <div class="card-head"><span class="card-date">24.02.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814493</span></div>
+        <h2 class="card-title">씰 교환 + 한정 씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange + Limited Seal Exchange</span> — NPC 오유민</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">24.02.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814493&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814493 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814269" data-server="KR">
+        <div class="card-head"><span class="card-date">10.02.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814269</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">10.02.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814269&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814269 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-814064" data-server="KR">
+        <div class="card-head"><span class="card-date">03.02.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 814064</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">03.02.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=814064&Btype=Update" target="_blank">newsBoard_sub.aspx?o=814064 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">January 2026</span><span class="tl-month-count">6 posts</span></div>
+      <article class="card tl-entry" id="na-4100" data-server="NA">
+        <div class="card-head"><span class="card-date">28.01.2026</span><span class="card-kind-badge sv-na">NA · PatchNote</span><span class="card-idx">idx 4100</span></div>
+        <h2 class="card-title">[Seal Exchange] Event (Takato)</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">28.01.2026</span><a href="https://dmo.gameking.com/News/PatchNoteView.aspx?idx=4100" target="_blank">PatchNoteView.aspx?idx=4100 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-813810" data-server="KR">
+        <div class="card-head"><span class="card-date">27.01.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 813810</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">27.01.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=813810&Btype=Update" target="_blank">newsBoard_sub.aspx?o=813810 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="th-83" data-server="TH">
+        <div class="card-head"><span class="card-date">23.01.2026</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 23 ม.ค. 2569</h2>
+        <p class="seal-note">กิจกรรมแลกเปลี่ยนซีล — NPC &lt;แลกเปลี่ยนซีล&gt;เมรามอน (Meramon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">23.01.2026</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-83/" target="_blank">patch -83 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-813439" data-server="KR">
+        <div class="card-head"><span class="card-date">20.01.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 813439</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — ขยายรายการแลก, NPC 오유민</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">20.01.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=813439&Btype=Update" target="_blank">newsBoard_sub.aspx?o=813439 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-810" data-server="NA">
+        <div class="card-head"><span class="card-date">14.01.2026</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 810</span></div>
+        <h2 class="card-title">Seal Exchange Event (Takato)</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">14.01.2026</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=810" target="_blank">EventView.aspx?idx=810 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-812989" data-server="KR">
+        <div class="card-head"><span class="card-date">13.01.2026</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 812989</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 오유민 (Oyumin)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">13.01.2026</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=812989&Btype=Update" target="_blank">newsBoard_sub.aspx?o=812989 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">November 2025</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="kr-811713" data-server="KR">
+        <div class="card-head"><span class="card-date">05.11.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 811713</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 씰 교환 워메몬 (Wormmon)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">05.11.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811713&Btype=Update" target="_blank">newsBoard_sub.aspx?o=811713 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-789" data-server="NA">
+        <div class="card-head"><span class="card-date">04.11.2025</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 789</span></div>
+        <h2 class="card-title">[Special Seal Exchange] Event</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">04.11.2025</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=789" target="_blank">EventView.aspx?idx=789 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">October 2025</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="kr-811362" data-server="KR">
+        <div class="card-head"><span class="card-date">15.10.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 811362</span></div>
+        <h2 class="card-title">특별한 씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Special Seal Exchange</span> — NPC 씰 교환 워메몬 (Wormmon)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">15.10.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=811362&Btype=Update" target="_blank">newsBoard_sub.aspx?o=811362 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-784" data-server="NA">
+        <div class="card-head"><span class="card-date">01.10.2025</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 784</span></div>
+        <h2 class="card-title">Autumn Seal Exchange / Seal Master Package</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">01.10.2025</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=784" target="_blank">EventView.aspx?idx=784 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">September 2025</span><span class="tl-month-count">3 posts</span></div>
+      <article class="card tl-entry" id="th-78" data-server="TH">
+        <div class="card-head"><span class="card-date">25.09.2025</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 25 ก.ย. 2568</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;ครบรอบ 13 ปี&gt; เค้ก</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">25.09.2025</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-78/" target="_blank">patch -78 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-782" data-server="NA">
+        <div class="card-head"><span class="card-date">23.09.2025</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 782</span></div>
+        <h2 class="card-title">[Seal Exchange] Event (Lillymon)</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">23.09.2025</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=782" target="_blank">EventView.aspx?idx=782 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-810828" data-server="KR">
+        <div class="card-head"><span class="card-date">17.09.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 810828</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC 씰 교환 보코몬 (Bukamon)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">17.09.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=810828&Btype=Update" target="_blank">newsBoard_sub.aspx?o=810828 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">July 2025</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="kr-808363" data-server="KR">
+        <div class="card-head"><span class="card-date">23.07.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 808363</span></div>
+        <h2 class="card-title">제볼루션 씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Jevolution Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">23.07.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=808363&Btype=Update" target="_blank">newsBoard_sub.aspx?o=808363 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-759" data-server="NA">
+        <div class="card-head"><span class="card-date">22.07.2025</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 759</span></div>
+        <h2 class="card-title">[Seal Exchange] Event (Gabumon)</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">22.07.2025</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=759" target="_blank">EventView.aspx?idx=759 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">June 2025</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="kr-807402" data-server="KR">
+        <div class="card-head"><span class="card-date">18.06.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 807402</span></div>
+        <h2 class="card-title">특별한 씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Special Seal Exchange</span> — NPC 씰 교환 워메몬 (Wormmon)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">18.06.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=807402&Btype=Update" target="_blank">newsBoard_sub.aspx?o=807402 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="na-743" data-server="NA">
+        <div class="card-head"><span class="card-date">17.06.2025</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 743</span></div>
+        <h2 class="card-title">[Special Seal Exchange] Event / Seal Master Package</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">17.06.2025</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=743" target="_blank">EventView.aspx?idx=743 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">February 2025</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-797955" data-server="KR">
+        <div class="card-head"><span class="card-date">26.02.2025</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 797955</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">26.02.2025</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=797955&Btype=Update" target="_blank">newsBoard_sub.aspx?o=797955 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">November 2024</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-794497" data-server="KR">
+        <div class="card-head"><span class="card-date">13.11.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 794497</span></div>
+        <h2 class="card-title">씰 교환 이벤트</h2>
+        <p class="seal-note"><span class="gloss">Seal Exchange Event</span> — NPC ครบรอบ 15 ปี (เค้ก)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">13.11.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=794497&Btype=Update" target="_blank">newsBoard_sub.aspx?o=794497 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">September 2024</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="th-66" data-server="TH">
+        <div class="card-head"><span class="card-date">26.09.2024</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 26 ก.ย. 2567</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;แลกซีล&gt;แฟรี่มอน (Fairimon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">26.09.2024</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-66/" target="_blank">patch -66 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-792682" data-server="KR">
+        <div class="card-head"><span class="card-date">25.09.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 792682</span></div>
+        <h2 class="card-title">쁘띠몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Petitmon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">25.09.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=792682&Btype=Update" target="_blank">newsBoard_sub.aspx?o=792682 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">August 2024</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="na-683" data-server="NA">
+        <div class="card-head"><span class="card-date">20.08.2024</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 683</span></div>
+        <h2 class="card-title">[Special Seal Exchange] + [Delumon's Seal Exchange!]</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">20.08.2024</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=683" target="_blank">EventView.aspx?idx=683 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-789333" data-server="KR">
+        <div class="card-head"><span class="card-date">07.08.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 789333</span></div>
+        <h2 class="card-title">특별한 씰 교환 + 뿌띠몬의 씰 교환</h2>
+        <p class="seal-note"><span class="gloss">Special Seal Exchange + Pyocomon's Seal Exchange</span> (씰 도둑을 잡아라 patch)</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">07.08.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=789333&Btype=Update" target="_blank">newsBoard_sub.aspx?o=789333 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">July 2024</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="th-64" data-server="TH">
+        <div class="card-head"><span class="card-date">25.07.2024</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 25 ก.ค. 2567</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;แลกซีล&gt;ลีลีมอน (Lillymon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">25.07.2024</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-64/" target="_blank">patch -64 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-788597" data-server="KR">
+        <div class="card-head"><span class="card-date">10.07.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 788597</span></div>
+        <h2 class="card-title">페어리몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Fairimon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">10.07.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=788597&Btype=Update" target="_blank">newsBoard_sub.aspx?o=788597 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">June 2024</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="na-673" data-server="NA">
+        <div class="card-head"><span class="card-date">11.06.2024</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 673</span></div>
+        <h2 class="card-title">[Guilmon's Seal Exchange!] Event</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">11.06.2024</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=673" target="_blank">EventView.aspx?idx=673 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">May 2024</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-787646" data-server="KR">
+        <div class="card-head"><span class="card-date">29.05.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 787646</span></div>
+        <h2 class="card-title">메라몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Meramon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">29.05.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=787646&Btype=Update" target="_blank">newsBoard_sub.aspx?o=787646 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">March 2024</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-783755" data-server="KR">
+        <div class="card-head"><span class="card-date">13.03.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 783755</span></div>
+        <h2 class="card-title">길몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Guilmon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">13.03.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=783755&Btype=Update" target="_blank">newsBoard_sub.aspx?o=783755 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">February 2024</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="th-59" data-server="TH">
+        <div class="card-head"><span class="card-date">22.02.2024</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 22 ก.พ. 2567</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;แลกซีลการ์ด&gt;วิซาร์มอน (Wisemon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">22.02.2024</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-59/" target="_blank">patch -59 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-782119" data-server="KR">
+        <div class="card-head"><span class="card-date">07.02.2024</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 782119</span></div>
+        <h2 class="card-title">릴리몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Lillymon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">07.02.2024</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=782119&Btype=Update" target="_blank">newsBoard_sub.aspx?o=782119 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">December 2023</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="kr-780048" data-server="KR">
+        <div class="card-head"><span class="card-date">13.12.2023</span><span class="card-kind-badge sv-kr">KR · Update</span><span class="card-idx">o 780048</span></div>
+        <h2 class="card-title">유키다루몬의 씰 교환!</h2>
+        <p class="seal-note"><span class="gloss">Frigimon's Seal Exchange</span></p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">13.12.2023</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=780048&Btype=Update" target="_blank">newsBoard_sub.aspx?o=780048 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">November 2023</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-56" data-server="TH">
+        <div class="card-head"><span class="card-date">23.11.2023</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 23 พ.ย. 2566</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;แลกซีล&gt;ลีลีมอน (Lillymon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">23.11.2023</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-56/" target="_blank">patch -56 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">August 2023</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="na-636" data-server="NA">
+        <div class="card-head"><span class="card-date">01.08.2023</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 636</span></div>
+        <h2 class="card-title">[Seal Exchange by Takato!] Event</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">01.08.2023</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=636" target="_blank">EventView.aspx?idx=636 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">April 2023</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-49" data-server="TH">
+        <div class="card-head"><span class="card-date">27.04.2023</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 27 เม.ย. 2566</h2>
+        <p class="seal-note">กิจกรรมแลกเปลี่ยนซีล — NPC &lt;แลกเปลี่ยนซีล&gt;ทาเครุ (Takeru)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">27.04.2023</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-49/" target="_blank">patch -49 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">September 2022</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-42" data-server="TH">
+        <div class="card-head"><span class="card-date">26.09.2022</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 26 ก.ย. 2565</h2>
+        <p class="seal-note">กิจกรรมแลกเปลี่ยนซีล — NPC &lt;กิจกรรมแลกเปลี่ยนซีล&gt;ทาคาโตะ (Takato)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">26.09.2022</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-42/" target="_blank">patch -42 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">February 2022</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="na-551" data-server="NA">
+        <div class="card-head"><span class="card-date">28.02.2022</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 551</span></div>
+        <h2 class="card-title">New Seal & [Marcus' Seal Exchange!] Event</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">28.02.2022</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=551" target="_blank">EventView.aspx?idx=551 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">October 2021</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="na-530" data-server="NA">
+        <div class="card-head"><span class="card-date">12.10.2021</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 530</span></div>
+        <h2 class="card-title">[Takato's Seal Exchange!] Event</h2>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">12.10.2021</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=530" target="_blank">EventView.aspx?idx=530 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">July 2021</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-28" data-server="TH">
+        <div class="card-head"><span class="card-date">26.07.2021</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 26 ก.ค. 2564</h2>
+        <p class="seal-note">กิจกรรมแลกซีล — NPC &lt;กิจกรรมแลกซีล&gt;ทาคาโตะ (Takato)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">26.07.2021</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-28/" target="_blank">patch -28 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">January 2021</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-21" data-server="TH">
+        <div class="card-head"><span class="card-date">07.01.2021</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 7 ม.ค. 2564</h2>
+        <p class="seal-note">แลกซีลได้จาก NPC ดิจิทามะมอน (Digitamamon)</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">07.01.2021</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-21/" target="_blank">patch -21 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">September 2020</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-12" data-server="TH">
+        <div class="card-head"><span class="card-date">24.09.2020</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 24 ก.ย. 2563</h2>
+        <p class="seal-note">รายการซีลที่เพิ่ม + ตั๋วแลกซีลการ์ด</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">24.09.2020</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-12/" target="_blank">patch -12 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">June 2020</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-15" data-server="TH">
+        <div class="card-head"><span class="card-date">26.06.2020</span><span class="card-kind-badge sv-th">TH · Patch</span></div>
+        <h2 class="card-title">อัพเดท 26 มิ.ย. 2563</h2>
+        <p class="seal-note">รายละเอียดระบบแลกซีล</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">26.06.2020</span><a href="https://www.vplay.in.th/%e0%b8%a3%e0%b8%b2%e0%b8%a2%e0%b8%a5%e0%b8%b0%e0%b9%80%e0%b8%ad%e0%b8%b5%e0%b8%a2%e0%b8%94%e0%b8%81%e0%b8%b2%e0%b8%a3%e0%b8%ad%e0%b8%b1%e0%b8%9e%e0%b9%80%e0%b8%94%e0%b8%97%e0%b8%9b%e0%b8%a3-15/" target="_blank">patch -15 ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">January 2018</span><span class="tl-month-count">1 post</span></div>
+      <article class="card tl-entry" id="th-system" data-server="TH">
+        <div class="card-head"><span class="card-date">23.01.2018</span><span class="card-kind-badge sv-th">TH · ระบบ</span><span class="card-tag-system">System</span></div>
+        <h2 class="card-title">ระบบซีลมาสเตอร์</h2>
+        <p class="seal-note">หน้าอธิบายระบบ Seal Master (แลกซีลผ่าน NPC ดิจิทามะมอน) — เป็นระบบถาวร ไม่ใช่อีเวนต์หมุนเวียน</p>
+        <div class="sources"><span class="src-item is-th"><span class="src-label">TH</span><span class="src-date">23.01.2018</span><a href="https://www.vplay.in.th/%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%9A%E0%B8%8B%E0%B8%B5%E0%B8%A5%E0%B8%A1%E0%B8%B2%E0%B8%AA%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C/" target="_blank">ระบบซีลมาสเตอร์ ↗</a></span></div>
+      </article>
+
+    <div class="tl-month"><span class="tl-month-label">May 2017</span><span class="tl-month-count">2 posts</span></div>
+      <article class="card tl-entry" id="na-352" data-server="NA">
+        <div class="card-head"><span class="card-date">30.05.2017</span><span class="card-kind-badge sv-na">NA · Event</span><span class="card-idx">idx 352</span><span class="card-tag-system">System</span></div>
+        <h2 class="card-title">Renewal of Seal Master</h2>
+        <p class="seal-note">เปิดระบบ Seal Master + ใบแลกซีล (foundational system post)</p>
+        <div class="sources"><span class="src-item is-na"><span class="src-label">NA</span><span class="src-date">30.05.2017</span><a href="https://dmo.gameking.com/News/EventView.aspx?idx=352" target="_blank">EventView.aspx?idx=352 ↗</a></span></div>
+      </article>
+      <article class="card tl-entry" id="kr-708817" data-server="KR">
+        <div class="card-head"><span class="card-date">11.05.2017</span><span class="card-kind-badge sv-kr">KR · Event</span><span class="card-idx">o 708817</span><span class="card-tag-system">System</span></div>
+        <h2 class="card-title">[씰 마스터] 리뉴얼 업데이트</h2>
+        <p class="seal-note"><span class="gloss">Seal Master Renewal</span> — เปิดระบบ Seal Master + 씰 교환권, แลกผ่าน NPC ดิจิทามะมอน</p>
+        <div class="sources"><span class="src-item is-kr"><span class="src-label">KR</span><span class="src-date">11.05.2017</span><a href="https://www.digimonmasters.com/news/newsBoard_sub.aspx?o=708817&Btype=Event" target="_blank">newsBoard_sub.aspx?o=708817 ↗</a></span></div>
+      </article>
+
+  </div>
+
+  <p style="max-width:760px;margin:24px auto 0;padding:0 4px;color:var(--muted-soft);font-size:12.5px;line-height:1.6">
+    หมายเหตุ: นับเฉพาะโพสต์ที่มีกิจกรรม/ระบบ <strong>แลกซีลจริง</strong> (씰 교환 · แลกซีล) ไม่นับโพสต์ที่แค่แจกใบแลกซีลเป็นรางวัลในกล่องสุ่ม/ซีซันพาส.
+    เว็บ KR/TH เป็น .aspx/WordPress ที่ search index ได้ไม่ครบ — โพสต์อีเวนต์เก่า (KR 2018–2022, NA ก่อน 2021) อาจมีเพิ่มที่ต้องไล่ archive ทีละหน้า.
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  Built by <a href="https://github.com/kongpop1405" target="_blank">@kongpop1405</a>
+  &nbsp;·&nbsp; Generated with <a href="https://claude.ai/" target="_blank">Claude AI</a>
+  &nbsp;·&nbsp; <a href="https://github.com/dmo-hub/dmo" target="_blank">Source on GitHub</a>
+</footer>
+
+<script>
+(() => {
+  const pills  = document.querySelectorAll('.filter-pill[data-filter="server"]');
+  const cards  = document.querySelectorAll('.tl-entry');
+  const months = document.querySelectorAll('.tl-month');
+  const countEl = document.getElementById('filter-count');
+  const active = new Set();
+
+  function apply() {
+    let visible = 0;
+    cards.forEach(c => {
+      const show = active.size === 0 || active.has(c.dataset.server);
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    months.forEach(m => {
+      let next = m.nextElementSibling, any = false;
+      while (next && !next.matches('.tl-month')) {
+        if (next.matches('.tl-entry') && next.style.display !== 'none') { any = true; break; }
+        next = next.nextElementSibling;
+      }
+      m.style.display = any ? '' : 'none';
+    });
+    countEl.textContent = active.size ? `${visible} โพสต์ · ${[...active].join(' + ')}` : '';
+  }
+
+  pills.forEach(btn => btn.addEventListener('click', () => {
+    const v = btn.dataset.value;
+    if (active.has(v)) { active.delete(v); btn.classList.remove('active'); }
+    else { active.add(v); btn.classList.add('active'); }
+    apply();
+  }));
+
+  document.getElementById('filter-reset').addEventListener('click', () => {
+    active.clear();
+    pills.forEach(b => b.classList.remove('active'));
+    apply();
+  });
+})();
+</script>
+</body>
+</html>
